@@ -1,0 +1,25 @@
+/**
+ *
+ * {{ properCase routeName }}
+ *
+ */
+import React from 'react';
+{{#if hasHistory}}
+import { withRouter } from 'react-router';
+{{/if}}
+import PropTypes from 'prop-types';
+
+const {{ properCase routeName }} = props => (
+  <></>
+);
+
+
+{{ properCase routeName }}.propTypes = {
+  // Add here some propTypes
+};
+
+{{ properCase routeName }}.defaultProps = {
+  // Add here some default propTypes values
+};
+
+export default {{#if hasHistory}}withRouter({{/if}}{{ properCase routeName }}{{#if hasHistory}}){{/if}};

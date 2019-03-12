@@ -1,0 +1,15 @@
+import dotProp from 'dot-prop-immutable';
+import { actionTypes } from '../actions/{{camelCase actionNameNew}}';
+
+const ACTION_HANDLERS = {
+
+};
+
+const initialState = {
+
+};
+
+export default function {{camelCase actionNameNew}}Reducer(state = initialState, action) {
+  const handler = ACTION_HANDLERS[action.type];
+  return handler ? handler(state, action) : state;
+}

@@ -1,0 +1,33 @@
+import { createRequestTypes, createAction } from '../../../store/actions/index';
+
+export const actionTypes = {
+{{#each actions}}
+  {{constantCase this}}: '{{constantCase this}}',
+{{/each}}
+  // @generator action:route:type
+{{#each actionsList}}
+  ...createRequestTypes('{{constantCase this}}'),
+{{/each}}
+  // @generator action:route:type:request
+};
+
+// ------------------------------------
+// Actions
+// ------------------------------------
+
+{{#each actionsList}}
+export const {{camelCase this}} = {
+  request: request => createAction(actionTypes.{{constantCase this}}_REQUEST, { request }),
+  success: (response, payload) => createAction(actionTypes.{{constantCase this}}_SUCCESS, { response, payload }),
+  failure: (response, payload) => createAction(actionTypes.{{constantCase this}}_FAILURE, { response, payload }),
+};
+{{/each}}
+// @generator action:route:request
+{{#each actions}}
+
+export const do{{properCase this}} = () => ({
+  type: actionTypes.{{constantCase this}},
+  payload: {},
+});
+{{/each}}
+// @generator action:route

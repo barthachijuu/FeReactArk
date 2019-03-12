@@ -1,0 +1,18 @@
+import { put, takeEvery, fork } from 'redux-saga/effects';
+
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+export function* {{camelCase sagaName}}() {
+
+}
+// @generator saga
+
+// @generator saga:watch
+export function* watch{{properCase sagaName}}() {
+
+}
+
+export default [
+  fork(watch{{properCase sagaName}}),
+  // @generator saga:fork
+];

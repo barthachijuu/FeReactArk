@@ -1,0 +1,50 @@
+import { applyMiddleware, compose, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import createReducer from './reducers';
+
+// Saga
+const sagaMiddleware = createSagaMiddleware();
+
+const rootStore = (initialState = {}) => {
+  // ======================================================
+  // Middleware Configuration
+  // ======================================================
+
+  const sagaMiddleware = createSagaMiddleware();
+  cost middlewares = [sagaMiddleware];
+
+  // ======================================================
+  // Store Enhancers
+  // ======================================================
+  const enhancers = [applyMiddleware(...middlewares)];
+
+  // eslint-disable-line no-underscore-dangle
+
+  const composeEnhancers = __DEV__ && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+
+
+  // ======================================================
+  // Store Instantiation and HMR Setup
+  // ======================================================
+  const store = createStore(
+    createReducer(),
+    initialState,
+    composeEnhancers(...enhancers),
+  );
+
+  store.injectedSagas = {};
+  store.injectedReducers = {};
+  store.runSaga = sagaMiddleware.run;
+  store.runSaga(sagas);
+
+  if (module.hot) {
+    module.hot.accept('./reducers', () => {
+      const defaultReducers = require('./reducers').default; // eslint-disable-line global-require
+      store.replaceReducer(defaultReducers(store.injectedReducers));
+    });
+  }
+
+  return store;
+};
+
+export default rootStore();

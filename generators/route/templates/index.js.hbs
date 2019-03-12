@@ -1,0 +1,5 @@
+import RootComponent from './RootComponent';
+
+{{#if isLazy}}
+export default RootComponent;{{else}}export default () => RootComponent;
+{{/if}}

@@ -1,0 +1,17 @@
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as {{ properCase routeName }}Actions from '../modules/{{ properCase routeName }}Actions';
+import {{ properCase routeName }} from './{{ properCase routeName }}';
+
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators({{ properCase routeName }}Actions, dispatch),
+});
+
+const mapStateToProps = () => ({
+
+});
+export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  own: ownProps,
+  actions: dispatchProps,
+}))({{ properCase routeName }});

@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Generators.
 - Webpack configuration for dev and prod environments.
 - Webpack compiler and monitor stats.
-- Pproject configuration and deploy envs.
+- Project configuration and deploy envs.
 
 ## [0.0.1] — 2019-03-11
 

@@ -1,0 +1,24 @@
+/**
+ *
+ * {{ properCase subrouteName }}
+ *
+ */
+import React from 'react';
+import PropTypes from 'prop-types';
+{{#if hasHistory}}
+import { withRouter } from 'react-router';
+{{/if}}
+
+const {{ properCase subrouteName }} = props => (
+  <></>
+);
+
+
+{{ properCase subrouteName }}.propTypes = {
+  // Add here some propTypes
+};
+
+{{ properCase subrouteName }}.defaultProps = {
+  // Add here some default propTypes values
+};
+export default {{#if hasHistory}}withRouter({{/if}}{{ properCase subrouteName }}{{#if hasHistory}}){{/if}};

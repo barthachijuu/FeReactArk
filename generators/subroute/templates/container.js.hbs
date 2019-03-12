@@ -1,0 +1,18 @@
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionLayer from '../../modules/{{ properCase whichRoute }}Actions';
+import {{ properCase subrouteName }} from './{{ properCase subrouteName }}';
+
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators(actionLayer, dispatch),
+});
+
+const mapStateToProps = () => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  own: ownProps,
+  actions: dispatchProps,
+}))({{ properCase subrouteName }});

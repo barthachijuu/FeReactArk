@@ -1,0 +1,10 @@
+{{#if wantIntl}}
+import { injectIntl } from 'react-intl';
+{{/if}}
+{{#if containerComponent}}
+import {{ properCase componentName }} from './{{ properCase componentName }}Container';
+{{else}}
+import {{ properCase componentName }} from './{{ properCase componentName }}';
+{{/if}}
+
+export default {{#if wantIntl}}injectIntl({{/if}}{{properCase componentName }}{{#if wantIntl}}){{/if}};
