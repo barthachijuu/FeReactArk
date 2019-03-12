@@ -29,21 +29,21 @@ webpack build system that's already setup to provide hot reloading, SCSS preproc
 <img src="./repo_readme_assets/logo-webpack.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/jest.png" height="55">&nbsp;&nbsp;
 
-- [] Webpack task runner
+- [x] Webpack task runner
 - [] Sass / Scss compiler + Module
 - [] Images optimization
 - [] Style linter and minification
 - [] Javascript linter and minification
-- [] Yarn / Npm package managers
-- [] ES6 supported
+- [x] Yarn / Npm package managers
+- [x] ES6 supported
 - [] Npm-better
 - [] Make float object if possible
 - [] Use Lazy Mode for component import
-- [] Add Atlaskit
+- [] Material Ui
 - [] Jest
 - [] Enzyme
 - [] SCSS Lint
-- [] Redux Form
+- [] React Redux Form
 - [] Generators
 
 ---
