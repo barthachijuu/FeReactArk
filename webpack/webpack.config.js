@@ -37,7 +37,6 @@ module.exports = {
       Components: `${APP_DIR}/components`,
       Mocks: `${APP_DIR}/mocks`,
       Store: `${APP_DIR}/store`,
-      Utilities: `${APP_DIR}/utilities`,
       Route: `${APP_DIR}/routes`,
       Root: path.resolve(__dirname, '../'),
       Utility: `${APP_DIR}/utility`,
