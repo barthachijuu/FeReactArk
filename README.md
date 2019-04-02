@@ -223,12 +223,12 @@ patterns for building scalable applications. If you wish to read more about this
 ├──.prettierrc
 ├──.scss-lint.yml
 ├── AUTHORS.md
-├── BEST_PRACTICES.md
 ├── CHANGELOG.md
 ├── CODE_OF_CONDUCT.md
-├── code_review.md
+├── CODE_REVIEW.md
+├── CONTRIBUTING.md
 ├── COMMIT_TEMPLATE.md
-├── HOW_TO_COMMIT.md
+├── LICENSE.md
 ├── MAP.md
 ├── package.json
 ├── postcss.config.js
