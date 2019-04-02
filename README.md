@@ -250,11 +250,12 @@ However, adding the DevTools components to your project is simple. First, grab t
 
 [Redux Devtools](https://github.com/gaearon/redux-devtools) are enabled by default in development.
 
-``` html
+```html
 — <kbd>CTRL</kbd>+<kbd>H</kbd> Toggle DevTools Dock
 — <kbd>CTRL</kbd>+<kbd>Q</kbd> Move DevTools Dock Position
-— see [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock-monitor) for more detailed information.
 ```
+
+See [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock-monitor) for more detailed information.
 
 If, you have the [Redux DevTools chrome extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) installed it will
 automatically be used on the client-side instead.
