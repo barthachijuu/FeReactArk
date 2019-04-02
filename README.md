@@ -104,7 +104,7 @@ cd FeReactArk
 Then install dependencies and check to see it works. It is recommended that you use [Yarn](https://yarnpkg.com/) for deterministic installs, but `npm install` will work just as well.
 
 ```bash
-yarn setup projectName # Sets up a new project with the given name and generates project's scaffolding.
+yarn setup --project=projectName # Sets up a new project with the given name and generates project's scaffolding.
 yarn start # Compile and launch (same as `npm start`)
 ```
 

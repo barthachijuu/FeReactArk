@@ -1,12 +1,12 @@
 {
   "name": "fe-react-ark",
   "version": "0.0.1",
-  "description": "The best multiskin boilerplate arch for made your projects, really easy to develop.",
+  "description": "The best react boilerplate arch for made your projects, really easy to develop.",
   "main": "index.jsx",
   "repository": "https://github.com/barthachijuu/FeReactArk.git",
   "author": "Bartolo Amico <bartolo.amico@gmail.com>",
   "contributors": [
-    "Gabriele Bonumore <g.bonumore@gmail.com>"
+    "Gabriele Bonumore <g.bonumore@emergento.com>"
   ],
   "license": "MIT",
   "engines": {

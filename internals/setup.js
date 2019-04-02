@@ -33,11 +33,12 @@ function deleteFileInCurrentDir(file, callback) {
 function endProcess() {
   deleteFileInCurrentDir('setup.js', () => {
     process.stdout.write('\nRemove setup script');
+    addCheckMark.bind(null);
     clearInterval(interval);
     process.stdout.write('\n\nNecessary dependencies installed and bootstrapping process complete.');
+    process.stdout.write(`\n Before start, please navigate to the new project directory "${argv.project}", and remember to add your repo on your remote origin.`);
     process.stdout.write('\nNow you can run "yarn start", to start your project.');
-    process.stdout.write('\nDone!');
-    process.exit(0);
+    process.stdout.write('\nEnjoy your code!');
   });
 }
 
@@ -98,7 +99,6 @@ function cleanRepo() {
     }
   });
 }
-
 
 /**
  * Callback function after installing dependencies
