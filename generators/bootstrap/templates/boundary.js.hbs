@@ -32,16 +32,16 @@ class ErrorBoundary extends Component {
     if (this.state.hasError) {
       return (
         <>
-          <Grid item className={style.bigBody}>
-            <Grid item className={style.body}>
+          <div className={style.bigBody}>
+            <div className={style.body}>
               <h2>Something went wrong.</h2>
               {this.state.errorType && this.state.errorType.toString()}
               <br />
               <details className={style.detailsButton}>
                 {this.state.errorInfo ? this.state.errorInfo.componentStack : <h3>Sorry, no more details</h3>}
               </details>
-            </Grid>
-          </Grid>
+            </div>
+          </div>
         </>
       );
     }

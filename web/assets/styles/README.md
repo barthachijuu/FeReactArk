@@ -21,29 +21,27 @@ To skip the specific warning just add `// scss-lint:disable <ruleName>` _(withou
 
 Es.
 
-```sh
+```scss
 
- &:-moz-placeholder {
+ &:-moz-placeholder{
   font-family: $font-family-regular;
-  color: #9a9b9c;
- }
+  color: #9a9b9c;}
 ```
 
-This rule will trigger _VendorPrefix_ and _PseudoElement_ linter warnings. 
+This rule will trigger _VendorPrefix_ and _PseudoElement_ linter warnings.
 So we will change it in:
 
-```sh
- &:-moz-placeholder {// scss-lint:disable VendorPrefix PseudoElement
+```scss
+ &:-moz-placeholder {
   font-family: $font-family-regular;
-  color: #9a9b9c;
- }
+  color: #9a9b9c;}
 ```
 
 ## Folder structure
 
     styles/
         - abstracts/
-            - _abstracts-dir.scss           # Import all abstracts .scss files  
+            - _abstracts-dir.scss           # Import all abstracts .scss files
             - _fonts.scss                   # Font Import
             - _mixins.scss                  # Scss Mixins
             - _variables.scss               # Scss Variables
@@ -145,7 +143,7 @@ So we will change it in:
     - Stick to extending placeholders, not existing CSS selectors.
     - Extend a placeholder as few times as possible in order to avoid side effects.
 
-## Useful links:
+## Useful links
 
 - [Sass official functions](http://sass-lang.com/documentation/Sass/Script/Functions.html)
 - [SMACSS Approach](https://smacss.com/)
