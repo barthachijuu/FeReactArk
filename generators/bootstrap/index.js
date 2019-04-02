@@ -101,7 +101,12 @@ module.exports = {
       type: 'prettify',
       path: '/web/src/',
       options: '--trailing-comma all --print-width 120 --single-quote',
+    });
 
+    actions.push({
+      type: 'defaultlang',
+      path: '/translations/',
+      lang: ['lang-it', 'lang-en'],
     });
 
     return actions;

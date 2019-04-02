@@ -48,6 +48,15 @@ const utils = {
    * Return base path
    */
   getPath: () => path.join(__dirname, `../../web/src/`),
+  /**
+   * Return directory content if exist
+  */
+  getDirectoryContent: (dir) => {
+    if (fs.existsSync(path.join(__dirname, `../../web/src/${dir}`))) {
+      return fs.readdirSync(path.join(__dirname, `../../web/src/${dir}`));
+    }
+    return [];
+  },
   // Trim template
   trimTemplateFile: template => fs.readFileSync(template, 'utf8').replace(/\s(?!(?:[^']*'[^']*')*[^']*$)/gm, ''),
   newLine: template => fs.readFileSync(template, 'utf8').replace(/__new__$/, '\n'),

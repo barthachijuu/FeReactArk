@@ -7,6 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const utils = require('./utils/fileUtils');
 const bootstrapGenerator = require('./bootstrap/index.js');
 const apiGenerator = require('./apirest/index.js');
 const actionGenerator = require('./action/index.js');
@@ -21,13 +22,16 @@ console.clear();
 module.exports = (plop) => {
   // controller generator
   plop.setGenerator('bootstrap', bootstrapGenerator);
-  plop.setGenerator('api', apiGenerator);
-  plop.setGenerator('action', actionGenerator);
-  plop.setGenerator('component', componentGenerator);
-  plop.setGenerator('mock', mockGenerator);
-  plop.setGenerator('route', routeGenerator);
-  plop.setGenerator('saga', sagaGenerator);
-  plop.setGenerator('subroute', subRouteGenerator);
+  if (utils.getDirectoryContent('routes').length !== 0) {
+    plop.setGenerator('api', apiGenerator);
+    plop.setGenerator('action', actionGenerator);
+    plop.setGenerator('component', componentGenerator);
+    plop.setGenerator('mock', mockGenerator);
+    plop.setGenerator('route', routeGenerator);
+    plop.setGenerator('saga', sagaGenerator);
+    plop.setGenerator('subroute', subRouteGenerator);
+  }
+
   plop.addHelper('directory', (comp) => {
     try {
       fs.accessSync(
