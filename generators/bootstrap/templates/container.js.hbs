@@ -39,15 +39,15 @@ class {{ properCase name }} extends Component {
 
   handleAuthentication = () => {
   // Uncomment the line below to handle auth, remember to add unauthenticated routes inside the regex.
-  //if (!this.props.logged && !/change-me/.test(window.location.href)) window.location = '/login.html';
-};
+  // if (!this.props.logged && !/change-me/.test(window.location.href)) window.location = '/login.html';
+  };
 
   render() {
     const { authRoutes, noauthRoutes, logged } = this.props;
     const loggedApp = (
-        authRoutes.routes.map(({ component, ...otherRouteProp }) => (
-          <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
-        ))
+      authRoutes.routes.map(({ component, ...otherRouteProp }) => (
+        <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
+      ))
     );
     return (
       <>

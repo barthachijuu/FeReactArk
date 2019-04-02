@@ -88,6 +88,7 @@ removeFile(`${path.join(__dirname, '../web/assets/styles/scss/ErrorBoundary.scss
 removeFile('', 'store/actions');
 removeFile('', 'store/reducers');
 removeFile('', 'store/sagas');
+removeFile('', 'translations');
 removeDir([`${path.join(__dirname, '../web/src/components')}`,
   `${path.join(__dirname, '../web/src/containers')}`,
   `${path.join(__dirname, '../web/src/routes')}`,

@@ -21,15 +21,24 @@ process.stdout.write('\n');
 let interval;
 
 /**
+ * Deletes a file in the current directory
+ */
+function deleteFileInCurrentDir(file, callback) {
+  fs.unlink(path.join(__dirname, file), callback);
+}
+
+/**
  * Function which ends setup process
  */
 function endProcess() {
-  process.stdout.write('\nRemove setup script');
-  clearInterval(interval);
-  process.stdout.write('\n\nNecessary dependencies installed and bootstrapping process complete.');
-  process.stdout.write('\nNow you can run "yarn start", to start your project.');
-  process.stdout.write('\nDone!');
-  process.exit(0);
+  deleteFileInCurrentDir('setup.js', () => {
+    process.stdout.write('\nRemove setup script');
+    clearInterval(interval);
+    process.stdout.write('\n\nNecessary dependencies installed and bootstrapping process complete.');
+    process.stdout.write('\nNow you can run "yarn start", to start your project.');
+    process.stdout.write('\nDone!');
+    process.exit(0);
+  });
 }
 
 /**
@@ -73,7 +82,7 @@ function cleanRepo() {
   clearInterval(interval);
   fs.readFile('.git/config', 'utf8', (err, data) => {
     if (!err) {
-      const isClonedRepo = typeof JSON.stringify(data) === 'string' && (JSON.stringify(data).match(/url\s*=/g) || []).length === 1 && /digitalicbpi\/fe-architecture.git/.test(JSON.stringify(data));
+      const isClonedRepo = typeof JSON.stringify(data) === 'string' && (JSON.stringify(data).match(/url\s*=/g) || []).length === 1 && /barthachijuu\/FeReactArk.git/.test(JSON.stringify(data));
       if (isClonedRepo) {
         process.stdout.write('\nRemoving old repository');
         fse.remove('.git/', () => {
