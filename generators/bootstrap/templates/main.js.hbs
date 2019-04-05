@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import axios from 'axios';
-import JssProvider from 'react-jss/lib/JssProvider';
-import { create } from 'jss';
 import LanguageProvider from '../utility/LanguageProvider';
 import ErrorBoundary from '../utility/ErrorBoundary';
 import {{properCase name}} from './{{properCase name}}';
 import mainCSS from '../../assets/styles/scss/main.scss'; // eslint-disable-line
-import Icons from '../../assets/styles/scss/icons.scss'; // eslint-disable-line no-unused-vars
-import theme from '../../assets/styles/theme/{{properCase name}}.theme.js';
 
 class MainContainer extends Component {
   static propTypes = {
@@ -46,7 +41,7 @@ class MainContainer extends Component {
         <Provider store={store}>
           <LanguageProvider messages={messages} locale={this.state.messages.language}>
             <ErrorBoundary>
-              <{{properCase name}} routes={routes} logged={logged} store={store} />
+              <{{properCase name}} authRoutes={authRoutes} noauthRoutes={noauthRoutes} logged={this.state.logged} store={store} />
             </ErrorBoundary>
           </LanguageProvider>
         </Provider>
@@ -55,9 +50,4 @@ class MainContainer extends Component {
   }
 }
 
-
-const mapStateToProps = () => ({
-  logged: true, // state.login.logged,
-});
-
-export default connect(mapStateToProps)(MainContainer);
+export default MainContainer;

@@ -2,7 +2,7 @@ require('./utils/check-version')();
 
 const chalk = require('chalk');
 const path = require('path');
-const PROJECT_CONFIG = require('../config/project.config');
+const project = require('../config/project.config');
 const globalenv = require('../config/global.vars');
 const history = require('connect-history-api-fallback');
 const hmr = require('webpack-hot-middleware');
@@ -10,17 +10,13 @@ const express = require('express');
 const webpack = require('webpack');
 const compression = require('compression');
 const webpackConfig = process.env.NODE_ENV === 'production' ? require('../webpack/webpack.prod') : require('../webpack/webpack.dev');
-const webpackLoginConfig = require('../webpack/webpack.login');
 const argv = require('yargs').argv;
 const env = require(`../config/deployenv/${argv.d || 'development'}`);
 
 webpackConfig.plugins.push(new webpack.DefinePlugin(globalenv));
 webpackConfig.plugins.push(new webpack.DefinePlugin(env));
-webpackLoginConfig.plugins.push(new webpack.DefinePlugin(globalenv));
-webpackLoginConfig.plugins.push(new webpack.DefinePlugin(env));
 
 const compiler = webpack(webpackConfig);
-const login = webpack(webpackLoginConfig);
 const app = express();
 
 app.use(compression());
@@ -38,20 +34,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
       "Access-Control-Allow-Origin": "*"
     }
 });
-const loginDevMiddleware = require('webpack-dev-middleware')(login, {
-    publicPath: '/',
-    contentBase: 'web/src',
-    hot: true,
-    stats: {
-      colors: true,
-      version: true,
-      chunks: true,
-    },
-    lazy: false,
-    headers: {
-      "Access-Control-Allow-Origin": "*"
-    }
-});
+
 const webpackHotMiddleware = require('webpack-hot-middleware')(compiler, {
     logLevel: 'warn',
     log: false,
@@ -61,7 +44,6 @@ const webpackHotMiddleware = require('webpack-hot-middleware')(compiler, {
     action: 'reload'
 });
 app.use(webpackDevMiddleware);
-app.use(loginDevMiddleware);
 app.use(webpackHotMiddleware);
 
 // force reload page when html-webpack-plugin template changes in\x.html
@@ -78,15 +60,12 @@ app.use(hmr(compiler, {
     path: '/__webpack_hmr'
 }));
 
-app.use(hmr(login, {
-    path: '/__webpack_hmrlogin'
-}));
 // serve static files
-app.use(PROJECT_CONFIG.dev_server.assetsPublicPath, express.static(path.resolve(__dirname, '../web/src')));
+app.use(project.dev_server.assetsPublicPath, express.static(path.resolve(__dirname, '../web/src')));
 
 // default port where dev server listens for incoming traffic
-app.use(path.join(PROJECT_CONFIG.dev_server.assetsPublicPath, PROJECT_CONFIG.dev_server.assetsSubDirectory), express.static(path.resolve(__dirname, '../web/assets')));
-const port = process.env.PORT || PROJECT_CONFIG.dev_server.port;
+app.use(path.join(project.dev_server.assetsPublicPath), express.static(path.resolve(__dirname, '../web/assets')));
+const port = process.env.PORT || project.dev_server.port;
 console.log(chalk.bgGreen(chalk.black('###   Starting server...   ###')));
 
 
@@ -104,12 +83,9 @@ app.get('*.js*', (req, res, next) => {
 });
 app.use(history({}));
 
-app.use(express.static(PROJECT_CONFIG.dev_server.assetsPublicPath));
+app.use(express.static(project.dev_server.assetsPublicPath));
 
 app.use('*', (req, res, next) => {
-  if (req.baseUrl.indexOf('login') !== -1) {
-    return (next());
-  }
   compiler.outputFileSystem.readFile(path.join(__dirname, '../web/src/index.html'), (err, result) => {
     if (err) {
       return next(err)

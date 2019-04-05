@@ -109,12 +109,6 @@ config.paths = {
 config.webpack = {
   CSSModuleLoader: {
     loader: 'css-loader',
-    options: {
-      modules: true,
-      sourceMap: true,
-      localIdentName: '[local]__[hash:base64:5]',
-      minimize: true,
-    },
   },
   postCSSLoader: {
     loader: 'postcss-loader',

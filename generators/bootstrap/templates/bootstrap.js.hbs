@@ -21,7 +21,7 @@ import store from './store/createStore';
 // Render Setup
 // ========================================================
 const MOUNT_NODE = document.getElementById('root');
-const routes = require('./routes/index').default(store);
+const authRoutes = require('./routes/index').default(store);
 const noauthRoutes = require('./routes/index').createUnauthRoutes(store);
 
 // React INTL

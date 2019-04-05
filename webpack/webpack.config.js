@@ -63,12 +63,6 @@ module.exports = {
         MODE === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
         {
           loader: 'css-loader',
-          options: {
-            modules: true,
-            sourceMap: true,
-            localIdentName: '[name]_[local]_[hash:base64:5]',
-            minimize: true,
-          },
         },
         {
           loader: 'postcss-loader',

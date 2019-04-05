@@ -2,16 +2,14 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 
-// Saga
-const sagaMiddleware = createSagaMiddleware();
-
 const rootStore = (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
 
+  // Saga
   const sagaMiddleware = createSagaMiddleware();
-  cost middlewares = [sagaMiddleware];
+  const middlewares = [sagaMiddleware];
 
   // ======================================================
   // Store Enhancers
@@ -35,7 +33,6 @@ const rootStore = (initialState = {}) => {
   store.injectedSagas = {};
   store.injectedReducers = {};
   store.runSaga = sagaMiddleware.run;
-  store.runSaga(sagas);
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
