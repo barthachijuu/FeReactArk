@@ -57,16 +57,20 @@ module.exports = {
       templateFile: './component/templates/component.js.hbs',
       abortOnFail: true,
       skipIfExists: true,
-    }];
-
-    actions.push({
+    },
+    {
       type: 'add',
       path: '../web/src/components/{{properCase componentName}}/index.js',
       templateFile: './component/templates/index.js.hbs',
       abortOnFail: true,
       skipIfExists: true,
-    });
-
+    },
+    {
+      type: 'add',
+      path: `${utils.getPath()}components/{{properCase componentName}}/tests/index.test.js`,
+      templateFile: './component/templates/test.js.hbs',
+      abortOnFail: true,
+    }];
 
     // If they want a container, add componentNameContainer.js
 

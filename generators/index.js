@@ -23,13 +23,19 @@ module.exports = (plop) => {
   // controller generator
   plop.setGenerator('bootstrap', bootstrapGenerator);
   if (utils.getDirectoryContent('routes').length !== 0) {
-    plop.setGenerator('api', apiGenerator);
+    if (utils.getDirectoryContent('routes').length > 1) {
+      plop.setGenerator('api', apiGenerator);
+    }
     plop.setGenerator('action', actionGenerator);
     plop.setGenerator('component', componentGenerator);
-    plop.setGenerator('mock', mockGenerator);
+    if (utils.getDirectoryContent('routes').length > 1) {
+      plop.setGenerator('mock', mockGenerator);
+    }
     plop.setGenerator('route', routeGenerator);
     plop.setGenerator('saga', sagaGenerator);
-    plop.setGenerator('subroute', subRouteGenerator);
+    if (utils.getDirectoryContent('routes').length > 1) {
+      plop.setGenerator('subroute', subRouteGenerator);
+    }
   }
 
   plop.addHelper('directory', (comp) => {

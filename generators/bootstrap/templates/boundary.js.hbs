@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import style from '../../assets/styles/scss/ErrorBoundary.scss';
 
 class ErrorBoundary extends Component {
@@ -31,16 +32,16 @@ class ErrorBoundary extends Component {
     if (this.state.hasError) {
       return (
         <>
-          <div className={style.bigBody}>
-            <div className={style.body}>
+          <Grid item className={style.bigBody}>
+            <Grid item className={style.body}>
               <h2>Something went wrong.</h2>
               {this.state.errorType && this.state.errorType.toString()}
               <br />
               <details className={style.detailsButton}>
                 {this.state.errorInfo ? this.state.errorInfo.componentStack : <h3>Sorry, no more details</h3>}
               </details>
-            </div>
-          </div>
+            </Grid>
+          </Grid>
         </>
       );
     }

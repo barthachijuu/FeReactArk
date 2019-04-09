@@ -25,10 +25,6 @@ const authRoutes = require('./routes/index').default(store);
 const noauthRoutes = require('./routes/index').createUnauthRoutes(store);
 
 // React INTL
-const messages = {
-  ...itAppStrings,
-  ...enAppStrings,
-};
 
 addLocaleData([...en, ...it]);
 
@@ -36,7 +32,7 @@ moment.locale('it');
 
 const render = () => {
   ReactDOM.render(
-    <MainContainer store={store} authRoutes={authRoutes} noauthRoutes={noauthRoutes} messages={messages}/>,
+    <MainContainer store={store} authRoutes={authRoutes} noauthRoutes={noauthRoutes} />,
     MOUNT_NODE,
   );
 };

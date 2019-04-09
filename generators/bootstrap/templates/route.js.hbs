@@ -1,8 +1,8 @@
 // We only need to import the modules necessary for initial render
 // When you add a first route be sure to remove the comment from the lines below.
 
-// import React, { lazy } from 'react';
-// import rootStore from 'Store/createStore';
+import React, { lazy } from 'react';
+import rootStore from 'Store/createStore';
 import asyncComponent from 'Utility/AsyncComponent';
 import LazyComponent from 'Utility/LazyComponent';
 
@@ -12,7 +12,7 @@ export const Components = {
   // @generator routes:component export
 };
 
-export const createAuthRoutes = store => ({
+export const createAuthRoutes = () => ({
   routes: [
     // @generator routes:define:auth
 
@@ -21,7 +21,7 @@ export const createAuthRoutes = store => ({
 
 // These routes don't need the user to be logged in.
 
-export const createUnauthRoutes = store => ({
+export const createUnauthRoutes = () => ({
   routes: [
     // @generator routes:define:unauth
 

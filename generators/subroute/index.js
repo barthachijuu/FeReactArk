@@ -28,7 +28,7 @@ module.exports = {
       message: 'What\'s the name of the subRoute?',
       validate: (value, answers) => {
         if (/.+/.test(value)) {
-          return utils.checkExist(`routes/${answers.whichRoute}/components/${utils.pascalize(value)}`) ? true : 'That subRoute already exists.';
+          return utils.checkExist(`routes/${answers.whichRoute}/components/${utils.pascalize(value)}`) ? 'That subRoute already exists.' : true;
         }
         return 'The name is required.';
       },

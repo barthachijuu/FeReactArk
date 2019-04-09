@@ -33,14 +33,23 @@ module.exports = {
       type: 'list',
       name: 'isActionNew',
       message: 'Do you want to create a new action file or add an action to an already existing file?',
-      choices: () => ['New action file', 'Add an action'],
+      choices: () => (utils.readDir(`${utils.getPath()}store/actions/`).length > 1 ? ['New action file', 'Add an action'] : ['New action file']),
       when: answers => answers.whichAction === 'Global action',
     },
     {
       type: 'list',
       name: 'whichActionFile',
       message: 'Which action file do you want to extend?',
-      choices: () => utils.readDir(`${utils.getPath()}store/actions/`),
+      choices: () => {
+        const mychoiches = utils.readDir(`${utils.getPath()}store/actions`);
+        const list = [];
+        mychoiches.forEach((m) => {
+          if (!/index/.test(m)) {
+            list.push(m);
+          }
+        });
+        return list;
+      },
       when: answers => answers.isActionNew === 'Add an action',
     },
     {
@@ -49,7 +58,7 @@ module.exports = {
       message: 'What should the action file be called?',
       validate: (value) => {
         if (/.+/.test(value)) {
-          return utils.checkExist(`store/actions/${utils.pascalize(value)}.js`) ? true : 'That action file already exists.';
+          return utils.checkExist(`store/actions/${utils.camelize(value)}.js`) ? 'That action file already exists.' : true;
         }
         return 'The name is required.';
       },
@@ -61,10 +70,10 @@ module.exports = {
       message: 'What\'s the name of the action?',
       validate: (value, answers) => {
         if (/.+/.test(value) && answers.isActionNew === 'Add an action') {
-          return utils.checkString(`store/actions/${answers.whichActionFile}`, new RegExp(utils.constantize(value), 'gm')) || 'That method already exists.';
+          return !utils.checkString(`store/actions/${answers.whichActionFile}`, new RegExp(utils.constantize(value), 'gm')) || 'That method already exists.';
         }
         if (/.+/.test(value) && answers.whichAction === 'Route action') {
-          return utils.checkString(`routes/${answers.whichRoute}/modules/${answers.whichRoute}Actions.js`, new RegExp(utils.constantize(value), 'gm')) || 'That method already exists.';
+          return !utils.checkString(`routes/${answers.whichRoute}/modules/${answers.whichRoute}Actions.js`, new RegExp(utils.constantize(value), 'gm')) || 'That method already exists.';
         }
         return 'The name is required.';
       },
@@ -80,14 +89,14 @@ module.exports = {
       type: 'input',
       name: 'actionsList',
       message: 'Do you want to set a list of action request? (separate actions by comma or leave this blank for an empty file)',
-      filter: input => input.split(','),
+      filter: input => (input.length > 0 ? input.split(',') : undefined),
       when: answers => answers.isActionNew === 'New action file',
     },
     {
       type: 'input',
       name: 'actions',
       message: 'Do you want to set a list of actions? (separate actions by comma or leave this blank for an empty file)',
-      filter: input => input.split(','),
+      filter: input => (input.length > 0 ? input.split(',') : undefined),
       when: answers => answers.isActionNew === 'New action file',
     },
   ],

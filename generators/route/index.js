@@ -13,7 +13,7 @@ module.exports = {
       message: 'What should it be called',
       validate: (value) => {
         if (/.+/.test(value)) {
-          return utils.checkExist(`routes/${utils.pascalize(value)}`) ? true : 'That route already exists.';
+          return utils.checkExist(`routes/${utils.pascalize(value)}`) ? 'That route already exists.' : true;
         }
         return 'The name is required.';
       },
@@ -99,6 +99,12 @@ module.exports = {
         type: 'add',
         path: `${utils.getPath()}routes/{{properCase routeName}}/components/{{properCase routeName}}Container.js`,
         templateFile: './route/templates/container.js.hbs',
+        abortOnFail: true,
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/tests/index.test.js`,
+        templateFile: './route/templates/test.js.hbs',
         abortOnFail: true,
       },
       {

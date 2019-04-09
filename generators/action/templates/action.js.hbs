@@ -7,7 +7,7 @@ export const actionTypes = {
   {{/each}}
 {{/if}}
   // @generator action:type
-{{#if actionsList.length}}
+{{#if actionsList}}
   {{#each actionsList}}
   ...createRequestTypes('{{constantCase this}}'),
   {{/each}}
@@ -19,7 +19,7 @@ export const actionTypes = {
 // Actions
 // ------------------------------------
 
-{{#if actionsList.length}}
+{{#if actionsList}}
   {{#each actionsList}}
 export const {{camelCase this}} = {
   request: request => createAction(actionTypes.{{constantCase this}}_REQUEST, { request }),
@@ -29,7 +29,7 @@ export const {{camelCase this}} = {
   {{/each}}
 {{/if}}
 // @generator action:request
-{{#if actions.length}}
+{{#if actions}}
   {{#each actions}}
 
 export function do{{properCase this}}() {

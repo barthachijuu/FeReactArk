@@ -27,7 +27,7 @@ module.exports = {
       message: 'What\'s the url want to be mocked?',
       validate: (value, answers) => {
         if (/.+/.test(value)) {
-          return utils.checkString(`mocks/${answers.whichMock}/${answers.whichMock}.js`, new RegExp(utils.camelize(value), 'gm')) || 'That mock already exists.';
+          return utils.checkString(`mocks/${answers.whichMock}/${answers.whichMock}.js`, new RegExp(`'/${value}'`, 'gm')) ? 'That mock already exists.' : true;
         }
         return 'The name is required.';
       },

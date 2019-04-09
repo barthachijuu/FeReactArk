@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 class {{ properCase name }} extends Component {
   static propTypes = {
@@ -20,7 +21,6 @@ class {{ properCase name }} extends Component {
       component: PropTypes.func.isRequired,
     }))).isRequired,
     store: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
     logged: PropTypes.bool.isRequired,
   };
 
@@ -52,13 +52,15 @@ class {{ properCase name }} extends Component {
     return (
       <>
         <Router>
-          <Route path="/" />
-          <Switch>
-            {noauthRoutes.routes.map(({ component, ...otherRouteProp }) => (
-              <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
-            ))}
-            {logged ? loggedApp : this.handleAuthentication()}
-          </Switch>
+          <Grid container>
+            <Route path="/" />
+            <Switch>
+              {noauthRoutes.routes.map(({ component, ...otherRouteProp }) => (
+                <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
+              ))}
+              {logged ? loggedApp : this.handleAuthentication()}
+            </Switch>
+          </Grid>
         </Router>
       </>
     );

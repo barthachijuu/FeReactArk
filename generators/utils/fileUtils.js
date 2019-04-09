@@ -8,7 +8,7 @@ const utils = {
    * @param  {filename} string  The file to open
    * @param  {method} string  The string to validate
    */
-  checkString: (filename, method) => !method.test(fs.readFileSync(path.join(__dirname, `../../web/src/${filename}`), 'utf-8')),
+  checkString: (filename, method) => method.test(fs.readFileSync(path.join(__dirname, `../../web/src/${filename}`), 'utf-8')),
   /**
    * Return true if is a dir
    *
@@ -38,7 +38,7 @@ const utils = {
    *
    * @param  {string} fielename      The filename to check existation
    */
-  checkExist: fileName => !fs.existsSync(path.join(__dirname, `../../web/src/${fileName}`)),
+  checkExist: fileName => fs.existsSync(path.join(__dirname, `../../web/src/${fileName}`)),
   /**
    * List every Route
    *
@@ -59,6 +59,7 @@ const utils = {
   },
   // Trim template
   trimTemplateFile: template => fs.readFileSync(template, 'utf8').replace(/\s(?!(?:[^']*'[^']*')*[^']*$)/gm, ''),
+
   newLine: template => fs.readFileSync(template, 'utf8').replace(/__new__$/, '\n'),
 
 };

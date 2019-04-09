@@ -11,7 +11,7 @@ module.exports = {
       type: 'list',
       name: 'whichSaga',
       message: 'Is it a global saga or a saga for a route?',
-      choices: () => ['Global saga', 'Route saga'],
+      choices: () => (utils.readDir(`${utils.getPath()}store/actions/`).length > 1 ? ['Global saga', 'Route saga'] : ['Route saga']),
     },
     {
       type: 'list',
@@ -40,7 +40,16 @@ module.exports = {
       type: 'list',
       name: 'whichSagaFile',
       message: 'Which sagas file do you want to extend?',
-      choices: () => utils.readDir(`${utils.getPath()}store/sagas/`),
+      choices: () => {
+        const mychoiches = utils.readDir(`${utils.getPath()}store/sagas`);
+        const list = [];
+        mychoiches.forEach((m) => {
+          if (`${utils.getPath()}store/sagas/${m}` && !/index/.test(m)) {
+            list.push(m);
+          }
+        });
+        return list;
+      },
       when: answers => answers.isSagaNew === 'Add a saga',
     },
     {
@@ -51,7 +60,7 @@ module.exports = {
         const mychoiches = utils.readDir(`${utils.getPath()}store/actions`);
         const list = [];
         mychoiches.forEach((m) => {
-          if (`${utils.getPath()}store/actions/${m}`) {
+          if (`${utils.getPath()}store/actions/${m}` && !/index/.test(m)) {
             list.push(m);
           }
         });
@@ -65,10 +74,10 @@ module.exports = {
       message: 'What\'s the name of the saga?',
       validate: (value, answers) => {
         if (/.+/.test(value) && answers.isSagaNew === 'Add a saga') {
-          return utils.checkString(`store/sagas/${answers.whichSagaFile}`, new RegExp(utils.camelize(value), 'gm')) || 'That method already exists.';
+          return utils.checkString(`store/sagas/${answers.whichSagaFile}`, new RegExp(`function\\* ${utils.camelize(value)}\\(`, 'g')) ? 'That method already exists.' : true;
         }
-        if (/.+/.test(value) && answers.whichSaga === 'Route saga') {
-          return utils.checkString(`routes/${answers.whichRoute}/modules/${answers.whichRoute}Sagas.js`, new RegExp(utils.camelize(value), 'gm')) || 'That method already exists.';
+        if (/.+/.test(`function* ${value}`) && answers.whichSaga === 'Route saga') {
+          return utils.checkString(`routes/${answers.whichRoute}/modules/${answers.whichRoute}Sagas.js`, new RegExp(`function\\* ${utils.camelize(value)}\\($`, 'g')) ? 'That method already exists.' : true;
         }
         return 'The name is required.';
       },
@@ -86,7 +95,7 @@ module.exports = {
       actions.push({
         type: 'add',
         path: `${utils.getPath()}store/sagas/${data.sagaNameNew}`,
-        templateFile: 'action/templates/sagas.js.hbs',
+        templateFile: 'sagas/templates/sagas.js.hbs',
         skipIfExists: true,
       });
     }
