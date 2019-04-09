@@ -2,17 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import axios from 'axios';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-import JssProvider from 'react-jss/lib/JssProvider';
-import { create } from 'jss';
 import LanguageProvider from '../utility/LanguageProvider';
 import ErrorBoundary from '../utility/ErrorBoundary';
-import {{properCase name}} from './{{properCase name}}';
-import mainCSS from '../../assets/styles/scss/main.scss'; // eslint-disable-line
-import Icons from '../../assets/styles/scss/icons.scss'; // eslint-disable-line no-unused-vars
-import theme from '../../assets/styles/theme/{{properCase name}}.theme.js';
+import {{properCase name}} from './{{properCase name}}Container';
 
 class MainContainer extends Component {
   static propTypes = {
@@ -33,58 +25,21 @@ class MainContainer extends Component {
     super();
 
     this.state = {
-      messages: [],
       logged: false,
     };
   }
 
-  componentWillMount() {
-    this.getLang();
-  }
-
-  async getLang() {
-    let response;
-    let lang;
-    try {
-      response = await axios({
-        method: 'get',
-        url: 'https://wwwstg.nexi.it/dictionaryservice/selfpointonline/content.dic.lang-it.json',
-      });
-    } catch (error) {
-      console.error(error);
-    }
-    if (response) {
-      lang = response.data;
-      window.localStorage.setItem('language', JSON.stringify({ messages: response.data }));
-    } else {
-      lang = JSON.parse(window.localStorage.getItem('language'));
-      lang = lang.messages;
-    }
-    this.setState({ messages: lang });
-  }
-
   render() {
-    const generateClassName = createGenerateClassName();
-    const jss = create({
-      ...jssPreset(),
-      // We define a custom insertion point that JSS will look for injecting the styles in the DOM.
-      insertionPoint: document.getElementById('jss-insertion-point'),
-    });
     const { authRoutes, store, noauthRoutes } = this.props;
     return (
       <>
-        <CssBaseline />
-        <JssProvider jss={jss} generateClassName={generateClassName}>
-          <MuiThemeProvider theme={theme.muiTheme}>
-            <Provider store={store}>
-              <LanguageProvider messages={this.state.messages.data} locale={this.state.messages.language}>
-                <ErrorBoundary>
-                  <{{properCase name}} authRoutes={authRoutes} noauthRoutes={noauthRoutes} logged={this.state.logged} store={store} />
-                </ErrorBoundary>
-              </LanguageProvider>
-            </Provider>
-          </MuiThemeProvider>
-        </JssProvider>
+        <Provider store={store}>
+          <LanguageProvider messages={this.state.messages.data} locale={this.state.messages.language}>
+            <ErrorBoundary>
+              <{{properCase name}} authRoutes={authRoutes} noauthRoutes={noauthRoutes} logged={this.state.logged} store={store} />
+            </ErrorBoundary>
+          </LanguageProvider>
+        </Provider>
       </>
     );
   }

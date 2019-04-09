@@ -6,7 +6,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
 
 class {{ properCase name }} extends Component {
   static propTypes = {
@@ -52,15 +51,13 @@ class {{ properCase name }} extends Component {
     return (
       <>
         <Router>
-          <Grid container>
-            <Route path="/" />
-            <Switch>
-              {noauthRoutes.routes.map(({ component, ...otherRouteProp }) => (
-                <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
-              ))}
-              {logged ? loggedApp : this.handleAuthentication()}
-            </Switch>
-          </Grid>
+          <Route path="/" />
+          <Switch>
+            {noauthRoutes.routes.map(({ component, ...otherRouteProp }) => (
+              <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
+            ))}
+            {logged ? loggedApp : this.handleAuthentication()}
+          </Switch>
         </Router>
       </>
     );

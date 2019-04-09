@@ -27,7 +27,6 @@ module.exports = {
     const languageTemplate = './bootstrap/templates/language.js.hbs';
     const routeTemplate = './bootstrap/templates/route.js.hbs';
     const storeTemplate = './bootstrap/templates/store.js.hbs';
-    const themeTemplate = './bootstrap/templates/theme.js.hbs';
     const boundaryTemplate = './bootstrap/templates/boundary.js.hbs';
     const boundaryStyle = `body { margin: 0; } .bigBody { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 100vw; background-color: rgba(149, 150, 175, 0.3); } .body { display: flex; flex-direction: column; justify-content: center; text-align: center; .detailsButton { white-space: pre-wrap; outline: none; margin-top: 20px; &:focus { outline: none; } } } `;
     const apiTemplate = './bootstrap/templates/api.js.hbs';
@@ -42,7 +41,7 @@ module.exports = {
       },
       {
         type: 'add',
-        path: '../web/src/containers/{{properCase name}}.jsx',
+        path: '../web/src/containers/{{properCase name}}Container.jsx',
         templateFile: containerTemplate,
         abortOnFail: true,
         skipIfExists: true,
@@ -72,13 +71,6 @@ module.exports = {
         type: 'add',
         path: '../web/src/store/createStore.js',
         templateFile: storeTemplate,
-        abortOnFail: true,
-        skipIfExists: true,
-      },
-      {
-        type: 'add',
-        path: '../web/assets/styles/theme/{{properCase name}}.theme.js',
-        templateFile: themeTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
