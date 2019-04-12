@@ -10,13 +10,7 @@ module.exports = {
     {
       type: 'input',
       name: 'name',
-      message: 'container name please',
-      filter: (input) => {
-        if (!/container/.test(input)) {
-          return `${input} container`;
-        }
-        return undefined;
-      },
+      message: 'Choose a name for the container',
     },
   ],
   actions: () => {

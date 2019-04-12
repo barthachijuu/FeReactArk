@@ -3,4 +3,5 @@
 */
 
 module.exports = {
+  API_REST_BE: "''"
 };

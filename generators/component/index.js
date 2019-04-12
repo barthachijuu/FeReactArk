@@ -20,7 +20,7 @@ module.exports = {
       default: '',
       validate: (value) => {
         if ((/.+/).test(value)) {
-          return utils.checkExist(value) ? 'That component already exists.' : true;
+          return utils.checkExist(`components/${utils.pascalize(value)}`) ? 'That component already exists.' : true;
         }
         return 'The name is required.';
       },

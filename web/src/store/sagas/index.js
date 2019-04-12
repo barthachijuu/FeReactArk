@@ -1,9 +1,15 @@
 import { all } from 'redux-saga/effects';
+import sbroff from './sbroff';
+import spruzz from './spruzz';
+import squirt from './squirt';
 // @generator sagas:import
 
 export default function* root() {
   yield all([
     // @generator sagas:export
+    ...squirt,
+    ...spruzz,
+    ...sbroff,
   ]);
 }
 

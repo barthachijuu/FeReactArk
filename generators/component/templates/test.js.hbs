@@ -1,0 +1,20 @@
+/**
+ *
+ * Unit Test for
+ * {{ properCase componentName }}
+ *
+ */
+import React from 'react';
+import { shallow, mount } from 'enzyme';
+
+let render, wrapper ;
+beforeEach(() => {
+    render = shallow(<{{ properCase componentName }} />)
+});
+
+describe('<{{ properCase componentName }} /> rendering', () => {
+  it('should render self', () => {
+    expect(render).toHaveLength(1);
+  });
+
+});

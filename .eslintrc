@@ -26,7 +26,9 @@
     "__INT": false,
     "__PROD__": false,
     "__COVERAGE__": false,
-    "ENV": true
+    "ENV": true,
+    "ISMOCK": false,
+    "API_REST_BE": false
   },
   "rules": {
     "comma-dangle": 1,
@@ -59,6 +61,7 @@
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
     "no-nested-ternary": 0,
     "no-param-reassign": 0,
     "no-unused-expressions": 0,

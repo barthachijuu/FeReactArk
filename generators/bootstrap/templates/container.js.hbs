@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-class {{ properCase name }} extends Component {
+class {{ properCase name }}Container extends Component {
   static propTypes = {
     authRoutes: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
       path: PropTypes.string.isRequired,
@@ -64,4 +64,4 @@ class {{ properCase name }} extends Component {
   }
 }
 
-export default {{ properCase name }};
+export default {{ properCase name }}Container;

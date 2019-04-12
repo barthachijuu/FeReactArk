@@ -1,6 +1,8 @@
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
-// @generator api: imoprt
+const mock = new MockAdapter(axios);
+// @generator api: import
 
 const defaultHeaders = {
   'Content-Type': 'application/json',
@@ -8,42 +10,30 @@ const defaultHeaders = {
   pragma: 'no-cache',
   'cache-control': 'no-cache',
   Application: 'pt',
-  Env: DEPLOY_ENV_NAME,
-  'Client-Version': CLIENT_VERSION,
   Channel: 'web',
   Locale: 'it',
-  'Macro-Context': '', // DYNAMIC CONTENT BY context.js middleware
-  'Micro-Context': '', // DYNAMIC CONTENT BY context.js middleware
 };
 
 const multiPartHeaders = {
   pragma: 'no-cache',
   'cache-control': 'no-cache',
   Application: 'pt',
-  Env: DEPLOY_ENV_NAME,
-  'Client-Version': CLIENT_VERSION,
   Channel: 'web',
   Locale: 'it',
-  'Macro-Context': '', // DYNAMIC CONTENT BY context.js middleware
-  'Micro-Context': '', // DYNAMIC CONTENT BY context.js middleware
 };
 
 const defaultBody = {};
 
 // Add a request interceptor
-axios.interceptors.request.use((config) => {
-  return config;
-}, error => Promise.reject(error));
+axios.interceptors.request.use(config => config, error => Promise.reject(error));
 
 // Add a response interceptor
-axios.interceptors.response.use((response) => {
-  // Do something with response data
-  return response;
-}, error => Promise.reject(error));
+axios.interceptors.response.use(response => response, error => Promise.reject(error));
 
 export {
   defaultHeaders,
   multiPartHeaders,
   defaultBody,
+  mock,
   // @generator api: rest
 };

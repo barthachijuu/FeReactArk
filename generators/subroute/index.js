@@ -51,7 +51,7 @@ module.exports = {
       },
       {
         type: 'add',
-        path: `${utils.getPath()}routes/${data.whichRoute}/components/{{camelCase subrouteName}}/{{properCase subrouteName}}Container.js`,
+        path: `${utils.getPath()}routes/${data.whichRoute}/components/{{properCase subrouteName}}/{{properCase subrouteName}}Container.js`,
         templateFile: './subroute/templates/container.js.hbs',
         abortOnFail: true,
       },

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import axios from 'axios';
 import LanguageProvider from '../utility/LanguageProvider';
 import ErrorBoundary from '../utility/ErrorBoundary';
-import {{properCase name}} from './{{properCase name}}Container';
+import {{properCase name}}Container from './{{properCase name}}Container';
 
 class MainContainer extends Component {
   static propTypes = {
@@ -36,7 +35,7 @@ class MainContainer extends Component {
         <Provider store={store}>
           <LanguageProvider messages={this.state.messages.data} locale={this.state.messages.language}>
             <ErrorBoundary>
-              <{{properCase name}} authRoutes={authRoutes} noauthRoutes={noauthRoutes} logged={this.state.logged} store={store} />
+              <{{properCase name}}Container authRoutes={authRoutes} noauthRoutes={noauthRoutes} logged={this.state.logged} store={store} />
             </ErrorBoundary>
           </LanguageProvider>
         </Provider>

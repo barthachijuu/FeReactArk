@@ -26,6 +26,9 @@ module.exports = {
       name: 'mockName',
       message: 'What\'s the url want to be mocked?',
       validate: (value, answers) => {
+        if (/\s/.test(value)) {
+          return 'Blank space are not allowed.';
+        }
         if (/.+/.test(value)) {
           return utils.checkString(`mocks/${answers.whichMock}/${answers.whichMock}.js`, new RegExp(`'/${value}'`, 'gm')) ? 'That mock already exists.' : true;
         }
