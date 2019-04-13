@@ -70,7 +70,7 @@ const removeDir = (dir) => {
             readline.cursorTo(process.stdout, 0);
             interval = animateProgress('Creating scaffolding');
           }, 800);
-          exec(`node node_modules/plop/src/plop.js --plopfile generators/index.js bootstrap ${data}-container`, addCheckMark.bind(null, endProcess));
+          exec(`node node_modules/plop/src/plop.js --plopfile generators/index.js bootstrap ${data}`, addCheckMark.bind(null, endProcess));
         }
       });
     }, 1800);

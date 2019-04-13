@@ -39,6 +39,7 @@ function endProcess() {
     process.stdout.write(`\n Before start, please navigate to the new project directory "${argv.project}", and remember to add your repo on your remote origin.`);
     process.stdout.write('\nNow you can run "yarn start", to start your project.');
     process.stdout.write('\nEnjoy your code!');
+    process.exit();
   });
 }
 
@@ -100,8 +101,22 @@ function cleanRepo() {
   });
 }
 
+
 /**
- * Callback function after installing dependencies
+ * Callback function after installing all dependencies
+ */
+function createScaffolding() {
+  clearInterval(interval);
+  process.stdout.write('\nCreating scaffolding...');
+  setTimeout(() => {
+    readline.cursorTo(process.stdout, 0);
+    interval = animateProgress('Creating scaffolding');
+  }, 800);
+  exec(`node node_modules/plop/src/plop.js --plopfile generators/index.js bootstrap ${argv.project}`, addCheckMark.bind(null, cleanRepo));
+}
+
+/**
+ * Callback function after installing first dependencies
  */
 function installDepsCallback(error) {
   clearInterval(interval);
@@ -111,12 +126,12 @@ function installDepsCallback(error) {
     process.stdout.write('\n');
     process.exit(0);
   } else {
-    process.stdout.write('Creating scaffolding...');
+    process.stdout.write('\nInstalling dependencies... (This might take a while)');
     setTimeout(() => {
       readline.cursorTo(process.stdout, 0);
-      interval = animateProgress('Creating scaffolding');
-    }, 800);
-    exec(`node node_modules/plop/src/plop.js --plopfile generators/index.js bootstrap ${argv.project}-container`, addCheckMark.bind(null, cleanRepo));
+      interval = animateProgress('Installing dependencies');
+    }, 500);
+    exec('yarn install', addCheckMark.bind(null, createScaffolding));
   }
 }
 
@@ -133,21 +148,40 @@ function installDeps() {
     } else {
       exec('npm --version', (err2, stdout2) => {
         const npmVersion = stdout2.trim();
-        if (!semver.satisfies(npmVersion, '>4.0.0')) {
+        if (!semver.satisfies(npmVersion, '>5.0.0')) {
           installDepsCallback(
             `[ERROR] You need npm v5 or above but you have v${npmVersion}`,
           );
         } else {
-          process.stdout.write('\nInstalling dependencies... (This might take a while)');
+          console.clear();
+          process.stdout.write('\nInstalling setup dependencies... (This is necessary for start a full installation)');
           setTimeout(() => {
             readline.cursorTo(process.stdout, 0);
-            interval = animateProgress('Installing dependencies');
+            interval = animateProgress('Installing setup dependencies');
           }, 500);
-          exec('yarn install', addCheckMark.bind(null, installDepsCallback));
+          exec('yarn install', addCheckMark.bind(null, createScaffolding));
         }
       });
     }
   });
 }
-
-installDeps();
+if (argv.project !== undefined) {
+  console.clear();
+  if (!/-/.test(argv.project)) {
+    process.stdout.write('You may insert the project name (in dash case)\n');
+    process.stdin.on('data', (data) => {
+      if (!/-/.test(data)) {
+        process.stdout.write('Please insert the project name (in dash case)\n');
+      } else {
+        argv.project = data;
+        installDeps();
+      }
+    });
+  } else {
+    installDeps();
+  }
+} else {
+  console.clear();
+  process.stdout.write('You may start the setup process with the project parameters.\ni.e yarn setup --project react-fe (only in dash case)\n');
+  process.exit();
+}
