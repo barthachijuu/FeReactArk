@@ -5,6 +5,53 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] — 2019-04-14
+
+## First Release
+
+### Added
+
+- Added default langiage helper on generator.
+
+## [0.0.9] — 2019-04-13
+
+### Added
+
+- Added default langiage helper on generator.
+
+## [0.0.8] — 2019-04-13
+
+### Changed
+
+- Remove container append text on clean script.
+- Clean code for setup script.
+- Add improovements on setup script, to prevent wrong launch.
+
+## [0.0.7] — 2019-04-12
+
+### Fixed
+
+- Fixed some problem on generator.
+
+## [0.0.6] — 2019-04-09
+
+### Fixed
+
+- Fixed generator for prevent error on regex.
+
+### Removed
+
+- Removed Material UI.
+
+## [0.0.5] — 2019-04-05
+
+### Added
+
+- Jest Configuration.
+- Enzyme.
+- PostCSS Configuration.
+- Roboto Font and Material Icon
+
 ## [0.0.4] — 2019-04-02
 
 ### Added

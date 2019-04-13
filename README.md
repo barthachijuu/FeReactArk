@@ -115,7 +115,7 @@ While developing, you will probably rely mostly on `yarn start`; however, there 
 |`yarn run <script>`|Description|
 |------------------|-----------|
 |`analyze`|Launches the package analyzer. [Read more about Webpack Visualizer](https://github.com/chrisbateman/webpack-visualizer).|
-|`archive`|Clean the `~/dist` directory.|
+|`archive`|Create an archive of the `~/dist` directory.|
 |`clean`|Clean the `~/dist` directory.|
 |`compile`|Compiles the application to disk (`~/dist` by default).|
 |`generate`|Starts the generate prompt. Read more about this in `~/GENERATORS.md`.|
