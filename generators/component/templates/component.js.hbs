@@ -1,0 +1,38 @@
+/**
+ *
+ * {{ properCase componentName }}
+ *
+ */
+import React from 'react';
+{{#if wantPropTypes}}
+import PropTypes from 'prop-types';
+{{/if}}
+{{#if wantSCSSModules}}
+import styles from './{{ properCase componentName }}.scss';
+{{/if}}
+
+{{#if componentType}}
+class {{ properCase componentName }} extends React.PureComponent {
+  render() {
+    return (
+      <></>
+    );
+  }
+}
+{{else}}
+const {{ properCase componentName }} = {{#if wantPropTypes}}props{{else}}(){{/if}} => (
+  <></>
+);
+{{/if}}
+
+{{#if wantPropTypes}}
+{{ properCase componentName }}.propTypes = {
+  // Add here some propTypes
+};
+
+{{ properCase componentName }}.defaultProps = {
+  // Add here some default propTypes values
+};
+{{/if}}
+
+export default {{ properCase componentName }};

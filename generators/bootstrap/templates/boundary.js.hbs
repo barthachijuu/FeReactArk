@@ -1,0 +1,55 @@
+/*
+ *
+ * ErrorBoundary
+ *
+ * this component make react errors more readable
+ */
+
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import style from '../../assets/styles/scss/ErrorBoundary.scss';
+
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, errorType: null, errorInfo: null };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    // Catch errors in any components below and re-render with error message
+    this.setState({
+      errorType: error,
+      errorInfo: info,
+    });
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <>
+          <div className={style.bigBody}>
+            <div className={style.body}>
+              <h2>Something went wrong.</h2>
+              {this.state.errorType && this.state.errorType.toString()}
+              <br />
+              <details className={style.detailsButton}>
+                {this.state.errorInfo ? this.state.errorInfo.componentStack : <h3>Sorry, no more details</h3>}
+              </details>
+            </div>
+          </div>
+        </>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
+export default ErrorBoundary;

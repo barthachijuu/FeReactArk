@@ -1,0 +1,17 @@
+import dotProp from 'dot-prop-immutable';
+import { actionTypes } from './{{properCase routeName}}Actions';
+
+const ACTION_HANDLERS = {
+{{#each actions }}
+  [actionTypes.{{constantCase this }}]: (state, action) => {
+    return state;
+  },
+{{/each}}
+};
+
+const initialState = {};
+
+export default function {{camelCase routeName}}(state = initialState, action) {
+  const handler = ACTION_HANDLERS[action.type];
+  return handler ? handler(state, action) : state;
+}

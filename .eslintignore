@@ -1,0 +1,10 @@
+blueprints/**/files/**
+coverage/**
+node_modules/**
+dist/**
+src/index.html
+config
+tests
+bin
+server
+generator/**/template

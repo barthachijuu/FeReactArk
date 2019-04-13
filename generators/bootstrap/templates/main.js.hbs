@@ -1,0 +1,47 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import LanguageProvider from '../utility/LanguageProvider';
+import ErrorBoundary from '../utility/ErrorBoundary';
+import {{properCase name}}Container from './{{properCase name}}Container';
+
+class MainContainer extends Component {
+  static propTypes = {
+    authRoutes: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      exact: PropTypes.bool.isRequired,
+      component: PropTypes.func.isRequired,
+    }))).isRequired,
+    noauthRoutes: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      exact: PropTypes.bool.isRequired,
+      component: PropTypes.func.isRequired,
+    }))).isRequired,
+    store: PropTypes.object.isRequired,
+  };
+
+  constructor() {
+    super();
+
+    this.state = {
+      logged: false,
+    };
+  }
+
+  render() {
+    const { authRoutes, store, noauthRoutes } = this.props;
+    return (
+      <>
+        <Provider store={store}>
+          <LanguageProvider messages={this.state.messages.data} locale={this.state.messages.language}>
+            <ErrorBoundary>
+              <{{properCase name}}Container authRoutes={authRoutes} noauthRoutes={noauthRoutes} logged={this.state.logged} store={store} />
+            </ErrorBoundary>
+          </LanguageProvider>
+        </Provider>
+      </>
+    );
+  }
+}
+
+export default MainContainer;

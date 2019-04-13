@@ -1,0 +1,67 @@
+/**
+ *
+ * {{properCase name }}
+ *
+ */
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+class {{ properCase name }}Container extends Component {
+  static propTypes = {
+    authRoutes: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      exact: PropTypes.bool.isRequired,
+      component: PropTypes.func.isRequired,
+    }))).isRequired,
+    noauthRoutes: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      exact: PropTypes.bool.isRequired,
+      component: PropTypes.func.isRequired,
+    }))).isRequired,
+    store: PropTypes.object.isRequired,
+    logged: PropTypes.bool.isRequired,
+  };
+
+  componentWillMount() {
+  }
+
+  componentDidMount() {
+  }
+
+  shouldComponentUpdate() {
+    return false; // if keep true the page tries to reload herself many times at load need to use some more sophisticate logic if weird things happen
+  }
+
+  componentWillUnmount() {
+  }
+
+  handleAuthentication = () => {
+  // Uncomment the line below to handle auth, remember to add unauthenticated routes inside the regex.
+  // if (!this.props.logged && !/change-me/.test(window.location.href)) window.location = '/login.html';
+  };
+
+  render() {
+    const { authRoutes, noauthRoutes, logged } = this.props;
+    const loggedApp = (
+      authRoutes.routes.map(({ component, ...otherRouteProp }) => (
+        <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
+      ))
+    );
+    return (
+      <>
+        <Router>
+          <Route path="/" />
+          <Switch>
+            {noauthRoutes.routes.map(({ component, ...otherRouteProp }) => (
+              <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
+            ))}
+            {logged ? loggedApp : this.handleAuthentication()}
+          </Switch>
+        </Router>
+      </>
+    );
+  }
+}
+
+export default {{ properCase name }}Container;

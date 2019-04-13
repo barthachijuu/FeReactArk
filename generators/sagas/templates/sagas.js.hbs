@@ -1,0 +1,13 @@
+import { all, put, takeEvery, fork } from 'redux-saga/effects';
+
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+// @generator saga
+
+// @generator saga:watch
+
+export default function* root() {
+  yield all([
+    // @generator saga:fork
+  ]);
+}

@@ -1,0 +1,81 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "import",
+    "react"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "__INT__": false,
+    "__TEST__": false,
+    "__INT": false,
+    "__PROD__": false,
+    "__COVERAGE__": false,
+    "ENV": true,
+    "ISMOCK": false,
+    "API_REST_BE": false
+  },
+  "rules": {
+    "comma-dangle": 1,
+    "object-curly-newline": [0, {
+        "multiline": true,
+        "minProperties": 3
+    }],
+    "quotes": [
+      1,
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "react/forbid-prop-types": [0, {
+      "checkContextTypes": false ,
+      "checkChildContextTypes": false
+    }],
+    "react/destructuring-assignment": [0, {
+        "extensions": [".jsx"]
+    }],
+    "max-len": [
+      0
+    ],
+    "no-console": [
+      0
+    ],
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
+    "no-nested-ternary": 0,
+    "no-param-reassign": 0,
+    "no-unused-expressions": 0,
+    "no-underscore-dangle": 0,
+    "no-useless-escape": 0,
+    "no-shadow": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ]
+      }
+    }
+  }
+}
