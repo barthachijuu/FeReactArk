@@ -32,7 +32,7 @@
     "reinit": "node internals/clean",
     "setup": "npm i -D chalk fs-extra readline semver yargs && node internals/setup",
     "start": "better-npm-run start",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "yarn test --watch"
   },
   "lint-staged": {
