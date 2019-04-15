@@ -4,20 +4,22 @@
  * {{ properCase routeName }}
  *
  */
-{{#if hasHistory}}
-import jestMock from '../../../../../internals/helpers/__mocks__/jestMock.js';
-{{/if}}
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { {{#if hasHistory}}mount, {{else}}shallow{{/if}} } from 'enzyme';
 import {{ properCase routeName }} from '../components/{{ properCase routeName }}';
 
-let render, wrapper ;
+{{#if hasHistory}}
+  let wrapper;
+{{else}}
+  let render;
+{{/if}}
 beforeEach(() => {
     {{#if hasHistory}}
-    jest.mock('../../../../../internals/helpers/__mocks__/jestMock.js')
-    wrapper = mount( <{{ properCase routeName }} /> , require('../../../../../internals/helpers/__mocks__/jestMock.js').default)
-    {{/if}}
+    jest.mock('../../../../../config/__mocks__/jestMock.js')
+    wrapper = mount( <{{ properCase routeName }} /> , require('../../../../../config/__mocks__/jestMock.js').default)
+    {{else}}
     render = shallow(<{{ properCase routeName }} />)
+    {{/if}}
 });
 
 describe('<{{ properCase routeName }} /> rendering', () => {

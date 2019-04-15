@@ -13,7 +13,6 @@ const globalenv = require('../config/global.vars');
 const env = require(`../config/deployenv/${argv.d || 'development'}`); // eslint-disable-line import/no-dynamic-require
 
 const webpackConfig = require('../webpack/webpack.compile');
-const webpackLoginConfig = require('../webpack/webpack.login');
 const addCheckMark = require('./helpers/checkmark');
 
 process.stdin.setEncoding('utf8');
@@ -26,8 +25,6 @@ exec('yarn clean', addCheckMark.bind(null, console.log(chalk.green('Remove previ
 
 webpackConfig.plugins.push(new webpack.DefinePlugin(globalenv));
 webpackConfig.plugins.push(new webpack.DefinePlugin(env));
-webpackLoginConfig.plugins.push(new webpack.DefinePlugin(globalenv));
-webpackLoginConfig.plugins.push(new webpack.DefinePlugin(env));
 
 const webpackCompiler = (config) => { // eslint-disable-line arrow-body-style
   return new Promise((resolve, reject) => {
@@ -66,7 +63,6 @@ const compile = () => {
       console.log('Compilation completed successfully.');
     })
     // LOGIN
-    .then(() => webpackCompiler(webpackLoginConfig))
     .then(() => {
       console.log('Login Compilation completed successfully.');
       const mychoiches = fs.readdirSync(`dist`);
