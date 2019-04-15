@@ -1,3 +1,4 @@
+[![dependencies Status](https://david-dm.org/barthachijuu/FeReactArk/status.svg)](https://david-dm.org/barthachijuu/FeReactArk)  [![devDependencies Status](https://david-dm.org/barthachijuu/FeReactArk/dev-status.svg)](https://david-dm.org/barthachijuu/FeReactArk?type=dev) [![Coverage Status](https://coveralls.io/repos/github/barthachijuu/FeReactArk/badge.svg?branch=master)](https://coveralls.io/github/barthachijuu/FeReactArk?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # FeReactArk
 
 The purpose of this guide is to get the project up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich
