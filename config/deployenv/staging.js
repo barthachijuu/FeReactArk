@@ -3,5 +3,6 @@
 */
 
 module.exports = {
-  API_REST_BE: "''"
+  API_REST_BE: "''",
+  ISMOCK: false,
 };

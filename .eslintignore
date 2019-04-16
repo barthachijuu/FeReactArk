@@ -3,8 +3,6 @@ coverage/**
 node_modules/**
 dist/**
 src/index.html
-config
+config/**
 tests
-bin
 server
-generator/**/template

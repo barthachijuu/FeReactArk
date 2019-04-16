@@ -23,6 +23,16 @@ const endProcess = () => {
   process.exit();
 };
 
+const resetSagas = () => {
+  let lines = fs.readFileSync(`${path.join(__dirname, '../web/src/store/sagas/index.js')}`, 'utf-8');
+  lines = lines.split('\n');
+  let start = lines.findIndex(line => line.indexOf('sagas:import') > -1);
+  lines.splice(1, (start - 1));
+  start = lines.findIndex(line => line.indexOf('sagas:export') > -1);
+  lines.splice(start + 1, start - 2);
+  fs.writeFileSync(`${path.join(__dirname, '../web/src/store/sagas/index.js')}`, lines.join('\n'));
+};
+
 const removeFile = (file = '', dir = '') => {
   if (dir !== '') {
     const files = utils.readDir(`${utils.getPath()}${dir}`);
@@ -60,6 +70,7 @@ const removeDir = (dir) => {
     }, 500);
     setTimeout(() => {
       addCheckMark.bind(null, clearInterval(interval));
+      resetSagas();
       process.stdout.write('\n Insert the container name (in dash case)');
       process.stdin.on('data', (data) => {
         if (!/-/.test(data)) {
@@ -95,4 +106,6 @@ removeDir([`${path.join(__dirname, '../web/src/components')}`,
   `${path.join(__dirname, '../web/assets/styles/theme')}`,
   `${path.join(__dirname, '../web/src/api')}`,
   `${path.join(__dirname, '../web/src/mocks')}`,
+  `${path.join(__dirname, '../web/src/utility/tests')}`,
+  `${path.join(__dirname, '../coverage')}`,
 ]);

@@ -17,6 +17,7 @@ class MainContainer extends Component {
       exact: PropTypes.bool.isRequired,
       component: PropTypes.func.isRequired,
     }))).isRequired,
+    messages: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
   };
 
@@ -29,11 +30,11 @@ class MainContainer extends Component {
   }
 
   render() {
-    const { authRoutes, store, noauthRoutes } = this.props;
+    const { authRoutes, store, noauthRoutes, messages } = this.props;
     return (
       <>
         <Provider store={store}>
-          <LanguageProvider messages={this.state.messages.data} locale={this.state.messages.language}>
+          <LanguageProvider messages={messages.data} locale={messages.locale}>
             <ErrorBoundary>
               <{{properCase name}}Container authRoutes={authRoutes} noauthRoutes={noauthRoutes} logged={this.state.logged} store={store} />
             </ErrorBoundary>
