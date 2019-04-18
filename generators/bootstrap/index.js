@@ -49,6 +49,12 @@ module.exports = {
       },
       {
         type: 'add',
+        path: `${utils.getPath()}utility/tests/language.test.js`,
+        templateFile: './bootstrap/templates/test.js.hbs',
+        abortOnFail: true,
+      },
+      {
+        type: 'add',
         path: '../web/src/index.jsx',
         templateFile: bootstrapTemplate,
         abortOnFail: true,
@@ -81,6 +87,12 @@ module.exports = {
         templateFile: boundaryTemplate,
         abortOnFail: true,
         skipIfExists: true,
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}utility/tests/errortest.test.js`,
+        templateFile: './bootstrap/templates/errortest.js.hbs',
+        abortOnFail: true,
       },
       {
         type: 'add',

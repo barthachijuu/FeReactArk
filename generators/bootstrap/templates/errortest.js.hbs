@@ -1,0 +1,33 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import ErrorBoundary from '../ErrorBoundary';
+
+let render;
+
+beforeEach(() => {
+  render = shallow(<ErrorBoundary />)
+});
+
+describe('<ErrorBoundary />', () => {
+  it('should render its self', () => {
+    expect(render).toHaveLength(1);
+  });
+
+  it('should render its children', () => {
+    const children = <h1>Test</h1>;
+    const renderedComponent = shallow(
+      <ErrorBoundary children={children}>
+        {children}
+      </ErrorBoundary>,
+    );
+    expect(renderedComponent.contains(children)).toBe(true);
+    expect(renderedComponent.find('h2').children).toHaveLength(1);
+
+  });
+
+  it('should has one of h2', () => {
+    expect(render.find('h2').children).toHaveLength(1);
+
+  });
+});

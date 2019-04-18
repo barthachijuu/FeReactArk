@@ -14,6 +14,7 @@ import moment from 'moment';
 import { addLocaleData } from 'react-intl';
 import * as en from 'react-intl/locale-data/en';
 import * as it from 'react-intl/locale-data/it';
+import itAppStrings from './translations/lang-it.json';
 import MainContainer from './containers/MainContainer';
 import store from './store/createStore';
 
@@ -25,6 +26,9 @@ const authRoutes = require('./routes/index').default(store);
 const noauthRoutes = require('./routes/index').createUnauthRoutes(store);
 
 // React INTL
+const messages = {
+  ...itAppStrings,
+};
 
 addLocaleData([...en, ...it]);
 
@@ -32,7 +36,7 @@ moment.locale('it');
 
 const render = () => {
   ReactDOM.render(
-    <MainContainer store={store} authRoutes={authRoutes} noauthRoutes={noauthRoutes} />,
+    <MainContainer store={store} authRoutes={authRoutes} noauthRoutes={noauthRoutes} messages={messages}/>,
     MOUNT_NODE,
   );
 };

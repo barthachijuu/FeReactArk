@@ -1,3 +1,3 @@
 module.exports = {
-    ISMOCK: false
+  ISMOCK: false,
 };
