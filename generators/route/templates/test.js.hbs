@@ -15,8 +15,8 @@ import {{ properCase routeName }} from '../components/{{ properCase routeName }}
 {{/if}}
 beforeEach(() => {
     {{#if hasHistory}}
-    jest.mock('../../../../../config/__mocks__/jestMock.js')
-    wrapper = mount( <{{ properCase routeName }} /> , require('../../../../../config/__mocks__/jestMock.js').default)
+    jest.mock('../../../../../__mocks__/jestMock.js')
+    wrapper = mount( <{{ properCase routeName }} /> , require('../../../../../__mocks__/jestMock.js').default)
     {{else}}
     render = shallow(<{{ properCase routeName }} />)
     {{/if}}

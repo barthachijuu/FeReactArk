@@ -1,8 +1,6 @@
-blueprints/**/files/**
 coverage/**
 node_modules/**
 dist/**
-src/index.html
-config/**
+web/src/index.html
+__mocks__
 tests
-server

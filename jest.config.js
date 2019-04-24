@@ -13,7 +13,7 @@ module.exports = {
     '^Components(.*)$': '<rootDir>web/src/components$1',
     '^Store(.*)$': '<rootDir>web/src/store$1',
     '^Utility(.*)$': '<rootDir>web/src/utility$1',
-    '.*\\.(css|scss)$': '<rootDir>/config/SCSSStub.js',
+    '.*\\.(css|scss)$': '<rootDir>/SCSSStub.js',
   },
   coverageThreshold: {
     global: {

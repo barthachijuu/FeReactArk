@@ -142,6 +142,8 @@ patterns for building scalable applications. If you wish to read more about this
 ```bash
 
 │
+├── __mocks__
+│   └──jestMock.js
 ├── config            <! Project Configuration Files !>
 │   ├── deployenv
 │   │   ├── development.js
@@ -167,8 +169,6 @@ patterns for building scalable applications. If you wish to read more about this
 │
 ├── internals         <! Build/Start scripts !>
 │   ├── helpers
-│   │   ├── __mocks__
-│   │   │     └──jestMock.js
 │   │   ├── checkmark.js
 │   │   ├── matchMedia.mock
 │   │   ├── progress.js

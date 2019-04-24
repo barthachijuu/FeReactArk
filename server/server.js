@@ -7,7 +7,7 @@ const hmr = require('webpack-hot-middleware');
 const express = require('express');
 const webpack = require('webpack');
 const compression = require('compression');
-const argv = require('yargs').argv;
+const { argv } = require('yargs');
 
 const project = require('../config/project.config');
 const globalenv = require('../config/global.vars');
@@ -23,7 +23,7 @@ const app = express();
 
 app.use(compression());
 
-const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
+const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, { // eslint-disable-line import/order
   publicPath: '/',
   contentBase: 'web/src',
   hot: true,
@@ -37,7 +37,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
   },
 });
 
-const webpackHotMiddleware = require('webpack-hot-middleware')(compiler, {
+const webpackHotMiddleware = require('webpack-hot-middleware')(compiler, { // eslint-disable-line import/order
   logLevel: 'warn',
   log: false,
   path: '/__webpack_hmr',
@@ -79,7 +79,7 @@ webpackDevMiddleware.waitUntilValid(() => {
 
 // use the gzipped bundle
 app.get('*.js*', (req, res, next) => {
-  req.url = req.url + '.gz';
+  req.url += '.gz';
   res.set('Content-Encoding', 'gzip');
   next();
 });
@@ -95,6 +95,7 @@ app.use('*', (req, res, next) => {
     res.set('content-type', 'text/html');
     res.send(result);
     res.end();
+    return true;
   });
 });
 module.exports = app;
