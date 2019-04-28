@@ -60,7 +60,8 @@ const config = {
   {
     type: 'lcov',
     dir: 'coverage',
-  }],
+  },
+  ],
 };
 
 /*
@@ -89,9 +90,9 @@ config.globals = {
 // ------------------------------------
 // Utilities
 // ------------------------------------
-function base() {
-  const args = [config.path_base].concat([].slice.call(arguments));
-  return path.resolve(...args);
+function base(...args) {
+  const arg = [config.path_base].concat(args);
+  return path.resolve(...arg);
 }
 
 config.paths = {
