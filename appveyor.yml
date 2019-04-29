@@ -11,3 +11,6 @@ test_script:
   - npm --version
   # run tests
   - jest && codecov
+
+# Don't actually build.
+build: 'off'
