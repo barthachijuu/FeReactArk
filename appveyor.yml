@@ -14,7 +14,7 @@ test_script:
   # Output useful info for debugging.
   - node --version
   - npm --version
-  - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"YourTestDll -noshadow" -output:"coverage.xml" -filter:"+[YourSUTNamepace*]* -[YourTestNamespace*]*"
+  - codecov -t $env:CODECOV_TOKEN -noshadow" -output:"coverage.xml"
 
 # Don't actually build.
 build: 'off'
