@@ -28,4 +28,6 @@ module.exports = {
   setupFilesAfterEnv: [
     './internals/enzyme.setup.js',
   ],
+  coverageDirectory: './coverage/',
+  collectCoverage: true,
 };

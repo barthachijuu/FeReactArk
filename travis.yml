@@ -2,11 +2,10 @@ language: node_js
 
 node_js:
   - '8'
+  - '7'
 
 script:
-  - yarn test:watch
-  - yarn deploy:dev
-  - yarn deploy:prod
+  - jest && codecov
 
 before_install:
   - export CHROME_BIN=chromium-browser
@@ -14,7 +13,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 install:
-  - yarn setup --project react-fe-ark
+  - npm install -g codecov
 
 notifications:
   email:
