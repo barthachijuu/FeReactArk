@@ -1,9 +1,6 @@
 environment:
   nodejs_version: '8'
 
-script:
-  - jest && codecov
-
 install:
   - npm install -g codecov
 
@@ -13,4 +10,4 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - npm test
+  - jest && codecov
