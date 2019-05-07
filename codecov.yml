@@ -1,26 +1,34 @@
-codecov:
-  notify:
-    require_ci_to_pass: yes
-
-coverage:
-  precision: 2
-  round: down
-  range: "70...100"
-
-  status:
-    project: yes
-    patch: yes
-    changes: no
-
-parsers:
-  gcov:
-    branch_detection:
-      conditional: yes
-      loop: yes
-      method: no
-      macro: no
-
-comment:
-  layout: "header, diff"
-  behavior: default
-  require_changes: no
+{
+  "comment": {
+    "require_changes": false,
+    "layout": "header, diff",
+    "behavior": "default"
+  },
+  "parsers": {
+    "gcov": {
+      "branch_detection": {
+        "macro": false,
+        "conditional": true,
+        "method": false,
+        "loop": true
+      }
+    }
+  },
+  "coverage": {
+    "status": {
+      "project": true,
+      "changes": false,
+      "patch": true
+    },
+    "range": [
+      70.0,
+      100.0
+    ],
+    "precision": 2,
+    "round": "down"
+  },
+  "codecov": {
+    "notify": {},
+    "require_ci_to_pass": true
+  }
+}
