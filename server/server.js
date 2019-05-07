@@ -37,7 +37,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, { // es
   },
 });
 
-const webpackHotMiddleware = require('webpack-hot-middleware')(compiler, { // eslint-disable-line import/order
+const webpackHotMiddleware = hmr(compiler, {
   logLevel: 'warn',
   log: false,
   path: '/__webpack_hmr',
