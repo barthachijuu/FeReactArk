@@ -1,27 +1,39 @@
+# Set build version format here instead of in the admin panel
+version: '{build}'
+
+# Do not build on gh tags
+skip_tags: true
+
+# Test against these versions of Node.js
 environment:
-  nodejs_version: '8'
+  matrix:
+    # Node versions to run
+    - nodejs_version: 'Current'
+    - nodejs_version: 'LTS'
+
+# Fix line endings in Windows. (runs before repo cloning)
+init:
+  - git config --global core.autocrlf input
 
 install:
+# Install the latest stable version of Node
+  - ps: Install-Product node $env:nodejs_version
+  - npm ci
   - npm install -g codecov
 
-before_build:
- - nuget restore
+# Disable automatic builds
+build: 'off'
 
 # Post-install test scripts.
 test_script:
   # Output useful info for debugging.
   - node --version
   - npm --version
+  - node ./server/utils/check-version
   - codecov -t $env:CODECOV_TOKEN -f "coverage.xml"
+  # run tests and run build
+  - npm run start
 
-# Don't actually build.
-build: 'off'
-
-after_test:
-  - ps: |
-      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
-      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-      bash codecov.sh -f "coverage.xml" -t $env:CODECOV_TOKEN
-
+# Cache node_modules for faster builds
 cache:
  - "%LOCALAPPDATA%\\Yarn"
