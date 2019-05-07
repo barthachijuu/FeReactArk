@@ -17,8 +17,6 @@ init:
 
 install:
 # Install the latest stable version of Node
-  - ps: Install-Product node $env:nodejs_version
-  - npm ci
   - npm install -g codecov
 
 # Disable automatic builds
