@@ -17,7 +17,7 @@ init:
 
 install:
 # Install the latest stable version of Node
-  - npm install -g codecov
+  - npm install -g codecov chalk semver
 
 # Disable automatic builds
 build: 'off'
