@@ -6,15 +6,12 @@ install:
 
 before_build:
  - nuget restore
-build_script:
- - msbuild /verbosity:quiet "YourSolution"
 
 # Post-install test scripts.
 test_script:
   # Output useful info for debugging.
   - node --version
   - npm --version
-  - yarn test
   - codecov -t $env:CODECOV_TOKEN -f "coverage.xml"
 
 # Don't actually build.
