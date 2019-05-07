@@ -33,7 +33,9 @@
     "setup": "npm i -D chalk fs-extra readline semver yargs && node internals/setup",
     "start": "better-npm-run start",
     "test": "jest --coverage",
-    "test:watch": "yarn test --watch"
+    "test:watch": "yarn test --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "lint-staged": {
     "*{js,jsx}": [
@@ -145,7 +147,8 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-merge": "^4.2.1",
     "webpack-monitor": "^1.0.14",
-    "webpack-visualizer-plugin": "^0.1.11"
+    "webpack-visualizer-plugin": "^0.1.11",
+    "snyk": "^1.161.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -208,5 +211,6 @@
     "url-loader": "^1.1.2",
     "webpack-cli": "^3.3.0",
     "webpack-manifest-plugin": "^2.0.4"
-  }
+  },
+  "snyk": true
 }
