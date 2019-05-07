@@ -1,0 +1,30 @@
+environment:
+  nodejs_version: '8'
+
+install:
+  - npm install -g codecov
+
+before_build:
+ - nuget restore
+build_script:
+ - msbuild /verbosity:quiet "YourSolution"
+
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  - yarn test
+  - codecov -t $env:CODECOV_TOKEN -f "coverage.xml"
+
+# Don't actually build.
+build: 'off'
+
+after_test:
+  - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh -f "coverage.xml" -t $env:CODECOV_TOKEN
+
+cache:
+ - "%LOCALAPPDATA%\\Yarn"

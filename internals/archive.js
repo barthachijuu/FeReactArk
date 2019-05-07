@@ -8,7 +8,7 @@ const pkg = require('../package.json');
 const env = require(`../config/deployenv/${argv.d || 'development'}`); // eslint-disable-line import/no-dynamic-require
 const deployEnv = env.DEPLOY_ENV_NAME.replace(/\'/g, '');
 // create a file to stream archive data to.
-const filename = `portalPaNexi-${deployEnv}-${pkg.version}-${env.TYPE.replace(/\'/g, '')}.zip`;
+const filename = `${argv.name}-${deployEnv}-${pkg.version}-${env.TYPE.replace(/\'/g, '')}.zip`;
 const output = fs.createWriteStream(path.join(__dirname, '../') + filename);
 const archive = archiver('zip', {
   zlib: {

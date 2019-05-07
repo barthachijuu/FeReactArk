@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 const utils = require('./utils/fileUtils');
+
 const bootstrapGenerator = require('./bootstrap/index.js');
 const apiGenerator = require('./apirest/index.js');
 const actionGenerator = require('./action/index.js');

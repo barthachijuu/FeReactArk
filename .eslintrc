@@ -23,7 +23,6 @@
     "__DEV__": false,
     "__INT__": false,
     "__TEST__": false,
-    "__INT": false,
     "__PROD__": false,
     "__COVERAGE__": false,
     "ENV": true,
