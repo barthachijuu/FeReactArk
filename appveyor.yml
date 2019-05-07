@@ -27,8 +27,7 @@ test_script:
   # Output useful info for debugging.
   - node --version
   - npm --version
-  - node ./server/utils/check-version
-  - codecov -t $env:CODECOV_TOKEN -f "coverage.xml"
+  - codecov -t $env:CODECOV_TOKEN -f
   # run tests and run build
   - npm run start
 
