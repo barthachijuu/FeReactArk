@@ -67,17 +67,11 @@ Write composable CSS that's co-located with your components for complete modular
 
 It's natural to want to add pages (e.g. `/contact`) to your application, and routing makes this possible.
 
-### Offline-first
-
-The next frontier in performant web apps: availability without a network connection from the instant your users load the app (if you choose to start without any API).
-
 ### Static code analysis
 
 Focus on writing new features without worrying about formatting or code quality. With the right editor setup, your code will automatically be formatted and linted as you work.
 
-```
-<sub><i>Keywords: React.js, Redux, Hot Reloading, ESNext, Babel, react-router, Offline First, `styled-components`, redux-saga, eslint</i></sub>
-```
+---
 
 But don't read too fast... there's more!
 
@@ -91,7 +85,8 @@ But don't read too fast... there's more!
 
 ### Getting Started
 
-___
+---
+
 Make sure you have Node 8.0.0 or above and Yarn 1.3.0 or above installed.
 
 1. Clone the repo using `git clone git@github.com:barthachijuu/FeReactArk.git`
@@ -105,14 +100,9 @@ Now you're ready to enjoy with your new project
 
 ### Documentation
 
-___
+---
+We are working hard to create an easy to understand docs
 
-- [The Da Vinci Code to `react-fe-ark`](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/general/introduction.md): An introduction for newcomers to this boilerplate.
-- [Overview](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/general): A short overview of the included tools
-- [Commands](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/general/commands.md): Getting the most out of this boilerplate
-- [Testing](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing): How to work with the built-in test harness
-- [Styling](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/style): How to work with the CSS tooling
-- [Troubleshooting](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/general/gotchas.md): Solutions to common problems faced by developers.
 
 ## Contributors ✨
 
