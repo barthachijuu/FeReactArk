@@ -25,6 +25,18 @@
         "plugin",
         "projectManagement"
       ]
+    },
+    {
+      "login": "gbonumore",
+      "name": "gbonumore",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/34310821?v=4",
+      "profile": "https://github.com/gbonumore",
+      "contributions": [
+        "code",
+        "content",
+        "design",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
