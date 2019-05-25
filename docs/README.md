@@ -54,13 +54,13 @@ We bundle all your clientside scripts and chunk them into several files using
 code splitting where possible. We then automatically optimize your code when
 building for production so you don't have to worry about that.
 
-See the [JS documentation](./js/README.md) for more information about the
+See the [JS documentation](#) for more information about the
 JavaScript side of things.
 
 ### Testing
 
 For a thorough explanation of the testing procedure, see the
-[testing documentation](./testing/README.md)!
+[testing documentation](#)!
 
 #### Unit testing
 
