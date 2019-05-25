@@ -8,6 +8,41 @@
 <div align="center"><strong>Start your new react project quickly and easily</strong></div>
 <div align="center">A very scalable architecture, with the best new front-end technologies, all on a configurable, feature-rich and a focus on performance and best practices</div>
 
+## What this boilerplate contains
+
+<img src="./repo_readme_assets/react.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/redux.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/router.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/logo-sass.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/logo-npm.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/yarn.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/logo-es6.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/logo-node.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/logo-webpack.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/jest.png" height="55">&nbsp;&nbsp;
+
+- [x] Webpack task runner
+- [x] SASS/SCSS Compiler & Linter + CSS Modules
+- [x] ESLint minification
+- [x] Yarn / Npm package managers
+- [x] ES6 supported
+- [x] Npm-better
+- [x] React Lazy Mode for Routes
+- [x] Styleguidist
+- [x] Jest
+- [x] Enzyme
+- [x] React Redux Form
+- [x] Generators
+
+---
+
+## Browsers Support
+
+| <img src="./repo_readme_assets/browsers/browser-ie.svg" height="35"> | <img src="./repo_readme_assets/browsers/browser-firefox.svg" height="35"> | <img src="./repo_readme_assets/browsers/browser-chrome.svg" height="35"> | <img src="./repo_readme_assets/browsers/browser-safari.svg" height="35"> | <img src="./repo_readme_assets/browsers/browser-opera.svg" height="35"> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Edge+                                                        | latest                                                       | latest                                                       | latest                                                       | latest                                                       |
+
+---
 ## Features
 
 ___
@@ -79,17 +114,6 @@ ___
 - [Styling](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/style): How to work with the CSS tooling
 - [Troubleshooting](https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/general/gotchas.md): Solutions to common problems faced by developers.
 
-### Contributors
-
-___
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## License
-
-This project is licensed under the MIT license, Copyright (c) 2019 Maximilian Stoiber. For more information see `LICENSE.md`
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -101,3 +125,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## License
+
+This project is licensed under the MIT license, Copyright (c) 2019 Maximilian Stoiber. For more information see `LICENSE.md`
