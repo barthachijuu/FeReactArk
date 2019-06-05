@@ -1,0 +1,43 @@
+{
+  "projectName": "FeReactArk",
+  "projectOwner": "barthachijuu",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "eslint",
+  "contributors": [
+    {
+      "login": "barthachijuu",
+      "name": "Bartolo Amico",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1281894?v=4",
+      "profile": "http://about.me/bartolo_amico",
+      "contributions": [
+        "code",
+        "content",
+        "doc",
+        "ideas",
+        "infra",
+        "maintenance",
+        "plugin",
+        "projectManagement"
+      ]
+    },
+    {
+      "login": "gbonumore",
+      "name": "gbonumore",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/34310821?v=4",
+      "profile": "https://github.com/gbonumore",
+      "contributions": [
+        "code",
+        "content",
+        "design",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
