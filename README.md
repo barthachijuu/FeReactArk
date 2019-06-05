@@ -2,7 +2,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
  [![HitCount](http://hits.dwyl.io/barthachijuu/FeReactArk.svg)](http://hits.dwyl.io/barthachijuu/FeReactArk)
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
- [![Github Tag][github-tag-image]][github-tag-url]
+![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/barthachijuu/FeReactArk.svg)
 
 # FeReactArk
 
