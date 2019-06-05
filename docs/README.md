@@ -2,6 +2,22 @@
 
 ## Table of Contents
 
+- [General](general)
+  - [**CLI Commands**](general/commands.md)
+  - [Tool Configuration](general/files.md)
+  - [FAQ](general/faq.md)
+- [Testing](testing)
+  - [Unit Testing](testing/unit-testing.md)
+  - [Component Testing](testing/component-testing.md)
+- [JS](js)
+  - [Redux](js/redux.md)
+  - [Immer](js/immer.md)
+  - [reselect](js/reselect.md)
+  - [redux-saga](js/redux-saga.md)
+  - [i18n](js/i18n.md)
+  - [routing](js/routing.md)
+  - [generator](js/generator.md)
+
 ## Overview
 
 ### Quickstart

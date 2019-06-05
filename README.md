@@ -2,14 +2,18 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
  [![HitCount](http://hits.dwyl.io/barthachijuu/FeReactArk.svg)](http://hits.dwyl.io/barthachijuu/FeReactArk)
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ [![Github Tag][github-tag-image]][github-tag-url]
 
 # FeReactArk
 
 <div align="center"><strong>Start your new react project quickly and easily</strong></div>
 <div align="center">A very scalable architecture, with the best new front-end technologies, all on a configurable, feature-rich and a focus on performance and best practices</div>
 
-## What this boilerplate contains
+---
 
+<div align="center"><strong>React FE Architecture contains:</strong></div>
+<br />
+<div align="center">
 <img src="./repo_readme_assets/react.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/redux.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/router.png" height="55">&nbsp;&nbsp;
@@ -20,19 +24,7 @@
 <img src="./repo_readme_assets/logo-node.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/logo-webpack.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/jest.png" height="55">&nbsp;&nbsp;
-
-- [x] Webpack task runner
-- [x] SASS/SCSS Compiler & Linter + CSS Modules
-- [x] ESLint minification
-- [x] Yarn / Npm package managers
-- [x] ES6 supported
-- [x] Npm-better
-- [x] React Lazy Mode for Routes
-- [x] Styleguidist
-- [x] Jest
-- [x] Enzyme
-- [x] React Redux Form
-- [x] Generators
+</div>
 
 ---
 
@@ -43,9 +35,8 @@
 | Edge+                                                        | latest                                                       | latest                                                       | latest                                                       | latest                                                       |
 
 ---
-## Features
 
-___
+## Features
 
 ### Easily scaffolding
 
@@ -103,7 +94,6 @@ Now you're ready to enjoy with your new project
 ---
 We are working hard to create an easy to understand docs
 
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -118,4 +108,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## License
 
-This project is licensed under the MIT license, Copyright (c) 2019 Maximilian Stoiber. For more information see `LICENSE.md`
+This project is licensed under the MIT license, Copyright (©) 2019 Maximilian Stoiber. For more information see `LICENSE.md`
