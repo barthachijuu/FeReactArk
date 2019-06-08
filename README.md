@@ -2,8 +2,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
  [![HitCount](http://hits.dwyl.io/barthachijuu/FeReactArk.svg)](http://hits.dwyl.io/barthachijuu/FeReactArk)
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/barthachijuu/FeReactArk.svg)
-
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/barthachijuu/FeReactArk.svg)](https://github.com/barthachijuu/FeReactArk/tags/)
 # FeReactArk
 
 <div align="center"><strong>Start your new react project quickly and easily</strong></div>
