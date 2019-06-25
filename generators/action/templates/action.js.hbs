@@ -3,7 +3,7 @@ import { createRequestTypes, createAction } from './index';
 export const actionTypes = {
 {{#if actions}}
   {{#each actions}}
-  {{constantCase this}}: '{{constantCase this}}',
+  DO_{{constantCase this}}: 'DO_{{constantCase this}}',
   {{/each}}
 {{/if}}
   // @generator action:type
@@ -34,7 +34,7 @@ export const {{camelCase this}} = {
 
 export function do{{properCase this}}() {
   return {
-    type: actionTypes.{{constantCase this}},
+    type: actionTypes.DO_{{constantCase this}},
     payload: {},
   };
 }

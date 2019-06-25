@@ -2,27 +2,19 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 const mock = new MockAdapter(axios);
-// @generator api: import
 
 const defaultHeaders = {
   'Content-Type': 'application/json',
   Accept: 'application/json, text/plain, */*',
   pragma: 'no-cache',
   'cache-control': 'no-cache',
-  Application: 'pt',
-  Channel: 'web',
-  Locale: 'it',
 };
 
-const multiPartHeaders = {
-  pragma: 'no-cache',
-  'cache-control': 'no-cache',
-  Application: 'pt',
-  Channel: 'web',
-  Locale: 'it',
-};
 
 const defaultBody = {};
+
+// Axios configuration
+axios.defaults.baseURL = API_REST_BE;
 
 // Add a request interceptor
 axios.interceptors.request.use(config => config, error => Promise.reject(error));

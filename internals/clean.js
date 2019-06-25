@@ -28,8 +28,9 @@ const resetSagas = () => {
   lines = lines.split('\n');
   let start = lines.findIndex(line => line.indexOf('sagas:import') > -1);
   lines.splice(1, (start - 1));
-  start = lines.findIndex(line => line.indexOf('sagas:export') > -1);
-  lines.splice(start + 1, start - 2);
+  start = lines.findIndex(line => line.indexOf('yield all([') > -1);
+  const end = lines.findIndex(line => line.indexOf('sagas:export') > -1);
+  lines.splice(start + 1, (end - start - 1));
   fs.writeFileSync(`${path.join(__dirname, '../web/src/store/sagas/index.js')}`, lines.join('\n'));
 };
 
@@ -71,10 +72,10 @@ const removeDir = (dir) => {
     setTimeout(() => {
       addCheckMark.bind(null, clearInterval(interval));
       resetSagas();
-      process.stdout.write('\n Insert the container name (in dash case)');
+      process.stdout.write('\n Insert the container name (in dash case), or press CTRL+C for exit the process');
       process.stdin.on('data', (data) => {
         if (!/-/.test(data)) {
-          process.stdout.write('\n Please insert the container name (in dash case)');
+          process.stdout.write('\n Please insert the container name (in dash case), or press CTRL+C for exit the process');
         } else {
           process.stdout.write('Creating scaffolding...');
           setTimeout(() => {

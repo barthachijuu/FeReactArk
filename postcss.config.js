@@ -1,6 +1,8 @@
 const { resolve } = require('path');
 const project = require('./config/project.config.js'); // eslint-disable-line
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer')({
+  browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 10'],
+});
 
 const fontMagician = require('postcss-font-magician')({
   variants: {

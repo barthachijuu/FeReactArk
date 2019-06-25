@@ -1,13 +1,16 @@
 const chalk = require('chalk');
 const path = require('path');
-const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+const { argv } = require('yargs');
 
 console.log(chalk.bgGreen(chalk.black('###   Creating default configuration.   ###\n')));
 // ========================================================
 // Default Configuration
 // ========================================================
 const config = {
-  env: process.env.NODE_ENV || 'development',
+  env: argv.mode || 'development',
   // ----------------------------------
   // Project Structure
   // ----------------------------------
@@ -29,7 +32,7 @@ const config = {
     assetsPublicPath: '/dist',
   },
   monitor: {
-    target: './.monitor/stats.json',
+    target: 'monitor/stats.json',
     port: process.env.MONITOR_PORT || 9001,
   },
 
@@ -110,17 +113,29 @@ config.paths = {
 config.webpack = {
   CSSModuleLoader: {
     loader: 'css-loader',
+    options: {
+      modules: true,
+      sourceMap: process.env.NODE_ENV === 'development',
+      localIdentName: '[local]__[hash:base64:5]',
+      minimize: process.env.NODE_ENV === 'production',
+    },
+  },
+  MiniCssLoader: {
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+      hmr: process.env.NODE_ENV === 'development',
+      modules: true,
+      sourceMap: process.env.NODE_ENV === 'development',
+      localIdentName: '[name]_[local]_[hash:base64:5]',
+      minimize: false, // process.env.NODE_ENV === 'production',
+      reloadAll: true,
+    },
   },
   postCSSLoader: {
     loader: 'postcss-loader',
     options: {
       ident: 'postcss',
-      sourceMap: true,
-      plugins: () => [
-        autoprefixer({
-          browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 10'],
-        }),
-      ],
+      sourceMap: process.env.NODE_ENV === 'development',
     },
   },
   templateLoader: {
@@ -139,6 +154,60 @@ config.webpack = {
       localIdentName: '[name]__[local]___[hash:base64:5]',
       sourceMap: true,
     },
+  },
+  devoptimization: {
+    splitChunks: {
+      chunks: 'all',
+      maxSize: 0,
+      minChunks: 2,
+      automaticNameDelimiter: '~',
+      hidePathInfo: true,
+      name: true,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          chunks: 'all',
+        },
+        styles: {
+          name: false,
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
+  prodoptimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+        },
+      },
+    },
+    minimizer: [
+      new UglifyJSPlugin({
+        uglifyOptions: {
+          warnings: false,
+          parse: {},
+          compress: {},
+          mangle: true,
+          output: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_fnames: false,
+        },
+      }),
+    ],
   },
 };
 // ========================================================

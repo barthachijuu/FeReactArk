@@ -4,9 +4,9 @@
 
 - [] Does the code work?
 - [] Description of the project status is included.
-- [] Code is easily understand.
+- [] Code is easily understood.
 - [] Code is written following the coding standarts/guidelines (React in our case).
-- [] Code is in sync with existing code patterns/technologies.
+- [] Is in sync with existing code patterns/technologies.
 - [] DRY. Is the same code duplicated more than twice?
 - [] Can the code be easily tested (don't forget about React components)?
 - [] Are functions/classes/components reasonably small (not too big)?
@@ -48,8 +48,8 @@
 - [] Use spread/rest operator.
 - [] Use default values.
 - [] Use const over let (avoid var).
-- [] Use import and export.
-- [] Use template literals.
+- [] Prefer import and export.
+- [] Prefer template literals.
 - [] Use destructuring assignment for arrays and objects.
 - [] Use Promises or Asyns/Await. Rejection is handled.
 

@@ -7,8 +7,7 @@ export const makeRootReducer = injectedReducers => combineReducers({
 });
 
 export const injectReducer = (store, { key, reducer }) => {
-  if (Object.hasOwnProperty.call(store.injectedReducers, key)) return;
-
+  if (Reflect.has(store.injectedReducers, key)) return;
   store.injectedReducers[key] = reducer;
   store.replaceReducer(makeRootReducer(store.injectedReducers));
 };

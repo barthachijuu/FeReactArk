@@ -97,12 +97,22 @@ module.exports = {
     message: 'Do you want to set a list of actions? (separate actions by comma or leave this blank for an empty file)',
     filter: input => (input.length > 0 ? input.split(',') : undefined),
     when: answers => answers.isActionNew === 'New action file',
-  }],
+  },
+  {
+    type: 'confirm',
+    name: 'newSaga',
+    message: 'Do you want to create the global saga for this action  file',
+    default: false,
+    when: answers => answers.isActionNew === 'New action file',
+  },
+  ],
   actions: (data) => {
     const addAction = 'action/templates/addAction.js.hbs';
     const addActionRequest = 'action/templates/addActionRequest.js.hbs';
     const addActionTemplate = `${utils.getPath()}store/actions/${data.whichActionFile}`;
     const routeActionFile = `${utils.getPath()}routes/${data.whichRoute}/modules/${data.whichRoute}Actions.js`;
+    const importReducers = `${utils.getPath()}store/reducers/index.js`;
+    const importReducerTemplate = 'action/templates/importReducer.js.hbs';
 
     const actions = [];
     if (data.isActionNew === 'New action file') {
@@ -118,6 +128,26 @@ module.exports = {
         templateFile: 'reducer/reducer.js.hbs',
         skipIfExists: true,
       });
+      actions.push({
+        type: 'modify',
+        path: importReducers,
+        pattern: /(\/\/ @generator reducers:import)[^]+(\/\/ @generator reducers:export)[^*]/gm,
+        templateFile: importReducerTemplate,
+      });
+      if (data.newSaga) {
+        actions.push({
+          type: 'add',
+          path: `${utils.getPath()}store/sagas/{{camelCase actionNameNew}}.js`,
+          templateFile: 'sagas/templates/sagas.js.hbs',
+          skipIfExists: true,
+        });
+        actions.push({
+          type: 'modify',
+          path: `${utils.getPath()}store/sagas/index.js`,
+          pattern: /(\/\/ @generator sagas:import)[^]+(\/\/ @generator sagas:export)[^*]/gm,
+          templateFile: 'action/templates/importSaga.js.hbs',
+        });
+      }
     }
     if (data.isActionNew === 'Add an action') {
       if (data.isRequest) {
@@ -160,7 +190,7 @@ module.exports = {
       actions.push({
         type: 'prettify-file',
         path: `routes/${data.whichRoute}/modules/${data.whichRoute}Actions.js`,
-        options: '--trailing-comma all --print-width 120 --single-quote',
+        options: '--trailing-comma all --print-width 140 --single-quote',
       });
     }
 

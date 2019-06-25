@@ -91,7 +91,7 @@ module.exports = {
     if (data.isSagaNew === 'New saga file') {
       actions.push({
         type: 'add',
-        path: `${utils.getPath()}store/sagas/${data.sagaNameNew}.js`,
+        path: `${utils.getPath()}store/sagas/{{camelCase sagaNameNew}}.js`,
         templateFile: 'sagas/templates/sagas.js.hbs',
         skipIfExists: true,
       });

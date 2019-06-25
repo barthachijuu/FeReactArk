@@ -8,10 +8,8 @@ export default function* root() {
 }
 
 export function injectSaga(store, { key, saga }) {
-  const hasSaga = Reflect.has(store.injectedSagas, key);
-  if (!hasSaga) {
-    /* eslint-disable no-param-reassign */
-    store.injectedSagas[key] = store.runSaga(saga);
-    /* eslint-enable no-param-reassign */
-  }
+  const isInjected = k => store.injectedSagas.has(k);
+  if (isInjected(key)) return;
+  const task = store.runSaga(saga);
+  store.injectedSagas.set(key, task);
 }

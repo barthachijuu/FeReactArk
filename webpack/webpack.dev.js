@@ -34,6 +34,7 @@ module.exports = merge(mainConfig, {
       template: `${APP_DIR}/index.html`,
       filename: `index.html`,
       inject: 'body',
+      title: 'test title',
     }),
   ],
   optimization: project.webpack.devoptimization,

@@ -58,7 +58,7 @@ module.exports = {
       },
     },
     {
-      test: /\.(scss|sass|css)$/,
+      test: /\.(sc|sa|c)ss$/,
       use: [
         MODE === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
         {
