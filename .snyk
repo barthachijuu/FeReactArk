@@ -1,8 +1,101 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.3
+version: v1.13.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   SNYK-JS-AXIOS-174505:
     - axios:
         patched: '2019-05-07T03:23:37.471Z'
+  SNYK-JS-LODASH-450202:
+    - babel-minify-webpack-plugin > babel-core > babel-register > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-merge > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - http-proxy-middleware > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - html-webpack-plugin > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > snyk-mvn-plugin > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-dev-server > http-proxy-middleware > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - archiver > async > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > snyk-php-plugin > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-register > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-generator > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-generator > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-traverse > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-traverse > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - snyk > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-template > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-template > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-helpers > babel-template > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-helpers > babel-template > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-template > babel-traverse > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-template > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-template > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-generator > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-template > babel-traverse > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-generator > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-helpers > babel-template > babel-traverse > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-helpers > babel-template > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - webpack-monitor > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
+    - babel-minify-webpack-plugin > babel-core > babel-helpers > babel-template > babel-traverse > babel-types > lodash:
+        patched: '2019-07-04T03:25:53.504Z'
