@@ -107,4 +107,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## License
 
-This project is licensed under the MIT license, Copyright (©) 2019 Maximilian Stoiber. For more information see `LICENSE.md`
+This project is licensed under the MIT license, Copyright (©) 2019 Bartolomeo Amico. For more information see `LICENSE.md`
