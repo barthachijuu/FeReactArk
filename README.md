@@ -17,7 +17,7 @@
 <img src="./repo_readme_assets/react.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/redux.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/router.png" height="55">&nbsp;&nbsp;
-<img src="./repo_readme_assets/logo-sass.png" height="55">&nbsp;&nbsp;
+<img src="./repo_readme_assets/cssinjs.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/logo-npm.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/yarn.png" height="55">&nbsp;&nbsp;
 <img src="./repo_readme_assets/logo-es6.png" height="55">&nbsp;&nbsp;
@@ -71,19 +71,19 @@ But don't read too fast... there's more!
 - Stay fast: Profile your app's performance from the comfort of your command line!
 - Catch problems: AppVeyor setup included by default, so your tests get run automatically on Windows and Unix.
 
-- [Node](http://nodejs.org/download/) (version >= 8.0.x)
-- [Yarn](https://yarnpkg.com/en/docs/install) (version >= 1.3.x)
+- [Node](http://nodejs.org/download/) (version >= 10.0.x)
+- [Yarn](https://yarnpkg.com/en/docs/install) (version >= 1.19.x)
 
 ### Getting Started
 
 ---
 
-Make sure you have Node 8.0.0 or above and Yarn 1.3.0 or above installed.
+Make sure you have Node 10.0.0 or above and Yarn 1.19.0 or above installed.
 
 1. Clone the repo using `git clone git@github.com:barthachijuu/FeReactArk.git`
 2. Move to the appropriate directory `cd FeReactArk`
 3. Install dependencies and check to see it works. It is recommended that you use [Yarn](https://yarnpkg.com/) for deterministic installs, but `npm install` will work just as well `yarn setup --project=projectName`
-4. At this point, you can launch `yarn start` and navigate on `http://localhost:4000` to see the project started
+4. At this point, you can launch `yarn start` and navigate on `http://localhost:4200` to see the project started
 
 Now you're ready to enjoy with your new project
 
@@ -108,4 +108,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## License
 
-This project is licensed under the MIT license, Copyright (©) 2019 Maximilian Stoiber. For more information see `LICENSE.md`
+This project is licensed under the MIT license, Copyright (©) 2019 Bartolomeo Amico. For more information see `LICENSE.md`

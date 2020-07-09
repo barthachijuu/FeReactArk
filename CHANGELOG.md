@@ -5,6 +5,67 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] — 2020-07-07
+
+### News
+
+Hooray!! Fe React Architecture v2.0.0 is out and we added a lot of cool update:
+
+- React has added many new features and we decided to take this opportunity:
+  - We now use `React.memo` and `Context` for prop memoization and prevent the drilling prop.
+  - We've added `@loadable` to manage components in lazy mode, and handling a fallback during the loading of them.)
+- After much case study, Immutability is finally gone. We've added `Immer` instead. With it, we can write very concise and readable
+  reducers while sticking to native JavaScript data structures.
+- We added react helmet. Now you can manage title and description for every single route
+
+There are many more changes to our documentation, internals, generators and general project setup. You can find a full changelog below.
+
+### Main
+
+- Reorganize the root structure
+- Added `Immer`
+- Now reducers handling immutability
+- Add `eslint-plugin-react-hooks`
+- Migrate all class components to functions
+- Add `React.memo` option and `Context` for improove components performance.
+- Use `loadable-components` to code-split and asynchronously load components
+- Add the fallback language to prevent a possibile CMS 500 error
+- Handling the dynamic environments
+
+### Documentation updates
+
+- Update all md files to explain new functionality
+- Spelling and grammar fixes
+
+### Internals updates
+
+- Many dependency updates and some libraries added, including:
+  - react-helmet
+  - offline-plugin
+  - connected-react-router
+  - @loadable/component
+  - redux-devtools-extension
+  - ngrok
+  - redux-thunk
+  and many oters.
+- Migrate default Node version to `10.0.0`
+- Fix support for `stylelint`
+- Rewrite generators code
+- Complete rewrite of express web server
+- Remove unused libraries
+- New Webpack code config
+- Miscellaneous fixes
+- Rewrite actions creations code
+- Rewrite setup and clean scripts
+- Reorganize the package.json scripts
+
+### Others updates
+
+- Fixes to generators
+- Bug fix in setup script
+- Reorganize fonts and images folders
+- Remove scss in favour of jss
+
 ## [1.2.0] — 2019-06-06
 
 ## Minor Release
