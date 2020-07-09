@@ -1,4 +1,6 @@
 const utils = require('../utils/fileUtils');
+const logger = require('../../server/utils/logger');
+
 /**
  * Component Generator
  */
@@ -8,89 +10,110 @@ module.exports = {
   description: 'Add a component to the app',
   prompts: [
     {
-      type: 'confirm',
+      type: 'list',
       name: 'componentType',
-      message: 'Is it a Stateful Component?',
-      default: true,
+      message: 'Which type of component do you prefer?',
+      choices: ['Functional', 'Classes'],
     },
     {
       type: 'input',
       name: 'componentName',
       message: 'What is the name of the component?',
-      default: '',
       validate: (value) => {
         if ((/.+/).test(value)) {
-          return utils.checkExist(`components/${utils.pascalize(value)}`) ? 'That component already exists.' : true;
+          return utils.checkExist(`components/${utils.pascalize(value)}`)
+            ? logger.warn('That component already exists.') : true;
         }
-        return 'The name is required.';
+        return logger.warn('The name is required.');
       },
     },
     {
       type: 'confirm',
-      name: 'containerComponent',
-      default: true,
-      message: 'Should the component have a container?',
+      name: 'hasMemo',
+      message: `Do you want the component use the momoized functionality?`,
+      default: false,
+      when: answers => answers.componentType === 'Functional',
     },
     {
-      type: 'confirm',
-      name: 'wantSCSSModules',
-      default: true,
-      message: 'Should the component use SCSS Modules?',
-    },
-    {
-      type: 'confirm',
-      name: 'wantPropTypes',
-      default: true,
-      message: 'Should the component have PropTypes?',
-    },
-    {
-      type: 'confirm',
-      name: 'wantIntl',
-      message: 'Should the component handle text?',
-      default: true,
+      name: 'options',
+      type: 'checkbox',
+      message: 'What do you want to include?',
+      default: ['container'],
+      choices: [{
+        name: 'Component Container',
+        value: 'container',
+      },
+      {
+        name: 'Component PropTypes',
+        value: 'props',
+      },
+      {
+        name: 'Component Language Module',
+        value: 'lang',
+      },
+      ],
     },
   ],
   actions: (data) => {
-    const actions = [{
-      type: 'add',
-      path: '../web/src/components/{{properCase componentName}}/{{properCase componentName}}.jsx',
-      templateFile: './component/templates/component.js.hbs',
-      abortOnFail: true,
-      skipIfExists: true,
-    },
-    {
-      type: 'add',
-      path: '../web/src/components/{{properCase componentName}}/index.js',
-      templateFile: './component/templates/index.js.hbs',
-      abortOnFail: true,
-      skipIfExists: true,
-    },
-    {
-      type: 'add',
-      path: `${utils.getPath()}components/{{properCase componentName}}/tests/index.test.js`,
-      templateFile: './component/templates/test.js.hbs',
-      abortOnFail: true,
-    }];
+    data.uname = utils.getAuthor();
+    data.since = utils.getDate();
+    const actions = [
+      logger.log(`Starting component creation process`),
+      logger.delayLog('Collect all answers'),
+      logger.delayLog('Configure all templates'),
+      logger.delayLog('Converting hbs template'),
+      logger.delayLog('Adding component'),
+      (data) => {
+        logger.success('[COMPONENT CREATED WITH SUCEESS]');
+        logger.info(data);
+      },
+      {
+        type: 'add',
+        path: '../app/components/{{properCase componentName}}/{{properCase componentName}}.jsx',
+        templateFile: './component/templates/component.js.hbs',
+        abortOnFail: true,
+        skipIfExists: true,
+      },
+      {
+        type: 'add',
+        path: '../app/components/{{properCase componentName}}/index.js',
+        templateFile: './component/templates/index.js.hbs',
+        abortOnFail: true,
+        skipIfExists: true,
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}components/{{properCase componentName}}/tests/{{properCase componentName}}.test.js`,
+        templateFile: './component/templates/test.js.hbs',
+        abortOnFail: true,
+      },
+      {
+        type: 'add',
+        path: `../app/components/{{properCase componentName}}/style.js`,
+        templateFile: `./component/templates/styles.cssjs.hbs`,
+        abortOnFail: true,
+        skipIfExists: true,
+      }];
 
-    // If they want a container, add componentNameContainer.js
+    // If container is included
 
-    if (data.containerComponent) {
+    if (data.options.includes('container')) {
       actions.push({
         type: 'add',
-        path: '../web/src/components/{{properCase componentName}}/{{properCase componentName}}Container.js',
+        path: '../app/components/{{properCase componentName}}/{{properCase componentName}}Container.js',
         templateFile: './component/templates/container.js.hbs',
         abortOnFail: true,
         skipIfExists: true,
       });
     }
 
-    // If they want a CSS file, add styles.scss
+    // If handling text is included
 
-    if (data.wantSCSSModules) {
+    if (data.options.includes('lang')) {
       actions.push({
         type: 'add',
-        path: '../web/src/components/{{properCase componentName}}/{{properCase componentName}}.scss',
-        templateFile: './component/templates/styles.scss.hbs',
+        path: '../app/components/{{properCase componentName}}/languageModule.jsx',
+        templateFile: './component/templates/language.jsx.hbs',
         abortOnFail: true,
         skipIfExists: true,
       });
@@ -100,7 +123,7 @@ module.exports = {
 
     actions.push({
       type: 'add',
-      path: '../web/src/components/{{properCase componentName}}/{{properCase componentName}}.md',
+      path: '../app/components/{{properCase componentName}}/{{properCase componentName}}.md',
       templateFile: './component/templates/README.md.hbs',
       abortOnFail: true,
       skipIfExists: true,

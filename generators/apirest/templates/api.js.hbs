@@ -4,14 +4,12 @@ export async function {{camelCase methodName}}(params) {
   try {
     data = await axios({
     method: '{{type}}',
-    url: `{{url}}`,
+    url: '{{url}}',
     data: { ...params },
-    headers: { ...defaultHeaders },
     });
-    return { response: data.data };
+    return handlingResponse(data);
   } catch (error) {
-    console.error(error);
-    return { error: error.response.data };
+    return handlingResponse(error);
   }
 }
 $&

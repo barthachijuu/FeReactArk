@@ -1,0 +1,29 @@
+/**
+ *
+ * Jest Unit Test for
+ * {{ properCase subrouteName }} Route
+ *
+ */
+import React from 'react';
+import { shallow } from 'enzyme';
+import {{ properCase subrouteName }} from '../components/{{ properCase subrouteName }}/{{ properCase subrouteName }}';
+
+let baseProps;
+let render;
+
+beforeAll(() => {
+  baseProps = {
+    router: {
+    },
+  };
+});
+
+beforeEach(() => {
+  render = shallow(<{{ properCase subrouteName }} {...baseProps} />);
+});
+
+describe('<{{ properCase subrouteName }} /> rendering', () => {
+  it('should render self', () => {
+    expect(render).toHaveLength(1);
+  });
+});

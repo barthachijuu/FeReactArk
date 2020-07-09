@@ -2,15 +2,25 @@
  *
  * {{ properCase subrouteName }}
  *
+ * @version 1.0.0
+ * @author {{uname}}
+ * @since {{since}}
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
-{{#if hasHistory}}
+{{#isPresent options 'history'}}
 import { withRouter } from 'react-router';
-{{/if}}
+{{/isPresent}}
+{{#isPresent options 'lang'}}
+import formattedMessage from './languageModule';
+{{/isPresent}}
+import style from './style.js';
 
 const {{ properCase subrouteName }} = props => (
-  <></>
+  <>
+    <p>Render SubRoute</p>
+  </>
 );
 
 
@@ -21,4 +31,4 @@ const {{ properCase subrouteName }} = props => (
 {{ properCase subrouteName }}.defaultProps = {
   // Add here some default propTypes values
 };
-export default {{#if hasHistory}}withRouter({{/if}}{{ properCase subrouteName }}{{#if hasHistory}}){{/if}};
+export default {{#isPresent options 'history'}}withRouter({{/isPresent}}{{ properCase subrouteName }}{{#isPresent options 'history'}}){{/isPresent}};

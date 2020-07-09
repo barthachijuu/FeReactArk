@@ -1,39 +1,44 @@
 #!/usr/bin/env node
-
 const { exec } = require('child_process');
 const fs = require('fs');
 const fse = require('fs-extra');
 const webpack = require('webpack');
 const chalk = require('chalk');
-const argv = require('yargs').parse();
+const git = require('git-rev-sync');
+const moment = require('moment');
+const { argv } = require('yargs');
+const pkg = require('../package.json');
 const project = require('../config/project.config');
 const globalenv = require('../config/global.vars');
 
-// configurations
-const env = require(`../config/deployenv/${argv.d || 'development'}`); // eslint-disable-line import/no-dynamic-require
-
-const webpackConfig = require('../webpack/webpack.compile');
+const COMPILE_FOLDER = argv.type === 'build' ? 'build' : 'dist';
+const webpackConfig = process.env.NODE_ENV === 'production'
+  ? require('../webpack/webpack.prod') : require('../webpack/webpack.compile');
 const addCheckMark = require('./helpers/checkmark');
 
 process.stdin.setEncoding('utf8');
 process.stdout.write('\n');
 
 process.stdout.write(`Current node environment ${chalk.cyanBright(process.env.NODE_ENV || 'development')} \n`);
-addCheckMark.bind(null, process.stdout.write(`Set Current deploy environment ${chalk.magenta(env.DEPLOY_ENV_NAME)} \n`));
-
-exec('yarn clean', addCheckMark.bind(null, console.log(chalk.green('Remove previous version.'))));
+addCheckMark.bind(null, process.stdout.write(`Set Current deploy environment
+${chalk.magenta(process.env.NODE_ENV)} \n`));
 
 webpackConfig.plugins.push(new webpack.DefinePlugin(globalenv));
-webpackConfig.plugins.push(new webpack.DefinePlugin(env));
+
+const pkgName = pkg.name.replace(/\w+/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase()).replace(/\s|\-/g, '');
+const configureBanner = () => `/*!\n* @project ${pkgName} \n* @version V ${pkg.version}\n
+* @author ${pkg.author}\n* @build ${moment().format('llll')} ET\n
+* @release ${git.long()} [branch ${git.branch()} ]\n
+* @copyright Copyright (c) ${moment().format('YYYY')} ${pkg.author} *\n*/`;
 
 const webpackCompiler = (config) => { // eslint-disable-line arrow-body-style
   return new Promise((resolve, reject) => {
     const compiler = webpack(config);
     compiler.run((err, stats) => { // eslint-disable-line consistent-return
       if (err) {
+        console.log('Webpack compiler encountered a fatal error.', err);
         return reject(err);
       }
-      console.log('Webpack compiler encountered a fatal error.', err);
       const jsonStats = stats.toJson();
       addCheckMark.bind(null, console.log(chalk.green('Webpack compile completed.')));
 
@@ -56,28 +61,16 @@ const compile = () => {
     if (stats.warnings.length && project.compiler_fail_on_warning) {
       throw new Error('Config set to fail on warning, exiting with status code "1".');
     }
-    fse.copySync('./public', './dist');
-    addCheckMark.bind(null, console.log(chalk.green('Copying static assets to dist folder.')));
+    fse.copySync(`${process.cwd()}/app/robot.txt`, `./${COMPILE_FOLDER}/robot.txt`);
+    fse.copySync(`${process.cwd()}/app/.htaccess`, `./${COMPILE_FOLDER}/.htaccess`);
+    fse.copySync(`${process.cwd()}/fonts`, `./${COMPILE_FOLDER}/fonts`);
+    fse.copySync(`${process.cwd()}/images`, `./${COMPILE_FOLDER}/images`);
+    addCheckMark.bind(null, console.log(chalk.green('Copying static assets to compiled folder.')));
   })
     .then(() => {
-      console.log('Compilation completed successfully.');
-    })
-    // LOGIN
-    .then(() => {
-      console.log('Login Compilation completed successfully.');
-      const mychoiches = fs.readdirSync(`dist`);
-      mychoiches.forEach((m) => {
-        if (/js|html/.test(m)) {
-          fs.readFile(`dist/${m}`, 'utf8', (err, data) => {
-            fs.writeFileSync(`dist/${m}`, data.replace(/\/web\/assets/gm, ''));
-          });
-        }
-      });
-    })
-    // END LOGIN
-    .then(() => {
-      fse.remove('./dist/styles');
-      exec(`yarn archive --d ${argv.d || 'development'}`, addCheckMark.bind(null, console.log(chalk.green('Create zip file for deployment.'))));
+      fs.writeFileSync(`./${COMPILE_FOLDER}/version.txt`, configureBanner());
+      exec(`yarn archive`,
+        addCheckMark.bind(null, console.log(chalk.green('Create zip file for deployment.'))));
     })
     .catch((err) => {
       console.log(err);

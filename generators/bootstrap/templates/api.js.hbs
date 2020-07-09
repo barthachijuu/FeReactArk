@@ -14,16 +14,19 @@ const defaultHeaders = {
 const defaultBody = {};
 
 // Axios configuration
-axios.defaults.baseURL = API_REST_BE;
+axios.defaults.baseURL = '';
+axios.defaults.headers.common = { ...defaultHeaders };
 
 // Add a request interceptor
 axios.interceptors.request.use(config => config, error => Promise.reject(error));
 
 // Add a response interceptor
-axios.interceptors.response.use(response => response, error => Promise.reject(error));
-
+axios.interceptors.response.use((response) => {
+  // Do something with response data
+  if (ISMOCK) response.statusText = 'ok';
+  return response;
+}, error => Promise.reject(error));
 export {
-  defaultHeaders,
   multiPartHeaders,
   defaultBody,
   mock,

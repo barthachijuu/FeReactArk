@@ -8,36 +8,29 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 
-export class LanguageProvider extends React.PureComponent {
-  render() {
-    return (
-      <IntlProvider
-        locale={this.props.locale}
-        key={this.props.locale}
-        messages={this.props.messages[this.props.locale]}
-      >
-        {React.Children.only(this.props.children)}
-      </IntlProvider>
-    );
-  }
+export function LanguageProvider(props) {
+  return (
+    <IntlProvider
+      locale={props.language.locale}
+      key={props.language.locale}
+      messages={props.language.messages[props.language.locale]}
+    >
+      {React.Children.only(props.children)}
+    </IntlProvider>
+  );
 }
 
-const mapStateToProps = () => ({
-});
 
 LanguageProvider.propTypes = {
-  locale: PropTypes.string,
-  messages: PropTypes.object,
+  language: PropTypes.object,
   children: PropTypes.element.isRequired,
 };
 
 LanguageProvider.defaultProps = {
-  locale: 'it',
-  messages: {},
+  language: {},
 };
 
 
-export default connect(mapStateToProps)(LanguageProvider);
+export default LanguageProvider;

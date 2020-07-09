@@ -1,18 +1,30 @@
 #!/usr/bin/env node
-
+const path = require('path');
 const shelljs = require('shelljs');
-const argv = require('yargs').parse();
+const fs = require('fs');
+const open = require('open');
+
 const animateProgress = require('./helpers/progress');
 const addCheckMark = require('./helpers/checkmark');
 
+const mode = process.env.NODE_ENV;
 const progress = animateProgress('Generating stats');
 
 // Generate stats.json file with webpack
 // Called after webpack has finished generating the stats.json file
-function callback() {
+function openAnalyzer() {
   clearInterval(progress);
+  open(`http://localhost:9001`);
 }
-shelljs.exec(
-  `webpack --config ./webpack/webpack.monitor.js --profile --json --mode=${argv.mode || 'development'} > monitor/stats.json`,
-  addCheckMark.bind(null, callback), // Output a checkmark on completion
-);
+
+/**
+ * Run
+ */
+(async () => {
+  if (!fs.existsSync(`${path.join(process.cwd(), 'monitor')}`)) {
+    fs.mkdirSync(`${path.join(process.cwd(), 'monitor')}`);
+  }
+  shelljs.exec(`webpack --config ${mode === 'development' ? './webpack/webpack.dev.js' : './webpack/webpack.prod.js'}
+    --profile --json --mode=${mode} > monitor/stats.json`,
+  addCheckMark.bind(null, openAnalyzer)); // Output a checkmark on completion
+})();

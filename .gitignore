@@ -2,6 +2,13 @@
 
 # Created by https://www.gitignore.io/api/linux,visualstudiocode,node,visualstudio,webstorm
 
+# Don't check auto-generated stuff into git
+coverage
+build
+node_modules
+stats.json
+dist
+
 ### Linux ###
 *~
 
@@ -62,7 +69,6 @@ typings/
 # Optional npm cache directory
 .npm
 
-
 # Optional eslint cache
 .eslintcache
 
@@ -95,10 +101,10 @@ typings/
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
 
 ### WebStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
@@ -516,5 +522,3 @@ ASALocalRun/
 # End of https://www.gitignore.io/api/linux,visualstudiocode,node,visualstudio,webstorm
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
-
-winzozz.bat

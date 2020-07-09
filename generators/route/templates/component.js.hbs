@@ -2,26 +2,46 @@
  *
  * {{ properCase routeName }}
  *
+ * @version 1.0.0
+ * @author {{uname}}
+ * @since {{since}}
  */
+
 import React from 'react';
-{{#if hasHistory}}
+{{#isPresent choicees 'history'}}
 import { withRouter } from 'react-router';
-{{/if}}
+{{/isPresent}}
 import PropTypes from 'prop-types';
+import Helemt from 'react-helmet';
+{{#isPresent options 'lang'}}
+import formattedMessage from './languageModule';
+{{/isPresent}}
+import style from './style.js';
 
 const {{ properCase routeName }} = props => (
   <>
-    <p>Render Component</p>
+    <Helmet>
+      <title>{{properCase routeName}} Page</title>
+      <meta
+        name="description"
+        content="A React.js Boilerplate application"
+      />
+    </Helmet>
+    <p>Render Route</p>
   </>
 );
 
 
 {{ properCase routeName }}.propTypes = {
   // Add here some propTypes
+  actions: PropTypes.object,
+  router: PropTypes.object,
 };
 
 {{ properCase routeName }}.defaultProps = {
   // Add here some default propTypes values
+  actions: {},
+  router: {},
 };
 
-export default {{#if hasHistory}}withRouter({{/if}}{{ properCase routeName }}{{#if hasHistory}}){{/if}};
+export default {{#isPresent choicees 'history'}}withRouter({{/isPresent}}{{ properCase routeName }}{{#isPresent choicees 'history'}}){{/isPresent}};

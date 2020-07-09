@@ -2,13 +2,10 @@
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
-const argv = require('yargs').parse();
 const pkg = require('../package.json');
 // configurations
-const env = require(`../config/deployenv/${argv.d || 'development'}`); // eslint-disable-line import/no-dynamic-require
-const deployEnv = env.DEPLOY_ENV_NAME.replace(/\'/g, '');
 // create a file to stream archive data to.
-const filename = `${argv.name}-${deployEnv}-${pkg.version}-${env.TYPE.replace(/\'/g, '')}.zip`;
+const filename = `${pkg.name}-${pkg.version}-${process.env.NODE_ENV === 'development' ? 'SNAPSHOT' : 'RELEASE'}.zip`;
 const output = fs.createWriteStream(path.join(__dirname, '../') + filename);
 const archive = archiver('zip', {
   zlib: {
