@@ -6,6 +6,9 @@ skip_tags: true
 
 # Test against these versions of Node.js
 environment:
+  COVERALLS_REPO_TOKEN:
+    secure: DVXEfg9jzw6U5XRr7EqM27w3xZCLEcisDmcah1t/NTVEOS/PD0Mo96SigDoNo4Jy
+
   matrix:
     # Node versions to run
     - nodejs_version: 'Current'
