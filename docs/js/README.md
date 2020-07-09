@@ -2,14 +2,14 @@
 
 ## State management
 
-This boilerplate manages application state using [Redux](redux.md)
-and keeps access performant via [`reselect`](reselect.md).
+This architecture manages application state using [Redux](redux.md), makes it
+immutable with [`Immer`](immer.md) and keeps access performant via [`reselect`](reselect.md).
 
 For managing asynchronous flows (e.g. logging in) we use [`redux-saga`](redux-saga.md).
 
-For routing, we use [`react-router`](routing.md).
+For routing, we use [`react-router` in combination with `connected-react-router`](routing.md).
 
-We include a generator for components, api, sagas, routes and selectors.
+We include a [`generator`](generator.md) for components, api, actions, sagas, routes and mocks.
 Run `yarn generate` to choose from the available generators, and automatically
 add new parts of your application!
 
@@ -18,11 +18,14 @@ add new parts of your application!
 
 ### Learn more
 
-- [Redux]()
-- [reselect](reselect.md)
-- [redux-saga](redux-saga.md)
-- [routing](routing.md)
-- [Asynchronously loaded components]()
+- [Immer](immer.md)
+- [Reselect](reselect.md)
+- [Redux-saga](redux-saga.md)
+- [Routing](routing.md)
+- [Async/Lazy loaded Route](async_lazy.md)
+- [Asynchronously loaded components](async-components.md)
+- [Memoization](memo.md)
+- [Context](context.md)
 
 ## Architecture: `components` and `containers`
 
