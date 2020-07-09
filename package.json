@@ -32,7 +32,7 @@
     "deploy": "yarn test && better-npm-run deploy",
     "generate": "plop --plopfile generators/index.js",
     "lint": "eslint config server app",
-    "lint-style": "stylelint '**/*.scss' '**/*.js'",
+    "lint-style": "stylelint '**/*.js'",
     "lint:app": "eslint --no-ignore app --fix",
     "prettify": "prettier --write",
     "reinit": "node internals/clean",

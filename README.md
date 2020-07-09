@@ -35,7 +35,7 @@
 
 ---
 
-## Features
+## 💡 Features
 
 ### Easily scaffolding
 
@@ -61,6 +61,10 @@ It's natural to want to add pages (e.g. `/contact`) to your application, and rou
 
 Focus on writing new features without worrying about formatting or code quality. With the right editor setup, your code will automatically be formatted and linted as you work.
 
+### Offline-first
+
+The next frontier in performant web apps: availability without a network connection from the instant your users load the app.
+
 ---
 
 But don't read too fast... there's more!
@@ -73,7 +77,7 @@ But don't read too fast... there's more!
 - [Node](http://nodejs.org/download/) (version >= 10.0.x)
 - [Yarn](https://yarnpkg.com/en/docs/install) (version >= 1.19.x)
 
-### Getting Started
+### 🚀 Getting Started
 
 ---
 
@@ -81,17 +85,38 @@ Make sure you have Node 10.0.0 or above and Yarn 1.19.0 or above installed.
 
 1. Clone the repo using `git clone git@github.com:barthachijuu/FeReactArk.git`
 2. Move to the appropriate directory `cd FeReactArk`
-3. Install dependencies and check to see it works. It is recommended that you use [Yarn](https://yarnpkg.com/) for deterministic installs, but `npm install` will work just as well `yarn setup --project=projectName`
+3. Install dependencies and check to see it works. It is recommended that you use [Yarn](https://yarnpkg.com/) for deterministic installs, but `npm run setup --project=projectName` will work just as well `yarn setup --project=projectName`
 4. At this point, you can launch `yarn start` and navigate on `http://localhost:4200` to see the project started
 
 Now you're ready to enjoy with your new project
 
 > Please note that this boilerplate is **not meant for beginners**! If you're just starting out with react or redux, please refer to <https://github.com/petehunt/react-howto> instead. If you want a solid, battle-tested base to build your next product upon and have some experience with react, this is the perfect start for you.
 
-### Documentation
+### 📚 Documentation
 
 ---
-We are working hard to create an easy to understand docs
+
+- [**Let's Kickstart with `FeReactArk`**](docs/general/kickstart.md): An introduction guide for noobies, to this boilerplate.
+- [Overview](docs/general): A short overview of the included tools
+- [**Commands**](docs/general/commands.md): Getting the most out of this boilerplate
+- [Testing](docs/testing): How to work with the built-in test harness
+- [Styling](docs/css): How to work with the CSS tooling
+- [Your app](docs/js): Supercharging your app with Routing, Redux, simple asynchronicity helpers, etc.
+- [**Troubleshooting**](docs/general/gotchas.md): Solutions to common problems faced by developers.
+
+## 🎁 Support: Donate
+
+> This project is **free**, **open source** and I try to provide excellent **free support**. Why donate? I work on this and other project for several hours in my spare time between my job and my lovely family, and try to keep it up to date and working. **THANK YOU!**
+
+[![](https://img.shields.io/badge/donate-paypal-005EA6.svg?logo=paypal)](https://www.paypal.me/barthachijuu) [![](https://img.shields.io/badge/donate-patreon-F87668.svg?logo=patreon)](https://www.patreon.com/barthachijuu)  [![](https://img.shields.io/badge/donate-ko--fi-29abe0.svg?logo=ko-fi)](https://ko-fi.com/barthachijuu)
+
+## 👑 Sponsors
+
+Support this project by becoming a sponsor. 🙏 Become a sponsor on [patreon](https://www.patreon.com/join/barthachijuu) or become top3 sponsor on [ko-fi](https://ko-fi.com/barthachijuu). Your logo will show up here with a link to your website.
+
+## 👔 Backers
+
+Thank you to all our backers! 🙏 Become a backer on [patreon](https://www.patreon.com/join/barthachijuu).
 
 ## Contributors ✨
 
