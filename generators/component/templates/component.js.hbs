@@ -2,37 +2,49 @@
  *
  * {{ properCase componentName }}
  *
+ * @version 1.0.0
+ * @author {{uname}}
+ * @since {{since}}
  */
-import React from 'react';
-{{#if wantPropTypes}}
-import PropTypes from 'prop-types';
-{{/if}}
-{{#if wantSCSSModules}}
-import styles from './{{ properCase componentName }}.scss';
-{{/if}}
 
-{{#if componentType}}
+import React from 'react';
+{{#isPresent options 'props'}}
+import PropTypes from 'prop-types';
+{{/isPresent}}
+import styles from './styles.js';
+{{#isPresent options 'lang'}}
+import formattedMessage from './languageModule';
+{{/isPresent}}
+
+
+{{#equal componentType 'Classes'}}
 class {{ properCase componentName }} extends React.PureComponent {
   render() {
     return (
-      <></>
+      <>
+        <p>Render Component</p>
+      </>
     );
   }
 }
 {{else}}
 const {{ properCase componentName }} = {{#if wantPropTypes}}props{{else}}(){{/if}} => (
-  <></>
+  <>
+    <p>Render Component</p>
+  </>
 );
-{{/if}}
+{{/equal}}
 
-{{#if wantPropTypes}}
+{{#isPresent options 'props'}}
 {{ properCase componentName }}.propTypes = {
   // Add here some propTypes
+  // and set a minimal description i.e.
+  /** Description of prop "baz". */
 };
 
 {{ properCase componentName }}.defaultProps = {
   // Add here some default propTypes values
 };
-{{/if}}
+{{/isPresent}}
 
-export default {{ properCase componentName }};
+export default {{#if hasMemo}}React.memo({{/if}}{{ properCase componentName }}{{#if hasMemo}}){{/if}};

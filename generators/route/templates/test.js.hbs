@@ -1,33 +1,29 @@
 /**
  *
- * Unit Test for
- * {{ properCase routeName }}
+ * Jest Unit Test for
+ * {{ properCase routeName }} Route
  *
  */
 import React from 'react';
-import { {{#if hasHistory}}mount, {{else}}shallow{{/if}} } from 'enzyme';
+import { shallow } from 'enzyme';
 import {{ properCase routeName }} from '../components/{{ properCase routeName }}';
 
-{{#if hasHistory}}
-  let wrapper;
-{{else}}
-  let render;
-{{/if}}
+let baseProps;
+let render;
+
+beforeAll(() => {
+  baseProps = {
+    router: {
+    },
+  };
+});
+
 beforeEach(() => {
-    {{#if hasHistory}}
-    jest.mock('../../../../../__mocks__/jestMock.js')
-    wrapper = mount( <{{ properCase routeName }} /> , require('../../../../../__mocks__/jestMock.js').default)
-    {{else}}
-    render = shallow(<{{ properCase routeName }} />)
-    {{/if}}
+  render = shallow(<{{ properCase routeName }} {...baseProps} />);
 });
 
 describe('<{{ properCase routeName }} /> rendering', () => {
   it('should render self', () => {
-    {{#if hasHistory}}
-    expect(wrapper).toHaveLength(1);
-    {{else}}
     expect(render).toHaveLength(1);
-    {{/if}}
   });
 });

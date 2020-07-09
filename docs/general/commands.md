@@ -6,7 +6,7 @@
 yarn setup --project=project_name
 ```
 
-Initializes a new project with this boilerplate. Deletes the `react-boilerplate`
+Initializes a new project with this boilerplate. Deletes the `fe-architecture`
 git history, installs the dependencies and initializes a new repository.
 
 > Note: This command is self-destructive, once you've run it the init script is
@@ -19,7 +19,7 @@ git history, installs the dependencies and initializes a new repository.
 yarn start
 ```
 
-Starts the development server running on `http://localhost:4000`
+Starts the development server running on `http://localhost:random_port`
 
 ## Cleaning
 
@@ -53,7 +53,7 @@ yarn start
 ```
 
 Starts the development server and makes your application accessible at
-`localhost:4000`. Changes in the application code will be hot-reloaded.
+`localhost:random_port`. Changes in the application code will be hot-reloaded.
 
 ### Production
 
@@ -63,9 +63,9 @@ yarn start:production
 
 - Runs tests (see `yarn test`)
 - Builds your app (see `yarn compile`)
+- Starts the production server (see yarn start:prod)
 
-The app is built for optimal performance: assets are
-minified and served gzipped.
+The app is built for optimal performance: assets are minified and served gzipped.
 
 ## Building
 
@@ -73,10 +73,10 @@ minified and served gzipped.
 yarn build
 ```
 
-Preps your app for deployment (does not run tests). Optimizes and minifies all files, piping them to the `dist` folder.
+Prepare your app for deployment on environment that is not production (does not run tests). The code has base optimization
+and is not minified. All files are piping them to the `build` folder.
 
-Upload the contents of `dist` to your web server to
-see your work live!
+Upload the contents of `build` to your web server to see your work live!
 
 ## Testing
 
@@ -107,15 +107,24 @@ yarn test:watch
 
 Watches changes to your application and re-runs tests whenever a file changes.
 
+### Remote testing
+
+```Shell
+yarn start:tunnel
+```
+
+Starts the development server and tunnels it with ngrok, making the website available worldwide.
+Useful for testing on different devices in different locations!
+
 ### Dependency size test
 
 ```Shell
 yarn analyze
 ```
 
-This command will generate a `stats.json` file from your production build, which
-you can upload to the [webpack analyzer](https://webpack.github.io/analyse/) or [Webpack Visualizer](https://chrisbateman.github.io/webpack-visualizer/). This
-analyzer will visualize your dependencies and chunks with detailed statistics
+This command will generate a `stats.json` file from your build, which you can
+visualize on `locahost:9001` with [webpack jarvis](https://github.com/zouhir/jarvis).
+This analyzer will visualize your dependencies and chunks with detailed statistics
 about the bundle size.
 
 ## Linting
@@ -131,3 +140,13 @@ yarn lint:eslint:fix -- .
 ```
 
 Lints your code and tries to fix any errors it finds.
+
+## Deploing
+
+```Shell
+yarn deploy
+```
+
+Prepare your app for deployment. That command includes linting and testing. Optimizes and
+minifies all files, piping them to the `dist` folder. If one of between lint or test fails,
+the process stopped. Upload the contents of `dist` to your web server to see your work live!

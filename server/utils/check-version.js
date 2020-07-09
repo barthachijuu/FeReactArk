@@ -32,15 +32,11 @@ module.exports = () => {
   }
 
   if (warnings.length) {
-    console.log(chalk.yellow('To use this template, you must update following to modules:')); // eslint-disable-line
-
+    console.log(chalk.yellow('To use this template, you must update following to modules:'));
     for (let i = 0; i < warnings.length; i += 1) {
       const warning = warnings[i];
-      // eslint-disable-next-line
       console.log(` ${warning}`);
     }
-    // eslint-disable-next-line
-    console.log();
     process.exit(1);
   }
 };

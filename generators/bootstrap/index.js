@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+const logger = require('../../server/utils/logger');
 const utils = require('../utils/fileUtils');
 
 /**
@@ -5,7 +7,7 @@ const utils = require('../utils/fileUtils');
  */
 
 module.exports = {
-  description: 'Add a main container component',
+  description: 'Add the main container component and all the scaffold structure',
   prompts: [
     {
       type: 'input',
@@ -22,103 +24,118 @@ module.exports = {
     const routeTemplate = './bootstrap/templates/route.js.hbs';
     const storeTemplate = './bootstrap/templates/store.js.hbs';
     const boundaryTemplate = './bootstrap/templates/boundary.js.hbs';
-    const boundaryStyle = `body { margin: 0; } .bigBody { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 100vw; background-color: rgba(149, 150, 175, 0.3); } .body { display: flex; flex-direction: column; justify-content: center; text-align: center; .detailsButton { white-space: pre-wrap; outline: none; margin-top: 20px; &:focus { outline: none; } } } `;
     const apiTemplate = './bootstrap/templates/api.js.hbs';
+    const methodTemplate = './bootstrap/templates/functions.js.hbs';
 
     const actions = [
+      chalk.blueBright(`Starting creation process`),
+      logger.delayLog('Retrieve all inputs'),
+      logger.delayLog('Configure all templates'),
+      logger.delayLog('Converting hbs template'),
+      (data) => {
+        console.log(chalk.green('[SUCEESS]'));
+        logger.info(data);
+      },
       {
         type: 'add',
-        path: '../web/src/containers/MainContainer.jsx',
+        path: '../app/containers/MainContainer.jsx',
         templateFile: mainTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
       {
         type: 'add',
-        path: '../web/src/containers/{{properCase name}}Container.jsx',
+        path: '../app/containers/{{properCase name}}Container.jsx',
         templateFile: containerTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
       {
         type: 'add',
-        path: '../web/src/utility/LanguageProvider.jsx',
+        path: '../app/utils/LanguageProvider.jsx',
         templateFile: languageTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
       {
         type: 'add',
-        path: `${utils.getPath()}utility/tests/language.test.js`,
+        path: `${utils.getPath()}utils/tests/language.test.js`,
         templateFile: './bootstrap/templates/test.js.hbs',
         abortOnFail: true,
+        skipIfExists: true,
       },
       {
         type: 'add',
-        path: '../web/src/index.jsx',
+        path: '../app/index.jsx',
         templateFile: bootstrapTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
       {
         type: 'add',
-        path: '../web/src/routes/index.jsx',
+        path: '../app/routes/index.jsx',
         templateFile: routeTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
       {
         type: 'add',
-        path: '../web/src/store/createStore.js',
+        path: '../app/store/createStore.js',
         templateFile: storeTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
       {
         type: 'add',
-        path: '../web/src/api/index.js',
+        path: '../app/api/index.js',
         templateFile: apiTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
       {
         type: 'add',
-        path: '../web/src/utility/ErrorBoundary.jsx',
+        path: '../app/utils/ErrorBoundary.jsx',
         templateFile: boundaryTemplate,
         abortOnFail: true,
         skipIfExists: true,
       },
       {
         type: 'add',
-        path: `${utils.getPath()}utility/tests/errortest.test.js`,
+        path: `${utils.getPath()}utils/tests/errortest.test.js`,
         templateFile: './bootstrap/templates/errortest.js.hbs',
         abortOnFail: true,
       },
       {
         type: 'add',
-        path: '../web/assets/styles/scss/ErrorBoundary.scss',
-        template: boundaryStyle,
+        path: '../app/utils/globalMethods.js',
+        templateFile: methodTemplate,
+        abortOnFail: true,
+        skipIfExists: true,
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}utils/tests/globaltest.test.js`,
+        templateFile: './bootstrap/templates/globaltest.js.hbs',
         abortOnFail: true,
         skipIfExists: true,
       },
     ];
-
     actions.push({
-      type: 'prettify',
-      path: '/web/src/',
-      options: '--trailing-comma all --print-width 120 --single-quote',
-    });
-
-    actions.push({
-      type: 'defaultlang',
+      type: 'fallbacklang',
       path: '/translations/',
       lang: ['lang-it'],
     });
+    actions.push({
+      type: 'prettify',
+      path: '',
+      options: '--trailing-comma all --print-width 120 --single-quote',
 
+    });
     if (utils.getDirectoryContent('containers').length === 0) {
       return actions;
     }
     console.clear();
-    return ['\nThe container is already present in the project.\nIf you want to change the container, please exec `yarn reinit` to clean the project.'];
+    return [`The container is already present in the project.\n
+    If you want to change the container, please exec \`yarn reinit\` to clean the project.`];
   },
 };

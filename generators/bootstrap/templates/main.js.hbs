@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import LanguageProvider from '../utility/LanguageProvider';
-import ErrorBoundary from '../utility/ErrorBoundary';
+import preset from 'jss-preset-default';
+import { JssProvider, ThemeProvider } from 'react-jss';
+import { create, SheetsRegistry } from 'jss';
+import { ConnectedRouter } from 'connected-react-router';
+import itAppStrings from 'Translations/lang-it.json';
+import { getLang } from 'Utility/globalMethods';
+import LanguageProvider from 'Utility/LanguageProvider';
+import ErrorBoundary from 'Utility/ErrorBoundary';
+import history from 'Utility/history';
 import {{properCase name}}Container from './{{properCase name}}Container';
+import theme from '../styles/themes';
+
+const translationMessages = {
+  it: {
+    ...itAppStrings,
+  },
+};
 
 class MainContainer extends Component {
   static propTypes = {
@@ -17,29 +31,49 @@ class MainContainer extends Component {
       exact: PropTypes.bool.isRequired,
       component: PropTypes.func.isRequired,
     }))).isRequired,
-    messages: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
   };
 
-  constructor() {
-    super();
+  state = {
+    logged: true,
+    language: {
+      messages: translationMessages,
+      locale: 'it',
+    },
+  };
 
-    this.state = {
-      logged: false,
-    };
+  componentDidMount() {
+    getLang().then((r) => {
+      if (r !== null) {
+        this.setState({ language: r.data });
+      }
+    });
   }
 
   render() {
-    const { authRoutes, store, noauthRoutes, messages } = this.props;
+    const jss = create(preset());
+    jss.insertionPoint = 'jss-insertion-point';
+    const sheets = new SheetsRegistry();
+    const sheet = jss.createStyleSheet();
+    sheets.add(sheet);
+    sheets.toString();
+
+    const { store } = this.props;
     return (
       <>
-        <Provider store={store}>
-          <LanguageProvider messages={messages.data} locale={messages.locale}>
-            <ErrorBoundary>
-              <{{properCase name}}Container authRoutes={authRoutes} noauthRoutes={noauthRoutes} logged={this.state.logged} store={store} />
-            </ErrorBoundary>
-          </LanguageProvider>
-        </Provider>
+        <ThemeProvider theme={theme}>
+          <JssProvider registry={sheets}>
+            <Provider store={store}>
+              <LanguageProvider language={this.state.language}>
+                <ErrorBoundary>
+                  <ConnectedRouter history={history}>
+                    <{{properCase name}}Container logged={this.state.logged} {...this.props} />
+                  </ConnectedRouter>
+                </ErrorBoundary>
+              </LanguageProvider>
+            </Provider>
+          </JssProvider>
+        </ThemeProvider>
       </>
     );
   }

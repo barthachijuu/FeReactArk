@@ -1,40 +1,46 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const WebpackPlugin = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const mainConfig = require('./webpack.config');
-const project = require('../config/project.config');
+const WP = require('webpack');
+const HWP = require('html-webpack-plugin');
+const MCEP = require('mini-css-extract-plugin');
+const FEWP = require('friendly-errors-webpack-plugin');
+const DP = require('webpack-dashboard/plugin');
+const mainConfig = require('./webpack.common');
+const pkg = require('../package.json');
 
-const APP_DIR = path.resolve(__dirname, '../web/src');
-
-mainConfig.entry.main = [
-  '@babel/polyfill',
-  `${APP_DIR}/index.jsx`,
-  'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-];
-mainConfig.output.filename = 'main.js';
-mainConfig.output.path = path.join(__dirname, '../web/src');
-mainConfig.output.publicPath = '/';
+mainConfig.entry.main.push('webpack-hot-middleware/client?reload=true');
+mainConfig.output.filename = '[name].js';
+mainConfig.output.chunkFilename = '[name].chunk.js';
 
 module.exports = merge(mainConfig, {
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   plugins: [
-    new MiniCssExtractPlugin({ filename: '[id].css', allChunks: false, disable: false, chunkFilename: '[id].css' }),
-    new WebpackPlugin.optimize.OccurrenceOrderPlugin(),
-    new WebpackPlugin.HotModuleReplacementPlugin(),
-    new WebpackPlugin.NoEmitOnErrorsPlugin(),
-    new WebpackPlugin.SourceMapDevToolPlugin(),
-    new WebpackPlugin.HashedModuleIdsPlugin(),
-    new SimpleProgressWebpackPlugin({
-      format: 'expanded',
-    }),
-    new HtmlWebpackPlugin({
-      template: `${APP_DIR}/index.html`,
+    new FEWP(),
+    new MCEP({ filename: '[id].css', chunkFilename: '[id].css' }),
+    new WP.optimize.OccurrenceOrderPlugin(),
+    new WP.NoEmitOnErrorsPlugin(),
+    new WP.HotModuleReplacementPlugin(),
+    new DP(),
+    new HWP({
+      template: `${path.join(process.cwd(), '/app/index.ejs')}`,
       filename: `index.html`,
-      inject: 'body',
+      inject: true,
+      title: pkg.name.replace(/\w+/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase()).replace(/\s|\-/g, ''),
+      meta: {
+        viewport: 'width=device-width, initial-scale=1',
+        // Will generate: <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        'X-UA-Compatible': 'IE=9;IE=10;IE=Edge,chrome=1',
+        // Will generate:   <meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=Edge,chrome=1" >
+      },
     }),
   ],
-  optimization: project.webpack.devoptimization,
+  optimization: {
+    splitChunks: {
+      automaticNameDelimiter: '-',
+      chunks: 'all',
+    },
+  },
+  performance: {
+    hints: 'warning',
+  },
 });

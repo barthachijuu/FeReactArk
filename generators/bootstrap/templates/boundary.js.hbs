@@ -7,7 +7,36 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import style from '../../assets/styles/scss/ErrorBoundary.scss';
+
+import { create } from 'jss';
+
+const styles = {
+  body: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    textAlign: 'center',
+  },
+  bigBody: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    width: '100vw',
+    backgroundColor: 'rgba(149, 150, 175, 0.3)',
+  },
+  detailsButton: {
+    whiteSpace: 'pre-wrap',
+    outline: 'none',
+    marginTop: '20px',
+  },
+  detailsButton_focus: {
+    outline: 'none',
+  },
+};
+const jss = create();
+const { classes } = jss.createStyleSheet(styles).attach();
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -31,12 +60,12 @@ class ErrorBoundary extends Component {
     if (this.state.hasError) {
       return (
         <>
-          <div className={style.bigBody}>
-            <div className={style.body}>
+          <div className={classes.bigBody}>
+            <div className={classes.body}>
               <h2>Something went wrong.</h2>
               {this.state.errorType && this.state.errorType.toString()}
               <br />
-              <details className={style.detailsButton}>
+              <details className={classes.detailsButton}>
                 {this.state.errorInfo ? this.state.errorInfo.componentStack : <h3>Sorry, no more details</h3>}
               </details>
             </div>
@@ -49,7 +78,11 @@ class ErrorBoundary extends Component {
 }
 
 ErrorBoundary.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element,
+};
+
+ErrorBoundary.defaultProps = {
+  children: React.createElement('div'),
 };
 
 export default ErrorBoundary;

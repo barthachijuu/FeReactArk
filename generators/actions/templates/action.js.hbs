@@ -1,0 +1,54 @@
+/*
+ *
+ * {{camelCase actionNameNew}} Actions
+ *
+ * @version 1.0.0
+ * @author {{uname}}
+ * @since {{since}}
+ */
+
+import { createRequestTypes, createAction, MakeRequest } from './index';
+
+export const actionTypes = {
+{{#if actions}}
+  {{#each actions as |action|}}
+  {{constantCase action}}: '{{../actionNameNew}}/{{snakeCase action}}',
+  {{/each}}
+{{/if}}
+  // @generator action:type
+{{#if actionsList}}
+  {{#each actionsList as |act|}}
+  ...createRequestTypes('{{../actionNameNew}}', '{{constantCase act}}'),
+  {{/each}}
+{{/if}}
+  // @generator action:type:request
+};
+
+// ------------------------------------
+// Actions
+// ------------------------------------
+{{#if actionsList}}
+  {{#each actionsList as |act|}}
+/** @action request
+ * * Insert a description
+ * @name {{camelCase act}}
+ * @return {object} - The action object
+ */
+export const {{camelCase act}} = new MakeRequest('{{snakeCase act}}');
+
+  {{/each}}
+{{/if}}
+// @generator action:request
+{{#if actions}}
+  {{#each actions as |action|}}
+
+/** @action
+ * * Insert a description
+ * @name {{properCase action}}
+ * @return {object} - The payload object
+ */
+export const do{{properCase action}} = payload => createAction(actionTypes.{{constantCase action}}, { payload });
+
+  {{/each}}
+{{/if}}
+// @generator action

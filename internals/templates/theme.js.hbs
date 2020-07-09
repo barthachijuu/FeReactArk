@@ -1,0 +1,61 @@
+const theme = {
+  '@global': {
+    body: {
+      fontFamily: 'Roboto',
+    },
+  },
+  breakpointValues: {
+    xs: 0,
+    sm: 480,
+    md: 768,
+    lg: 1024,
+    xl: 1200,
+  },
+  muiTheme: createMuiTheme({
+    palette: {
+      common: {
+        black: '#000',
+        white: '#fff',
+      },
+      background: {
+        paper: '#FFF',
+        default: '#F6F7F8',
+      },
+      primary: {
+        light: '#00B8DE',
+        main: '#2D32AA',
+        dark: '#00B8DE',
+        contrastText: '#FFF',
+      },
+      secondary: {
+        light: '#ff4081',
+        main: '#00B8DE',
+        dark: '#2D32AA',
+        contrastText: '#FFF',
+      },
+      error: {
+        light: '#E57373',
+        main: '#F9423A',
+        dark: '#D32F2F',
+        contrastText: '#FFF',
+      },
+      text: {
+        primary: '#000',
+        secondary: 'rgba(0, 0, 0, 0.54)',
+        disabled: 'rgba(0, 0, 0, 0.38)',
+        hint: 'rgba(0, 0, 0, 0.38)',
+      },
+    },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 480,
+        md: 768,
+        lg: 1024,
+        xl: 1200,
+      },
+    },
+  }),
+};
+
+export default theme;

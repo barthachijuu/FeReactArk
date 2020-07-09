@@ -1,6 +1,8 @@
 const { resolve } = require('path');
 const project = require('./config/project.config.js'); // eslint-disable-line
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer')({
+  browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 10'],
+});
 
 const fontMagician = require('postcss-font-magician')({
   variants: {
@@ -16,7 +18,7 @@ const fontMagician = require('postcss-font-magician')({
 
 const fontSetOptions = {
   inline: ['woff2'],
-  path: resolve(__dirname, './public/assets/fonts/'), // folder to save all font files. Required absolute path!
+  path: resolve(process.cwd(), '/fonts/'), // folder to save all font files. Required absolute path!
   formats: ['woff2', 'woff'],
   filename: '[css-name]-[set-name].[hash:4].[ext]',
   url({ fontName }) {

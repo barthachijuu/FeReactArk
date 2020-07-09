@@ -1,6 +1,0 @@
-...createRequestTypes('{{constantCase methodName}}'),
-$&export const {{camelCase methodName}} = {
-  request: request => createAction(actionTypes.{{constantCase methodName}}_REQUEST, { request }),
-  success: (response, payload) => createAction(actionTypes.{{constantCase methodName}}_SUCCESS, { response, payload }),
-  failure: (response, payload) => createAction(actionTypes.{{constantCase methodName}}_FAILURE, { response, payload }),
-};

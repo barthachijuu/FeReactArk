@@ -1,15 +1,47 @@
-import dotProp from 'dot-prop-immutable';
+/*
+ * {{camelCase actionNameNew}}Reducer
+ * Description
+ * The reducer takes care of our data. Using actions, we can
+ * update our application state. To add a new action,
+ * add it to the switch statement in the reducer function
+ *
+ * @version 1.0.0
+ * @author {{uname}}
+ * @since {{since}}
+ */
+
+import produce from 'immer';
 import { actionTypes } from '../actions/{{camelCase actionNameNew}}';
 
 const ACTION_HANDLERS = {
+{{#if actions}}
+  {{#each actions as |action|}}
+  [actionTypes.{{constantCase action}}]: produce((draft, action) => {
 
+  }),
+  {{/each}}
+{{/if}}
+{{#if actionsList}}
+  {{#each actionsList as |act|}}
+  [actionTypes.{{constantCase act}}_SUCCESS]: produce((draft, action) => {
+
+  }),
+  [actionTypes.{{constantCase act}}_FAILURE]: produce((draft, action) => {
+
+  }),
+  {{/each}}
+{{/if}}
+  // @generator reducer:type:action
 };
 
+// The initial state of the {{camelCase actionNameNew}}
 const initialState = {
 
 };
 
-export default function {{camelCase actionNameNew}}Reducer(state = initialState, action) {
+const {{camelCase actionNameNew}} = (state = initialState, action) => {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;
-}
+};
+
+export default {{camelCase actionNameNew}};

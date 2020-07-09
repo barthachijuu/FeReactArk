@@ -11,5 +11,10 @@
     "@babel/plugin-proposal-throw-expressions",
     "react-css-modules",
     "react-hot-loader/babel"
-  ]
+  ],
+    "env": {
+    "test": {
+      "plugins": ["@babel/plugin-transform-runtime"]
+    }
+  }
 }

@@ -1,0 +1,43 @@
+import 'regenerator-runtime/runtime';
+import Enzyme from 'enzyme';
+import EnzymeAdapter from 'enzyme-adapter-react-16';
+import axiosMock from 'axios';
+
+Enzyme.configure({
+  adapter: new EnzymeAdapter(),
+});
+
+const { nullSafe, handlingResponse, getLang } = require('../globalMethods/');
+
+describe('nullSafe', () => {
+  test('Return the passing value', () => {
+    const resp = nullSafe(() => 10, 1);
+    expect(resp).toBe(10);
+  });
+  test('Return a safe value', () => {
+    const resp = nullSafe(null, 1);
+    expect(resp).toBe(1);
+  });
+});
+describe('handlingResponse', () => {
+  test('Handling the 401 status', () => {
+    const result = handlingResponse({ statusText: 'ko', status: 401 });
+    expect(result).toHaveProperty(['error', 'type']);
+  });
+  test('Handling the 404 status', () => {
+    const result = handlingResponse({ statusText: 'ko', status: 404 });
+    expect(result).toHaveProperty(['error', 'type']);
+  });
+  test('Handling the 500 status', () => {
+    const result = handlingResponse({ statusText: 'ko', status: 500 });
+    expect(result).toHaveProperty(['error', 'type']);
+  });
+  test('Handling the defult status', () => {
+    const result = handlingResponse({ statusText: 'ko', status: 505 });
+    expect(result).toHaveProperty(['error', 'type']);
+  });
+  test('Handling the 200 status', () => {
+    const result = handlingResponse({ statusText: 'ok', status: 200 });
+    expect(result).toHaveProperty('response');
+  });
+});

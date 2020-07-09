@@ -1,4 +1,6 @@
 const utils = require('../utils/fileUtils');
+const logger = require('../../server/utils/logger');
+
 /**
  * Api Generator
  */
@@ -6,9 +8,10 @@ const utils = require('../utils/fileUtils');
 module.exports = {
   description: 'Add a single method for the api selected',
   prompts: [{
-    type: 'list',
+    type: 'rawlist',
     name: 'whichApi',
     message: 'On which API want to add a method?',
+    pageSize: 10,
     choices: () => {
       const mychoiches = utils.readDir(`${utils.getPath()}api/`);
       const list = [];
@@ -26,9 +29,10 @@ module.exports = {
     message: 'What\'s the name of the method?',
     validate: (value, answers) => {
       if (/.+/.test(value)) {
-        return !utils.checkString(`api/${answers.whichApi}/${answers.whichApi}.js`, new RegExp(`function ${utils.camelize(value)}\\(`, 'gm')) ? true : 'That method already exists.';
+        return !utils.checkString(`api/${answers.whichApi}/${answers.whichApi}.js`,
+          new RegExp(`function ${utils.camelize(value)}\\(`, 'gm')) ? true : logger.warn('That method already exists.');
       }
-      return 'The name is required.';
+      return logger.warn('The name is required.');
     },
   },
   {
@@ -37,6 +41,9 @@ module.exports = {
     message: 'What\'s the url of the method (if you know it)',
     filter: (input) => {
       if (input !== undefined) {
+        if (input.substr(-1) === '/' && input.substr(input.length - 1) === '/') {
+          input = input.substr(1, (input.length - 2));
+        }
         return input.replace(/\s/g, '');
       }
       return '';
@@ -48,16 +55,26 @@ module.exports = {
     name: 'type',
     message: 'Select the method type',
     choices: ['get', 'post', 'put', 'delete'],
+    default: 'post',
     when: a => a.url !== '',
   },
   ],
   actions: (data) => {
-    const actions = [{
-      type: 'modify',
-      path: `${utils.getPath()}api/${data.whichApi}/${data.whichApi}.js`,
-      pattern: /(\/\/ @generator api:method)/gm,
-      templateFile: './apirest/templates/api.js.hbs',
-    }];
+    const actions = [
+      logger.log(`Starting api creation process`),
+      logger.delayLog('Collect all answers'),
+      logger.delayLog('Configure all templates'),
+      logger.delayLog('Converting hbs template'),
+      logger.delayLog('Adding api method'),
+      (data) => {
+        logger.success('[METHOD ADDED WITH SUCEESS]');
+        logger.info(data);
+      }, {
+        type: 'modify',
+        path: `${utils.getPath()}api/${data.whichApi}/${data.whichApi}.js`,
+        pattern: /(\/\/ @generator api:method)/gm,
+        templateFile: './apirest/templates/api.js.hbs',
+      }];
     actions.push({
       type: 'prettify',
       path: `/api/${data.whichApi}/`,

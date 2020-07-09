@@ -1,5 +1,7 @@
 import RootComponent from './RootComponent';
 
-{{#if isLazy}}
-export default RootComponent;{{else}}export default () => RootComponent;
-{{/if}}
+{{#isPresent choicees 'lazy'}}
+export default RootComponent;
+{{else}}
+export default () => RootComponent;
+{{/isPresent}}

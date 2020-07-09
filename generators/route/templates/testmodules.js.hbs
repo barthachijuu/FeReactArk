@@ -1,0 +1,23 @@
+/**
+ *
+ * Jest Unit Test for
+ * {{ properCase componentName }} Redux Modules
+ *
+ */
+
+import * as actions from '../modules/{{ properCase routeName }}Actions';
+import {{ properCase routeName }} from '../modules/{{ properCase routeName }}Reducers';
+
+describe('actions', () => {
+  it('should create a sample test', () => {
+    const text = 'Action creator';
+    expect(text).toEqual('Action creator');
+  });
+});
+
+describe('reducers', () => {
+  it('should create a sample test', () => {
+    const text = 'Set state on reducer';
+    expect(text).toEqual('Set state on reducer');
+  });
+});

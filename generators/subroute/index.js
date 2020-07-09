@@ -1,4 +1,5 @@
 const utils = require('../utils/fileUtils');
+const logger = require('../../server/utils/logger');
 
 /**
  * Subroute Generator
@@ -27,31 +28,63 @@ module.exports = {
       name: 'subrouteName',
       message: 'What\'s the name of the subRoute?',
       validate: (value, answers) => {
-        if (/.+/.test(value)) {
-          return utils.checkExist(`routes/${answers.whichRoute}/components/${utils.pascalize(value)}`) ? 'That subRoute already exists.' : true;
+        if (/^[^a-zA-Z]+$/.test(value)) {
+          return logger.warn('The name can use only letter.');
         }
-        return 'The name is required.';
+        if (/.+/.test(value)) {
+          return utils.checkExist(`routes/${answers.whichRoute}/components/${utils.pascalize(value)}`)
+            ? logger.warn('That subRoute already exists.') : true;
+        }
+        return logger.warn('The name is required.');
       },
     },
     {
-      type: 'confirm',
-      name: 'hasHistory',
-      message: 'Should the component have access to history?',
-      default: false,
+      type: 'list',
+      name: 'styleType',
+      message: 'Which style will use the route?',
+      choices: ['scss', 'jss'],
+    },
+    {
+      name: 'options',
+      type: 'checkbox',
+      message: 'What do you want to include as extra?',
+      default: ['intl'],
+      choices: [{
+        name: 'History access',
+        value: 'history',
+      },
+      {
+        name: 'A language intl file',
+        value: 'intl',
+      },
+      ],
     },
   ],
   actions: (data) => {
+    data.uname = utils.getAuthor();
+    data.since = utils.getDate();
     const regex = new RegExp(`(path: '\/${data.whichRoute.toLowerCase()}',\\n\\s{0,})(exact: true)[^]`, 'gmi');
     const actions = [
+      logger.log(`Starting subroute creation process`),
+      logger.delayLog('Collect all answers'),
+      logger.delayLog('Configure all templates'),
+      logger.delayLog('Converting hbs template'),
+      logger.delayLog('Adding subroute'),
+      (data) => {
+        logger.success('[SUBROUTE CREATED WITH SUCEESS]');
+        logger.info(data);
+      },
       {
         type: 'add',
-        path: `${utils.getPath()}routes/${data.whichRoute}/components/{{properCase subrouteName}}/{{properCase subrouteName}}.jsx`,
+        path: `${utils.getPath()}routes/${data.whichRoute}
+        /components/{{properCase subrouteName}}/{{properCase subrouteName}}.jsx`,
         templateFile: './subroute/templates/component.js.hbs',
         abortOnFail: true,
       },
       {
         type: 'add',
-        path: `${utils.getPath()}routes/${data.whichRoute}/components/{{properCase subrouteName}}/{{properCase subrouteName}}Container.js`,
+        path: `${utils.getPath()}routes/${data.whichRoute}
+        /components/{{properCase subrouteName}}/{{properCase subrouteName}}Container.js`,
         templateFile: './subroute/templates/container.js.hbs',
         abortOnFail: true,
       },
@@ -62,12 +95,35 @@ module.exports = {
         templateFile: './subroute/templates/subroute.jsx.hbs',
       },
       {
+        type: 'add',
+        path: `${utils.getPath()}routes/${data.whichRoute}/tests/{{properCase subrouteName}}.test.js`,
+        templateFile: './subroute/templates/test.js.hbs',
+        abortOnFail: true,
+      },
+      {
         type: 'modify',
         path: `${utils.getPath()}routes/index.jsx`,
         pattern: regex,
         template: '$1exact: false,',
       },
-    ];
+      {
+        type: 'add',
+        path: `${utils.getPath()}routes/${data.whichRoute}/components/{{properCase subrouteName}}/style.js`,
+        templateFile: `./subroute/templates/styles.cssjs.hbs`,
+        abortOnFail: true,
+        skipIfExists: true,
+      }];
+      // If they want handling text
+
+    if (data.options.includes('intl')) {
+      actions.push({
+        type: 'add',
+        path: `${utils.getPath()}routes/${data.whichRoute}/components/{{properCase subrouteName}}/languageModule.jsx`,
+        templateFile: './subroute/templates/language.jsx.hbs',
+        abortOnFail: true,
+        skipIfExists: true,
+      });
+    }
     actions.push({
       type: 'prettify',
       path: `/routes/`,
