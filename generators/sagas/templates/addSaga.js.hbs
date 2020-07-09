@@ -1,7 +1,9 @@
-export function* {{camelCase sagaName}}() {
+function* {{camelCase sagaName}}() {
 
 }
 $&
-export function* watch{{properCase sagaName}}() {
-
+function* watch{{properCase sagaName}}() {
+  while ({{#if actionWatch}}yield take(actionTypes.{{whichAction}}'){{else}}true{{/if}}) {
+    yield call({{camelCase sagaName}});
+  }
 }

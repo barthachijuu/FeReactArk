@@ -1,26 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import {{properCase routeName}} from './components/{{properCase routeName}}';
+import {{properCase routeName}} from './components/{{properCase routeName}}Container';
 // @generator route:import
 
 const {{properCase routeName}}Root = props => (
-  <Switch>
-    <Route path={`${props.match.path}/`}{{#if isExact}} exact{{/if}} component={ {{~properCase routeName~}} } />
-    {/* @generator route:subroute */}
-    <Redirect to={`${props.match.path}/`} push />
-  </Switch>
+  <>
+    <Switch>
+      <Route path={`${props.match.path}/`}{{#isNotPresent choicees 'exact'}} exact{{/isNotPresent}} component={{ curlyBraces routeName}} />
+      {/* @generator route:subroute */}
+      <Redirect to={`${props.match.path}/`} push />
+    </Switch>
+  </>
 );
 
 {{properCase routeName}}Root.propTypes = {
-  match: PropTypes.objectOf(
-    PropTypes.shape({
-      path: PropTypes.string,
-      url: PropTypes.string,
-      isExact: PropTypes.bool,
-      params: PropTypes.obj,
-    }),
-  ).isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default {{properCase routeName}}Root;

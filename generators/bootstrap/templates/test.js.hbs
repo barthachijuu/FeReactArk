@@ -1,25 +1,32 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { defineMessages } from 'react-intl';
+// import { defineMessages } from 'react-intl';
+import { LanguageProvider } from '../LanguageProvider';
 
-import LanguageProvider from '../LanguageProvider';
+let baseProps;
 
-const messages = defineMessages({
-  someMessage: {
-    id: 'some.id',
-    defaultMessage: 'This is some default message',
-    en: 'This is some en message',
-  },
+beforeAll(() => {
+  baseProps = {
+    language: {
+      messages: {
+        it: {
+          'ark.route.test.messagetest': 'Testing language',
+        },
+      },
+      locale: 'it',
+    },
+  };
 });
+
 
 describe('<LanguageProvider />', () => {
   it('should render its children', () => {
     const children = <h1>Test</h1>;
     const renderedComponent = shallow(
-      <LanguageProvider messages={messages} locale="en">
+      <LanguageProvider {...baseProps}>
         {children}
       </LanguageProvider>,
     );
-    expect(renderedComponent.contains(children)).toBe(false);
+    expect(renderedComponent.contains(children)).toBe(true);
   });
 });

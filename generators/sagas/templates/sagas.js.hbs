@@ -1,13 +1,21 @@
-import { all, put, takeEvery, fork } from 'redux-saga/effects';
+/*
+ * {{camelCase sagaNameNew}} Sagas
+ *
+ * @version 1.0.0
+ * @author {{uname}}
+ * @since {{since}}
+ */
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
+import { put, fork, take, call, all } from 'redux-saga/effects';
+import { delay } from 'Store/sagas/index';
 
 // @generator saga
 
 // @generator saga:watch
 
-export default function* root() {
-  yield all([
-    // @generator saga:fork
-  ]);
-}
+/**
+ * Root saga manages watcher lifecycle
+ */
+export default [
+  // @generator saga:fork
+];

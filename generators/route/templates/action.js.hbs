@@ -1,12 +1,22 @@
-import { createRequestTypes, createAction } from 'Store/actions/index';
+
+/*
+ *
+ * {{properCase routeName}} Actions
+ *
+ * @version 1.0.0
+ * @author {{uname}}
+ * @since {{since}}
+ */
+
+import { createRequestTypes, createAction, MakeRequest } from 'Store/actions/index';
 
 export const actionTypes = {
-{{#each actions}}
-  {{constantCase this}}: '{{constantCase this}}',
+{{#each actions as |action|}}
+  DO_{{constantCase action}}: '{{snakeCase ../routeName}}/{{snakeCase action}}',
 {{/each}}
   // @generator action:route:type
-{{#each actionsList}}
-  ...createRequestTypes('{{constantCase this}}'),
+{{#each actionsList as |act|}}
+  ...createRequestTypes('{{snakeCase ../routeName}}', '{{constantCase act}}'),
 {{/each}}
   // @generator action:route:type:request
 };
@@ -14,20 +24,28 @@ export const actionTypes = {
 // ------------------------------------
 // Actions
 // ------------------------------------
+{{#if actionsList}}
+  {{#each actionsList as |act|}}
+/** @action request
+ * * Insert a description
+ * @name {{camelCase act}}
+ * @return {object} - The action object
+ */
+export const {{camelCase act}} = new MakeRequest('{{snakeCase act}}');
 
-{{#each actionsList}}
-export const {{camelCase this}} = {
-  request: request => createAction(actionTypes.{{constantCase this}}_REQUEST, { request }),
-  success: (response, payload) => createAction(actionTypes.{{constantCase this}}_SUCCESS, { response, payload }),
-  failure: (response, payload) => createAction(actionTypes.{{constantCase this}}_FAILURE, { response, payload }),
-};
-{{/each}}
+  {{/each}}
+{{/if}}
 // @generator action:route:request
-{{#each actions}}
+{{#if actions}}
+  {{#each actions as |action|}}
 
-export const do{{properCase this}} = () => ({
-  type: actionTypes.{{constantCase this}},
-  payload: {},
-});
-{{/each}}
+/** @action
+ * * Insert a description
+ * @name {{properCase action}}
+ * @return {object} - The payload object
+ */
+export const do{{properCase action}} = payload => createAction(actionTypes.DO_{{constantCase action}}, { payload });
+
+  {{/each}}
+{{/if}}
 // @generator action:route

@@ -1,17 +1,30 @@
-import { delay } from 'redux-saga';
+/*
+ *
+ * {{properCase routeName}} Sagas
+ *
+ * @version 1.0.0
+ * @author {{uname}}
+ * @since {{since}}
+ */
+
 import { put, fork, take, call, all } from 'redux-saga/effects';
+import { delay } from 'Store/sagas/index';
+import * as  actions, { actionTypes } from './{{properCase routeName}}Actions';
+import * as api from 'Api/{{camelCase routeName}}/{{camelCase routeName}}';
 
 // remember to delete the example code, before you
 // start to edit this file
 
-import { actionTypes } from './{{properCase routeName}}Actions';
 
 // @generator saga
 
 // @generator saga:watch
 
-export default function* root() {
+/**
+ * Root saga manages watcher lifecycle
+ */
+export default function* rootSaga() {
   yield all([
-  // @generator saga:fork
+    // @generator saga:fork
   ]);
 }

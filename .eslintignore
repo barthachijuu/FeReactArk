@@ -1,6 +1,8 @@
 coverage/**
 node_modules/**
 dist/**
-web/src/index.html
-__mocks__
-tests
+build/**
+app/*.html
+app/*.ejs
+generator/**/template
+__mocks__/**

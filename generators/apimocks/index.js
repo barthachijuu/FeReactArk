@@ -1,13 +1,14 @@
 const utils = require('../utils/fileUtils');
+const logger = require('../../server/utils/logger');
 /**
- * Api Generator
+ * Api Mock Generator
  */
 
 module.exports = {
   description: 'Add a single mock for the api selected',
   prompts: [
     {
-      type: 'list',
+      type: 'rawlist',
       name: 'whichMock',
       message: 'Select the API where the mock were added',
       choices: () => {
@@ -27,12 +28,13 @@ module.exports = {
       message: 'What\'s the url want to be mocked?',
       validate: (value, answers) => {
         if (/\s/.test(value)) {
-          return 'Blank space are not allowed.';
+          return logger.warn('Blank space are not allowed.');
         }
         if (/.+/.test(value)) {
-          return utils.checkString(`mocks/${answers.whichMock}/${answers.whichMock}.js`, new RegExp(`'/${value}'`, 'gm')) ? 'That mock already exists.' : true;
+          return utils.checkString(`mocks/${answers.whichMock}/${answers.whichMock}.js`,
+            new RegExp(`'/${value}'`, 'gm')) ? logger.warn('That mock already exists.') : true;
         }
-        return 'The name is required.';
+        return logger.warn('The name is required.');
       },
     },
     {
@@ -40,19 +42,29 @@ module.exports = {
       name: 'type',
       message: 'Select the method type',
       choices: ['get', 'post', 'put', 'delete'],
+      default: 'post',
       when: a => a.mockName !== '',
     },
     {
       type: 'list',
       name: 'status',
       message: 'Select the response status',
-      choices: ['200', '201', '204', '500'],
+      choices: ['200', '201', '204', '301', '400', '401', '404', '500'],
+      default: '200',
       when: a => a.mockName !== '',
     },
   ],
   actions: (data) => {
-    console.log(data.response);
     const actions = [
+      logger.log(`Starting mock creation process`),
+      logger.delayLog('Collect all answers'),
+      logger.delayLog('Configure all templates'),
+      logger.delayLog('Converting hbs template'),
+      logger.delayLog('Adding mock method'),
+      (data) => {
+        logger.success('[MOCK ADDED WITH SUCEESS]');
+        logger.info(data);
+      },
       {
         type: 'modify',
         path: `${utils.getPath()}mocks/${data.whichMock}/${data.whichMock}.js`,

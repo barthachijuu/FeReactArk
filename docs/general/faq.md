@@ -5,13 +5,6 @@
   - [Where are the files coming from when I run `yarn start`?](#where-are-the-files-coming-from-when-i-run-yarn-start)
   - [How do I fix `Error: listen EADDRINUSE 127.0.0.1:4000`?](#how-do-i-fix-error-listen-eaddrinuse-1270014000)
     - [OS X / Linux:](#os-x--linux)
-    - [Windows](#windows)
-  - [Issue with local caching when running in production mode (F5 / ctrl+F5 / cmd+r weird behavior)](#issue-with-local-caching-when-running-in-production-mode-f5--ctrlf5--cmdr-weird-behavior)
-      - [Quick fix on your local browser:](#quick-fix-on-your-local-browser)
-  - [Non-route containers](#non-route-containers)
-  - [How to keep my project up-to-date with `fe-react-ark`?](#how-to-keep-my-project-up-to-date-with-fe-react-ark)
-  - [How to turn off Webpack performance warnings after production build?](#how-to-turn-off-webpack-performance-warnings-after-production-build)
-  - [Have another question?](#have-another-question)
 
 ## Where are Babel, Prettier and ESLint configured?
 
@@ -30,7 +23,7 @@ The fix is to kill the process and rerun `yarn start`.
 
 ### OS X / Linux:
 
-1.  Find the process id (PID):
+1. Find the process id (PID):
 
     ```Shell
     ps aux | grep node
@@ -44,16 +37,18 @@ The fix is to kill the process and rerun `yarn start`.
     >
     > Note: If nothing is listed, you can try `lsof -i tcp:3000`
 
-2.  Then run
-    ```Shell
+2. Then run
+
+   ```Shell
     kill -9 YOUR_PID
     ```
+
     > e.g. given the output from the example above, `YOUR_PID` is `29811`, hence
     > that would mean you would run `kill -9 29811`
 
 ### Windows
 
-1.  Find the process id (PID):
+1. Find the process id (PID):
 
     ```Shell
     netstat -a -o -n
@@ -73,7 +68,8 @@ The fix is to kill the process and rerun `yarn start`.
 
     ```
 
-1.  Then run
+2. Then run
+
     ```Shell
     taskkill /F /PID YOUR_PID
     ```
@@ -84,7 +80,7 @@ The fix is to kill the process and rerun `yarn start`.
 
 Your production site isn't working? You update the code and nothing changes? It drives you insane?
 
-#### Quick fix on your local browser:
+## Quick fix on your local browser:
 
 To fix it on your local browser, just do the following. (Suited when you're testing the production mode locally)
 
@@ -112,7 +108,3 @@ performance: {
 ```
 
 You can find more information about the `performance` option (how to change maximum allowed size of a generated file, how to exclude some files from being checked and so on) in the [Webpack documentation](https://webpack.js.org/configuration/performance/).
-
-## Have another question?
-
-Submit an [issue](https://github.com/barthachijuu/FeReactArk/issues)

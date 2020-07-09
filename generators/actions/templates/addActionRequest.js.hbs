@@ -1,0 +1,7 @@
+...createRequestTypes('{{removeExtension whichActionFile}}', '{{constantCase methodName}}'),
+$&/** @action request
+* * Insert a description
+* @name {{camelCase methodName}}
+* @return {object} - The action object
+*/
+export const {{camelCase methodName}} = new MakeRequest('{{snakeCase methodName}}');

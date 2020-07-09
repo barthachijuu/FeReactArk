@@ -1,2 +1,2 @@
-mock.on{{properCase type}}('/{{mockName}}').reply({{status}}{{#if_eq status '200'}}, {  }{{/if_eq}});
+mock.on{{properCase type}}('/{{mockName}}').reply({{status}}{{#equal status '200'}}, {  }{{/equal}});
 $&

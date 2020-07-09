@@ -11,12 +11,13 @@ framework to run tests and make assertions. This library makes writing tests as 
 
 <!-- TOC depthFrom:2 depthTo:4 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Basics](#basics)
-  - [Jest](#jest)
-- [Testing Redux Applications](#testing-redux-applications)
-  - [Reducers](#reducers)
-    - [snapshots](#snapshots)
-  - [Actions](#actions)
+- [Unit testing](#unit-testing)
+  - [Basics](#basics)
+    - [Jest](#jest)
+  - [Testing Redux Applications](#testing-redux-applications)
+    - [Reducers](#reducers)
+      - [Snapshots](#snapshots)
+    - [Actions](#actions)
 
 <!-- /TOC -->
 
@@ -40,7 +41,6 @@ export function add(x, y) {
 
 > Note: The `export` here is ES6 syntax, and you would need an ES6 transpiler
 > (e.g. babel.js) to run this JavaScript.
-
 > The `export` makes our function available as a module, which we can `import` and use
 > in other files. Continue below to see what that looks like.
 
@@ -111,7 +111,7 @@ it("doesn't add the third number", () => {
 
 Should our function work, Jest will show this output when running the tests:
 
-```
+```md
 add()
   ✓ adds two numbers
   ✓ doesn't add the third number
@@ -133,7 +133,7 @@ Imagine the consequences to our code that uses the function!
 Thankfully, we have unit tests in place. Because we run the unit tests before we
 deploy our application, we see this output:
 
-```
+```javascript
 ● add() › adds two numbers
 
   expect(received).toEqual(expected)
@@ -155,7 +155,7 @@ the code! Congratulations, you just saved time and money!
 
 Imagine a navigation bar, this is what its folder might look like:
 
-```
+```md
 NavBar          # Wrapping folder
 ├── index.js      # Actual component
 ├── actions.js    # Actions
@@ -345,7 +345,7 @@ it('should return the correct constant', () => {
 
 If our `toggleNav` action works correctly, this is the output Jest will show us:
 
-```
+```jest
 NavBar actions
   toggleNav
     ✓ should return the correct constant

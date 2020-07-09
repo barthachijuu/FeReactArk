@@ -5,7 +5,8 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import Helemt from 'react-helmet';
 
 class {{ properCase name }}Container extends Component {
   static propTypes = {
@@ -48,17 +49,26 @@ class {{ properCase name }}Container extends Component {
         <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
       ))
     );
+
     return (
       <>
-        <Router>
-          <Route path="/" />
-          <Switch>
-            {noauthRoutes.routes.map(({ component, ...otherRouteProp }) => (
-              <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
-            ))}
-            {logged ? loggedApp : this.handleAuthentication()}
-          </Switch>
-        </Router>
+        <HashRouter>
+          <div>
+            <Helmet
+              titleTemplate="%s - React.js Nexi Architecture"
+              defaultTitle="React.js Boilerplate"
+            >
+              <meta name="description" content="A React.js Boilerplate for Nexi architecture" />
+            </Helmet>
+            <Route path="/" />
+            <Switch>
+              {noauthRoutes.routes.map(({ component, ...otherRouteProp }) => (
+                <Route {...otherRouteProp} key={otherRouteProp.path} render={component} />
+              ))}
+              {logged ? loggedApp : this.handleAuthentication()}
+            </Switch>
+          </div>
+        </HashRouter>
       </>
     );
   }

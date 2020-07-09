@@ -4,15 +4,12 @@ export async function {{camelCase methodName}}(params) {
   try {
     data = await axios({
     method: '{{type}}',
-    baseURL: `${API_REST_BE}/`,
-    url: `{{url}}`,
+    url: '{{url}}',
     data: { ...params },
-    headers: { ...defaultHeaders },
     });
-    return { response: data.data };
+    return handlingResponse(data);
   } catch (error) {
-    console.error(error);
-    return { error: error.response.data };
+    return handlingResponse(error);
   }
 }
 $&

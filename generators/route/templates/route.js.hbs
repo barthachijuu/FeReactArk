@@ -1,3 +1,3 @@
 {
-  path: '/{{removeBlank routeName}}',{{#if isExact}}exact: true, {{else}}exact: false, {{/if}}component: {{#if isLazy}}props => <LazyComponent {...props} componentName="{{properCase routeName}}" />{{else}}props => <{{properCase routeName}} {...props} />{{/if}},
+  path: '/{{removeBlank routeName}}',{{#isPresent choicees 'exact'}}exact: true, {{else}}exact: false, {{/isPresent}}component: {{#isPresent choicees 'lazy'}}props => <LazyComponent {...props} componentName="{{properCase routeName}}" />{{else}}props => <{{properCase routeName}} {...props} />{{/isPresent}},
 },$&

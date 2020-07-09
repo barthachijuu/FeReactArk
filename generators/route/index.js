@@ -1,5 +1,5 @@
 const utils = require('../utils/fileUtils');
-
+const logger = require('../../server/utils/logger');
 /**
  * Route Generator
  */
@@ -11,119 +11,140 @@ module.exports = {
     name: 'routeName',
     message: 'What should it be called',
     validate: (value) => {
-      if (/.+/.test(value)) {
-        return utils.checkExist(`routes/${utils.pascalize(value)}`) ? 'That route already exists.' : true;
+      if (/^[^a-zA-Z]+$/.test(value)) {
+        return logger.warn('The name can use only letter.');
       }
-      return 'The name is required.';
+      if (/.+/.test(value)) {
+        return utils.checkExist(`routes/${utils.pascalize(value)}`) ? logger.warn('That route already exists.') : true;
+      }
+      return logger.warn('The name is required.');
     },
   },
   {
-    type: 'confirm',
-    name: 'isExact',
-    bvmessage: 'Is path exact',
-    default: false,
+    name: 'choicees',
+    type: 'checkbox',
+    message: 'What do you want to include?',
+    default: ['lazy', 'auth'],
+    choices: [
+      {
+        name: 'Authorized route',
+        value: 'auth',
+      },
+      {
+        name: 'Exact path route',
+        value: 'exact',
+      },
+      {
+        name: 'History access',
+        value: 'history',
+      },
+      {
+        name: 'Lazy loaded route',
+        value: 'lazy',
+      },
+    ],
   },
   {
-    type: 'confirm',
-    name: 'isLazy',
-    message: 'Should the route be lazy loaded?',
-    default: true,
-  },
-  {
-    type: 'confirm',
-    name: 'isAuth',
-    message: 'Should the route be accesbile only if you are logged?',
-    default: true,
-  },
-  {
-    type: 'confirm',
-    name: 'hasHistory',
-    message: 'Should the route have access to history?',
-    default: false,
-  },
-  {
-    type: 'confirm',
-    name: 'wantActions',
-    message: 'Should the route have his own actions?',
-    default: true,
+    name: 'options',
+    type: 'checkbox',
+    message: 'What do you want to include as extra?',
+    default: ['action'],
+    choices: [{
+      name: 'Route Actions',
+      value: 'action',
+    },
+    {
+      name: 'Route Sagas',
+      value: 'saga',
+    },
+    {
+      name: 'A language intl file',
+      value: 'lang',
+    },
+    ],
   },
   {
     type: 'input',
     name: 'actionsList',
-    message: 'Type one or more action list requests (separate by comma the name or leave it blank for an empty file)',
+    message: `Type one or more action list requests
+    ${logger.log(`(separate by comma the name or leave it blank for an empty file)`)}`,
     filter: (input) => {
       if (input.length > 0) {
         return input.split(',');
       }
       return undefined;
     },
-    when: a => a.wantActions === true,
+    when: a => a.options.includes('action'),
   },
   {
     type: 'input',
     name: 'actions',
-    message: 'Type one or more action requests (separate by comma the name or leave it blank for an empty file)',
+    message: `Type one or more actions
+    ${logger.log(`(separate by comma the name or leave it blank for an empty file)`)}`,
     filter: (input) => {
       if (input.length > 0) {
         return input.split(',');
       }
       return undefined;
     },
-    when: a => a.wantActions === true,
-  },
-  {
-    type: 'confirm',
-    name: 'wantSaga',
-    message: 'Should the component have his own saga?',
-    default: true,
-    when: a => a.wantActions === true,
+    when: a => a.options.includes('action'),
   }],
   actions: (data) => {
-    const actions = [{
-      type: 'add',
-      path: `${utils.getPath()}routes/{{properCase routeName}}/components/{{properCase routeName}}.jsx`,
-      templateFile: './route/templates/component.js.hbs',
-      abortOnFail: true,
-    },
-    {
-      type: 'add',
-      path: `${utils.getPath()}routes/{{properCase routeName}}/components/{{properCase routeName}}Container.js`,
-      templateFile: './route/templates/container.js.hbs',
-      abortOnFail: true,
-    },
-    {
-      type: 'add',
-      path: `${utils.getPath()}routes/{{properCase routeName}}/tests/index.test.js`,
-      templateFile: './route/templates/test.js.hbs',
-      abortOnFail: true,
-    },
-    {
-      type: 'add',
-      path: `${utils.getPath()}routes/{{properCase routeName}}/index.js`,
-      templateFile: './route/templates/index.js.hbs',
-      abortOnFail: true,
-    },
-    {
-      type: 'add',
-      path: `${utils.getPath()}routes/{{properCase routeName}}/RootComponent.jsx`,
-      templateFile: './route/templates/root.js.hbs',
-      abortOnFail: true,
-    },
-    {
-      type: 'add',
-      path: `${utils.getPath()}api/{{camelCase routeName}}/{{camelCase routeName}}.js`,
-      templateFile: './route/templates/api.js.hbs',
-      abortOnFail: true,
-    },
-    {
-      type: 'add',
-      path: `${utils.getPath()}mocks/{{camelCase routeName}}/{{camelCase routeName}}.js`,
-      templateFile: './route/templates/mock.js.hbs',
-      abortOnFail: true,
-    },
-    ];
+    data.uname = utils.getAuthor();
+    data.since = utils.getDate();
+    const actions = [
+      logger.log(`Starting route creation process`),
+      logger.delayLog('Collect all answers'),
+      logger.delayLog('Configure all templates'),
+      logger.delayLog('Converting hbs template'),
+      logger.delayLog('Writing route'),
+      (data) => {
+        logger.success('[SUCEESS]');
+        logger.info(data);
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/components/{{properCase routeName}}.jsx`,
+        templateFile: './route/templates/component.js.hbs',
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/components/{{properCase routeName}}Container.js`,
+        templateFile: './route/templates/container.js.hbs',
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/tests/{{properCase routeName}}.test.js`,
+        templateFile: './route/templates/test.js.hbs',
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/index.js`,
+        templateFile: './route/templates/index.js.hbs',
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/RootComponent.jsx`,
+        templateFile: './route/templates/root.js.hbs',
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}api/{{camelCase routeName}}/{{camelCase routeName}}.js`,
+        templateFile: './route/templates/api.js.hbs',
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}mocks/{{camelCase routeName}}/{{camelCase routeName}}.js`,
+        templateFile: './route/templates/mock.js.hbs',
+      },
+      {
+        type: 'add',
+        path: `../app/routes/{{properCase routeName}}/components/style.js`,
+        templateFile: `./route/templates/styles.cssjs.hbs`,
+        skipIfExists: true,
+      }];
 
-    if (data.isAuth) {
+    if (data.choicees.includes('auth')) {
       actions.push({
         type: 'modify',
         path: `${utils.getPath()}routes/index.jsx`,
@@ -138,7 +159,7 @@ module.exports = {
         templateFile: './route/templates/route.js.hbs',
       });
     }
-    if (data.isLazy) {
+    if (data.choicees.includes('lazy')) {
       actions.push({
         type: 'modify',
         path: `${utils.getPath()}routes/index.jsx`,
@@ -153,8 +174,7 @@ module.exports = {
         templateFile: './route/templates/async-import.js.hbs',
       });
     }
-
-    if (data.wantActions) {
+    if (data.options.includes('action')) {
       actions.push({
         type: 'add',
         path: `${utils.getPath()}routes/{{properCase routeName}}/modules/{{properCase routeName}}Actions.js`,
@@ -165,21 +185,52 @@ module.exports = {
         templateFile: './route/templates/reducer.js.hbs',
       });
     }
-
-    if (data.wantSaga) {
+    if (data.options.includes('saga')) {
       actions.push({
         type: 'add',
         path: `${utils.getPath()}routes/{{properCase routeName}}/modules/{{properCase routeName}}Sagas.js`,
         templateFile: './route/templates/sagas.js.hbs',
       });
     }
+    if (data.options.includes('action')) {
+      actions.push({
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/tests/{{properCase routeName}}Action.test.js`,
+        templateFile: './route/templates/actiontest.js.hbs',
+      },
+      {
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/tests/{{properCase routeName}}Reducer.test.js`,
+        templateFile: './route/templates/reducertest.js.hbs',
 
+      });
+    }
+    if (data.options.includes('saga')) {
+      actions.push({
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/tests/{{properCase routeName}}Saga.test.js`,
+        templateFile: './route/templates/sagatest.js.hbs',
+
+      });
+    }
+    if (data.options.includes('lang')) {
+      actions.push({
+        type: 'add',
+        path: `${utils.getPath()}routes/{{properCase routeName}}/components/languageModule.jsx`,
+        templateFile: './route/templates/language.jsx.hbs',
+        skipIfExists: true,
+      });
+    }
+    actions.push({
+      type: 'createdir',
+      path: '/mocks/',
+      options: '--trailing-comma all --print-width 120 --single-quote',
+    });
     actions.push({
       type: 'prettify',
       path: '/routes/',
       options: '--trailing-comma all --print-width 120 --single-quote',
     });
-
     return actions;
   },
 };
