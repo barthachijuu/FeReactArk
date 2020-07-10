@@ -6,12 +6,11 @@ import { JssProvider, ThemeProvider } from 'react-jss';
 import { create, SheetsRegistry } from 'jss';
 import { ConnectedRouter } from 'connected-react-router';
 import itAppStrings from 'Translations/lang-it.json';
-import { getLang } from 'Utility/globalMethods';
 import LanguageProvider from 'Utility/LanguageProvider';
 import ErrorBoundary from 'Utility/ErrorBoundary';
 import history from 'Utility/history';
 import {{properCase name}}Container from './{{properCase name}}Container';
-import theme from '../styles/themes';
+import theme from '../styles/themes/theme
 
 const translationMessages = {
   it: {
@@ -43,11 +42,7 @@ class MainContainer extends Component {
   };
 
   componentDidMount() {
-    getLang().then((r) => {
-      if (r !== null) {
-        this.setState({ language: r.data });
-      }
-    });
+
   }
 
   render() {

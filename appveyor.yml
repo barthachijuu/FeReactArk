@@ -20,9 +20,7 @@ init:
 
 install:
 # Install the latest stable version of Node
-  - ps: Install-Product node $env:nodejs_version
   - npm install -g codecov
-  - npm ci
 
 # Disable automatic builds
 build: 'off'
@@ -33,7 +31,7 @@ test_script:
   - node --version
   - npm --version
   - codecov -t $env:CODECOV_TOKEN -f
-    # run tests and run build
+     # run tests and run build
   - npm run test
   - npm run build
 

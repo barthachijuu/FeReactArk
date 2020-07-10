@@ -1,57 +1,31 @@
-import { applyMiddleware, createStore, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import thunkMiddleware from 'redux-thunk';
-import { routerMiddleware } from 'connected-react-router';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import history from 'Utility/history';
-import loggerMiddleware from './middleware/logger';
-import monitorReducerEnhancer from './enhancers/monitorReducers';
-import createReducer from './reducers';
-import { rootSaga } from './sagas';
+// We only need to import the modules necessary for initial render
+// When you add a first route be sure to remove the comment from the lines below.
 
-const immutableStateInvariantMiddleware = require('redux-immutable-state-invariant').default();
+import React, { lazy } from 'react';
+import rootStore from 'Store/createStore';
+import asyncComponent from 'Utility/AsyncComponent';
+import LazyComponent from 'Utility/LazyComponent';
 
-const composeEnhancers = composeWithDevTools({
-  trace: true, traceLimit: 25, serialize: { options: { undefined: true, function(fn) { return fn.toString(); } } } });
-const sagaMiddleware = createSagaMiddleware();
+// @generator routes:import
 
-const rootStore = (initialState = {}) => {
-  // ======================================================
-  // Middleware Configuration
-  // ======================================================
-
-  const middlewares = [sagaMiddleware, thunkMiddleware, routerMiddleware(history)];
-  if (process.env.NODE_ENV !== 'production') {
-    middlewares.push(immutableStateInvariantMiddleware, loggerMiddleware);
-  }
-
-  // ======================================================
-  // Store Enhancers
-  // ======================================================
-  const enhancers = [applyMiddleware(...middlewares), monitorReducerEnhancer];
-
-  // ======================================================
-  // Store Instantiation and HMR Setup
-  // ======================================================
-  const store = createStore(
-    createReducer(),
-    initialState,
-    process.env.NODE_ENV === 'development' ? composeEnhancers(...enhancers) : compose(...enhancers),
-  );
-
-  store.asyncReducers = {};
-
-  if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      const defaultReducers = require('./reducers').default; // eslint-disable-line global-require
-      store.replaceReducer(defaultReducers(store.asyncReducers));
-    });
-  }
-  store.runSaga = sagaMiddleware.run;
-  store.injectedSagas = new Map();
-  store.runSaga(rootSaga);
-
-  return store;
+export const Components = {
+  // @generator routes:component export
 };
 
-export default rootStore();
+export const createAuthRoutes = () => ({
+  routes: [
+    // @generator routes:define:auth
+
+  ],
+});
+
+// These routes don't need the user to be logged in.
+
+export const createUnauthRoutes = () => ({
+  routes: [
+    // @generator routes:define:unauth
+
+  ],
+});
+
+export default createAuthRoutes;

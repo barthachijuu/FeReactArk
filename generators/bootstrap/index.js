@@ -25,7 +25,7 @@ module.exports = {
     const storeTemplate = './bootstrap/templates/store.js.hbs';
     const boundaryTemplate = './bootstrap/templates/boundary.js.hbs';
     const apiTemplate = './bootstrap/templates/api.js.hbs';
-    const methodTemplate = './bootstrap/templates/functions.js.hbs';
+    const methodTemplate = './bootstrap/templates/function.js.hbs';
 
     const actions = [
       chalk.blueBright(`Starting creation process`),
