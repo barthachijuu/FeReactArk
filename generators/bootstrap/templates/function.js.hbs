@@ -1,6 +1,4 @@
-import axios from 'axios';
-import react from 'react';
-import loadable from '@loadable/component'
+import loadable from '@loadable/component';
 
 /** @function
  * * Handling the API Rest resposnse, and return data and different message for status code
@@ -12,18 +10,18 @@ export const handlingResponse = (data) => {
   const response = { error: '' };
   if (data && !/ok/i.test(data.statusText)) {
     switch (data.status) {
-      case 401:
-        data.type = 'Unauthorized';
-        break;
-      case 404:
-        data.type = 'Not Found';
-        break;
-      case 500:
-        data.type = 'ServerError';
-        break;
-      default:
-        data.type = 'Invalid Data';
-        break;
+    case 401:
+      data.type = 'Unauthorized';
+      break;
+    case 404:
+      data.type = 'Not Found';
+      break;
+    case 500:
+      data.type = 'ServerError';
+      break;
+    default:
+      data.type = 'Invalid Data';
+      break;
     }
     return { response, error: data };
   }
