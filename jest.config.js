@@ -1,7 +1,5 @@
 // jest.config.js
 module.exports = {
-  clearMocks: true,
-  collectCoverage: true,
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',
     '!**/app/**/*.test.{js,jsx}',
@@ -12,8 +10,6 @@ module.exports = {
     '!app/index.jsx',
     '!app/**/*.{txt,ejs,htaccess}',
   ],
-  coverageDirectory: 'coverage/',
-  coverageReporters: ['text', 'lcov'],
   coverageThreshold: {
     global: {
       branches: 91,
@@ -23,7 +19,6 @@ module.exports = {
     },
   },
   moduleDirectories: ['node_modules', 'app'],
-  displayName: 'CLIENT',
   moduleNameMapper: {
     '^Api(.*)$': '<rootDir>app/api$1',
     '^Components(.*)$': '<rootDir>app/components$1',
@@ -46,7 +41,5 @@ module.exports = {
     '<rootDir>server',
     '<rootDir>webpack',
   ],
-  verbose: false,
   testRegex: 'tests/.*\\.test\\.js$',
-  moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node', 'png', 'jpg'],
 };

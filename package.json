@@ -244,6 +244,5 @@
       "post-commit": "git update-index -g",
       "pre-commit": "lint-staged && yarn run lint-style"
     }
-  },
-  "snyk": true
+  }
 }

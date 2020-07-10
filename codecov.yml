@@ -28,6 +28,7 @@
     "round": "down"
   },
   "codecov": {
+    "token": c10eac9b-692a-42c8-a4dd-c22ff9c82ed2,
     "notify": {},
     "require_ci_to_pass": true
   }
