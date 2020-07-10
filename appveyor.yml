@@ -31,11 +31,8 @@ test_script:
   - node --version
   - npm --version
   - codecov -t $env:CODECOV_TOKEN -f
-     # run tests and run build
-  - npm run test
 
 # Cache node_modules for faster builds
 cache:
  - "%LOCALAPPDATA%\\Yarn"
- - node_modules -> package.json
 
