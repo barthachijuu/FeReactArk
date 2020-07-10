@@ -39,15 +39,6 @@ module.exports = function addMiddlewares(app, webpackConfig) {
 
   app.use(middleware);
   app.use(hot);
-  // Start_Login_Conf
-  // eslint-disable-next-line global-require
-  const webpacklogin = require('../../webpack/webpacklogin');
-  const login = webpack(webpacklogin);
-  const loginMiddleware = createMiddleware(login);
-  const loginHot = createHotMiddleware(login);
-  app.use(loginMiddleware);
-  app.use(loginHot);
-  // End_Login_Conf
   app.use(hmr(compiler, {
     path: '/__webpack_hmr',
   }));
@@ -74,10 +65,7 @@ module.exports = function addMiddlewares(app, webpackConfig) {
   // artifacts, we use it instead
   const fs = middleware.fileSystem;
 
-  app.get('*', (req, res, next) => {
-    if (req.baseUrl.indexOf('login') !== -1) {
-      return (next());
-    }
+  app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
       if (err) {
         res.sendStatus(404);

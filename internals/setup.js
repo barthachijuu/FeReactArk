@@ -129,7 +129,7 @@ function checkClonedRepo() {
         .split(/\r?\n/)
         .map(line => line.trim())
         .filter(line => line.startsWith('origin'))
-        .filter(line => /\/barthachijuu\.git/.test(line))
+        .filter(line => /\/barthachijuu\/FeReactArk.git/.test(line))
         .length;
       resolve(!!isClonedRepo);
     });
@@ -305,7 +305,9 @@ function editPackageJson() {
       pkg.name = argv.project;
       pkg.version = '1.0.0';
       pkg.description = '';
+      pkg.repository = '';
       delete pkg.scripts.setup;
+      delete pkg.scripts.presetup;
       fs.writeFileSync(`${path.join(CWD, '/package.json')}`, JSON.stringify(pkg));
       exec(`yarn prettify ${path.join(CWD, '/package.json')}`);
     });
@@ -320,6 +322,7 @@ function editPackageJson() {
  */
 function endProcess() {
   process.stdout.write('\nNow you can run "yarn start", to start your project.');
+  process.stdout.write('\nRemember to add your repository to your remote.');
   process.stdout.write('\nEnjoy your code!');
   process.exit(0);
 }

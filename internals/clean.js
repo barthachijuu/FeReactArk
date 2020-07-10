@@ -223,8 +223,6 @@ function reportError(error) {
       '/app/utils/LanguageProvider.jsx',
       '/app/utils/ErrorBoundary.jsx',
       '/app/utils/globalMethods.js',
-      '/app/login.js',
-      '/app/login.html',
     ];
     const dirToRemove = [
       'store/actions',
@@ -263,7 +261,6 @@ function reportError(error) {
   const wantNew = await askIfWantToReinitProject().catch(reason => reportError(reason));
   if (wantNew === true) {
     await checkProjectName().catch(reason => reportError(reason));
-    // await endProcess();
   } else {
     process.stdout.write('\nNew project isn\'t set. You cannot start the project.');
     process.stdout.write('\nMake sure you reinitialize the project correctly');
