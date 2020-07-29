@@ -89,7 +89,7 @@ module.exports = {
       },
       {
         type: 'add',
-        path: `../app/components/{{properCase componentName}}/style.js`,
+        path: `../app/components/{{properCase componentName}}/styles.js`,
         templateFile: `./component/templates/styles.cssjs.hbs`,
         abortOnFail: true,
         skipIfExists: true,

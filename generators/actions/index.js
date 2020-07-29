@@ -90,8 +90,8 @@ module.exports = {
       }
       if (/.+/.test(value) && answers.whichAction === 'Route action') {
         return !utils.checkString(`routes/${answers.whichRoute}/modules/${answers.whichRoute}Actions.js`,
-          new RegExp(`${answers.isRequest ? utils.constantize(value)
-            : utils.constantize(`do ${value}`)}`, 'gm')) || logger.warn('That method already exists.');
+          new RegExp(`${answers.isRequest ? utils.constantize(`do ${value}`)
+            : utils.constantize(value)}`, 'gm')) || logger.warn('That method already exists.');
       }
       return logger.warn('The name is required.');
     },
@@ -101,7 +101,7 @@ module.exports = {
     type: 'confirm',
     name: 'reducerHandle',
     message: 'Want to handle the reducer state?',
-    when: answers => answers.method.length > 0,
+    when: answers => answers.methodName.length > 0,
   },
   {
     type: 'input',
@@ -241,8 +241,8 @@ module.exports = {
         }
       }
       actions.push({
-        type: 'prettify-file',
-        path: routeActionFile,
+        type: 'prettify',
+        path: `${utils.getPath()}routes/${data.whichRoute}/modules/`,
         options: '--trailing-comma all --print-width 140 --single-quote',
       });
     }

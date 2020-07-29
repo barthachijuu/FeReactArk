@@ -20,6 +20,7 @@ import formattedMessage from './languageModule';
 {{#equal componentType 'Classes'}}
 class {{ properCase componentName }} extends React.PureComponent {
   render() {
+    const classes = styles();
     return (
       <>
         <p>Render Component</p>
@@ -28,11 +29,14 @@ class {{ properCase componentName }} extends React.PureComponent {
   }
 }
 {{else}}
-const {{ properCase componentName }} = {{#if wantPropTypes}}props{{else}}(){{/if}} => (
-  <>
-    <p>Render Component</p>
-  </>
-);
+const {{ properCase componentName }} = {{#if wantPropTypes}}props{{else}}(){{/if}} => {
+  const classes = styles();
+  return (
+    <>
+      <p>Render Component</p>
+    </>
+  );
+};
 {{/equal}}
 
 {{#isPresent options 'props'}}

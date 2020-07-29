@@ -1,13 +1,12 @@
 import 'regenerator-runtime/runtime';
 import Enzyme from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
-import axiosMock from 'axios';
 
 Enzyme.configure({
   adapter: new EnzymeAdapter(),
 });
 
-const { nullSafe, handlingResponse, getLang } = require('../globalMethods/');
+const { nullSafe, handlingResponse } = require('../globalMethods/');
 
 describe('nullSafe', () => {
   test('Return the passing value', () => {

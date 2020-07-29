@@ -1,7 +1,7 @@
-...createRequestTypes('{{#equal isActionNew 'Add an action'}}{{removeExtension whichActionFile}}{{else}}{{removeExtension whichRoute}}{{/equal}}', '{{constantCase methodName}}'),
-$&/** @action request
+{{constantCase methodName}}: '{{#equal isActionNew 'Add an action'}}{{removeExtension whichActionFile}}{{else}}{{removeExtension whichRoute}}{{/equal}}/{{snakeCase methodName}}',
+  $&/** @action
 * * Insert a description
-* @name {{camelCase methodName}}
-* @return {object} - The action object
+* @name {{properCase methodName}}
+* @return {object} - The payload object
 */
-export const {{camelCase methodName}} = new MakeRequest('{{snakeCase methodName}}');
+export const do{{properCase methodName}} = payload => createAction(actionTypes.{{constantCase methodName}}, { payload });

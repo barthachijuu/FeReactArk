@@ -39,12 +39,6 @@ module.exports = {
       },
     },
     {
-      type: 'list',
-      name: 'styleType',
-      message: 'Which style will use the route?',
-      choices: ['scss', 'jss'],
-    },
-    {
       name: 'options',
       type: 'checkbox',
       message: 'What do you want to include as extra?',
@@ -76,15 +70,13 @@ module.exports = {
       },
       {
         type: 'add',
-        path: `${utils.getPath()}routes/${data.whichRoute}
-        /components/{{properCase subrouteName}}/{{properCase subrouteName}}.jsx`,
+        path: `${utils.getPath()}routes/${data.whichRoute}/components/{{properCase subrouteName}}/{{properCase subrouteName}}.jsx`, /* eslint-disable-line */
         templateFile: './subroute/templates/component.js.hbs',
         abortOnFail: true,
       },
       {
         type: 'add',
-        path: `${utils.getPath()}routes/${data.whichRoute}
-        /components/{{properCase subrouteName}}/{{properCase subrouteName}}Container.js`,
+        path: `${utils.getPath()}routes/${data.whichRoute}/components/{{properCase subrouteName}}/{{properCase subrouteName}}Container.js`, /* eslint-disable-line */
         templateFile: './subroute/templates/container.js.hbs',
         abortOnFail: true,
       },

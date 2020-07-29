@@ -2,13 +2,14 @@
 module.exports = {
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',
-    '!**/app/**/*.test.{js,jsx}',
-    '!app/styles/**/*.{js,scss}',
-    '!app/svg/**/*.svg',
-    '!app/translations/**/*.json',
-    '!app/utils/styleguide/**/*.{js,jsx}',
-    '!app/index.jsx',
-    '!app/**/*.{txt,ejs,htaccess}',
+    '!<rootDir>/app/**/*.test.{js,jsx}',
+    '!<rootDir>/app/**/index.js',
+    '!<rootDir>/styles/**/*.{js,scss}',
+    '!<rootDir>/svg/**/*.svg',
+    '!<rootDir>/app/translations/**/*.json',
+    '!<rootDir>/app/utils/styleguide/**/*.{js,jsx}',
+    '!<rootDir>/app/index.jsx',
+    '!<rootDir>/app/**/*.{txt,ejs,htaccess}',
   ],
   coverageThreshold: {
     global: {

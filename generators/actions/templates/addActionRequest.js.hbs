@@ -1,4 +1,4 @@
-...createRequestTypes('{{removeExtension whichActionFile}}', '{{constantCase methodName}}'),
+...createRequestTypes('{{#equal isActionNew 'Add an action'}}{{removeExtension whichActionFile}}{{else}}{{removeExtension whichRoute}}{{/equal}}', '{{constantCase methodName}}'),
 $&/** @action request
 * * Insert a description
 * @name {{camelCase methodName}}
