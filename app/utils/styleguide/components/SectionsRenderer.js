@@ -22,7 +22,7 @@ export function SectionsRenderer({ classes, children }) {
 		<div>
 			{children.length > 0 && (
 				<div className={classes.headingSpacer}>
-					<Heading level={1}>Nexi {pkg.name} Components</Heading>
+					<Heading level={1}>{pkg.name} Components</Heading>
 				</div>
 			)}
 			<DefaultSectionsRenderer>{children}</DefaultSectionsRenderer>

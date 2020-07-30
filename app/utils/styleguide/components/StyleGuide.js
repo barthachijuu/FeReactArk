@@ -6,7 +6,6 @@ import Markdown from 'react-styleguidist/lib/rsg-components/Markdown';
 import Styled from 'react-styleguidist/lib/rsg-components/Styled';
 import Version from 'react-styleguidist/lib/rsg-components/Version';
 import logo from './logo.svg';
-import nexi from './nexi.svg';
 
 const pkg = require('Root/package.json');
 
@@ -133,7 +132,7 @@ const styles = ({
     width: '2.5em',
     marginLeft: '-0.5em',
   },
-  imageNexi: {
+  imageLogo: {
     width: '6em',
     marginLeft: '1.5em',
   },
@@ -173,7 +172,7 @@ export function StyleGuideRenderer({
         </main>
         <div className={classes.sidebar}>
           <div className={classes.logo}>
-            <img className={classes.imageNexi} src={nexi} alt="Nexi logo" />
+            <img className={classes.imageLogo} src={logo} alt="Logo" />
             <div className={classes.version}>{pkg.name} Components List</div>
           </div>
           <div className={classes.version}><Version>V {pkg.version}</Version></div>
