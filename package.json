@@ -133,7 +133,7 @@
     "express": "4.16.4",
     "immer": "6.0.5",
     "lodash": "4.17.19",
-    "moment": "2.22.2",
+    "moment": "2.29.4",
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-helmet": "^6.1.0",
